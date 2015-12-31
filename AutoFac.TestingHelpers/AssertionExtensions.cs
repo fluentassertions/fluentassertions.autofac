@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using Autofac;
-using NEdifis.Attributes;
 using Module = Autofac.Module;
 
 namespace AutoFac.TestingHelpers
 {
-    [ExcludeFromCodeCoverage]
-    [ExcludeFromConventions("testing helper")]
     public static class AssertionExtensions
     {
         public static IContainer Container<TModule>(this TModule module, 
@@ -24,7 +20,7 @@ namespace AutoFac.TestingHelpers
             where TModule : Module, new()
         {
             var builder = new MockContainerBuilder();
-            if (types != null) builder.RegisterSubstitutes(types);
+            if (types != null) builder.Substitute(types);
             arrange?.Invoke(builder);
             builder.RegisterModule(module);
             return builder;

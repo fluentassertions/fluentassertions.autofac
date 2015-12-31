@@ -10,7 +10,7 @@ namespace SampleLib
     // ReSharper disable once InconsistentNaming
     internal class SampleModule_Should
     {
-        private readonly IContainer _container = Module<SampleModule>.GetContainer();
+        private readonly IContainer _container = Module<SampleModule>.GetTestContainer();
 
         [Test]
         [TestCase(typeof(ISampleService))]
@@ -20,9 +20,17 @@ namespace SampleLib
         }
 
         [Test]
-        public void RegisterSampleService()
+        public void Register_SampleService()
         {
-            _container.Should().Resolve<ISampleService, SampleService>();
+            _container.Should().Resolve<ISampleService>()
+                .As<SampleService>();
+        }
+
+        [Test]
+        public void Register_SampleInstance()
+        {
+            _container.Should().Resolve<ISampleInstance>()
+                .To(SampleModule.SampleInstance);
         }
     }
 }

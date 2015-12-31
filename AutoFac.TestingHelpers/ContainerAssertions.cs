@@ -12,31 +12,8 @@ namespace AutoFac.TestingHelpers
 
         public ContainerAssertions(IContainer container)
         {
+            if (container == null) throw new ArgumentNullException(nameof(container));
             _container = container;
-        }
-
-        public void Resolve<TRegister>(params Type[] resolvedTypes)
-        {
-            _container.IsRegistered<TRegister>().Should().BeTrue();
-
-            if (resolvedTypes == null || !resolvedTypes.Any()) return;
-
-            var instances = _container.Resolve<IEnumerable<TRegister>>().ToArray();
-            foreach (var type in resolvedTypes)
-            {
-                var instance = instances.FirstOrDefault(i => i.GetType() == type);
-                instance.Should().NotBeNull($"Type '{type}' should be registered as '{typeof(TRegister)}'");
-            }
-        }
-
-        public void Resolve<TRegister, TResolve>() where TResolve : TRegister
-        {
-            Resolve<TRegister>(typeof(TResolve));
-        }
-
-        public void ResolveTo<TRegister>(object expected)
-        {
-            _container.Resolve<TRegister>().Should().Be(expected);
         }
 
         public void Register<TRegister>(string because = null)
@@ -54,14 +31,20 @@ namespace AutoFac.TestingHelpers
             types.All(_container.IsRegistered).Should().BeTrue();
         }
 
-        public void AutoActivate<TRegister>() where TRegister : IStartable
+        public ResolveAssertions<TRegister> Resolve<TRegister>()
         {
-            Resolve<IStartable, TRegister>();
+            Register<TRegister>();
+            return new ResolveAssertions<TRegister>(_container);
         }
 
-        public void AutoActivate(params Type[] types)
+        public void AutoActivate<TResolve>() where TResolve : IStartable
         {
-            Resolve<IStartable>(types);
+            Resolve<IStartable>().As<TResolve>();
+        }
+
+        public void AutoActivate(Type type, params Type[] moreTypes)
+        {
+            Resolve<IStartable>().As(type, moreTypes);
         }
     }
 }
