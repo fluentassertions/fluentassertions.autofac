@@ -11,12 +11,12 @@ namespace AutoFac.TestingHelpers
     {
         public static IContainer GetContainer(Action<ContainerBuilder> arrange = null)
         {
-            return new TModule().GetContainer(arrange);
+            return new TModule().Container(arrange);
         }
 
         public static MockContainerBuilder GetBuilder(Action<ContainerBuilder> arrange = null)
         {
-            return new TModule().GetBuilder(arrange);
+            return new TModule().Builder(arrange);
         }
     }
 }
