@@ -80,9 +80,9 @@
     <Compile Include="SampleStarter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AutoFac.TestingHelpers\AutoFac.TestingHelpers.csproj">
+    <ProjectReference Include="..\Autofac.TestingHelpers\Autofac.TestingHelpers.csproj">
       <Project>{825699da-478c-45ff-afea-f5fc5a36789c}</Project>
-      <Name>AutoFac.TestingHelpers</Name>
+      <Name>Autofac.TestingHelpers</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

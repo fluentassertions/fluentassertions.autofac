@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyDescription("AutoFac.TestingHelpers")]
-[assembly: AssemblyProduct("AutoFac.TestingHelpers")]
+[assembly: AssemblyDescription("Autofac.TestingHelpers")]
+[assembly: AssemblyProduct("Autofac.TestingHelpers")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]

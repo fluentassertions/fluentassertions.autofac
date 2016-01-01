@@ -2,7 +2,7 @@
 using NEdifis.Attributes;
 using NUnit.Framework;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
     [TestFixtureFor(typeof(AssertionExtensions))]
     // ReSharper disable InconsistentNaming

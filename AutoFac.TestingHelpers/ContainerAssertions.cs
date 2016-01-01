@@ -1,8 +1,7 @@
 ﻿using System;
-using Autofac;
 using FluentAssertions;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
     public class ContainerAssertions
     {
@@ -14,9 +13,9 @@ namespace AutoFac.TestingHelpers
             _container = container;
         }
 
-        public RegisterAssertions<TService> RegisterType<TService>()
+        public RegisterAssertions RegisterType<TService>()
         {
-            return new RegisterAssertions<TService>(_container);
+            return new RegisterAssertions(_container, typeof(TService));
         }
 
         public RegisterAssertions RegisterType(Type type)

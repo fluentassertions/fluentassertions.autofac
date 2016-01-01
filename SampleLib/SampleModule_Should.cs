@@ -1,6 +1,6 @@
 ﻿using System;
 using Autofac;
-using AutoFac.TestingHelpers;
+using Autofac.TestingHelpers;
 using NEdifis.Attributes;
 using NUnit.Framework;
 

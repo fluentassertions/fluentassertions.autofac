@@ -2,9 +2,8 @@ using System;
 using System.Linq;
 using System.Reflection;
 using FluentAssertions;
-using Module = Autofac.Module;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
     public class MockContainerBuilderAssertions
     {

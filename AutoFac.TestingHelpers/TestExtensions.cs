@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using Autofac;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
     public static class TestExtensions
     {

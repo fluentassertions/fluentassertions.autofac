@@ -1,0 +1,6 @@
+site_name: Autofac.TestingHelpers
+theme: readthedocs
+repo_url: https://github.com/awesome-inc/Autofac.TestingHelpers
+
+pages:
+- Home: index.md

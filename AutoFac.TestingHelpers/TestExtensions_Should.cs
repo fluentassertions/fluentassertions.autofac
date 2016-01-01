@@ -1,11 +1,10 @@
 using System;
-using Autofac;
 using FluentAssertions;
 using NEdifis.Attributes;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
     [TestFixtureFor(typeof(TestExtensions))]
     // ReSharper disable InconsistentNaming

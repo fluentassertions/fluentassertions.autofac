@@ -1,8 +1,7 @@
-using Autofac;
 using NEdifis.Attributes;
 using NUnit.Framework;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
     [TestFixtureFor(typeof(MockContainerBuilderAssertions))]
     // ReSharper disable InconsistentNaming

@@ -1,8 +1,7 @@
 ﻿using System;
-using Autofac;
 using NEdifis.Attributes;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
     [ExcludeFromConventions("testing helper")]
     public static class Module<TModule> where TModule : Module, new()

@@ -1,6 +1,4 @@
-﻿using Autofac;
-
-namespace AutoFac.TestingHelpers
+﻿namespace Autofac.TestingHelpers
 {
     public static class AssertionExtensions
     {

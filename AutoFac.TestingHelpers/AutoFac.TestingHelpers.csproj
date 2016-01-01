@@ -7,8 +7,8 @@
     <ProjectGuid>{825699DA-478C-45FF-AFEA-F5FC5A36789C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>AutoFac.TestingHelpers</RootNamespace>
-    <AssemblyName>AutoFac.TestingHelpers</AssemblyName>
+    <RootNamespace>Autofac.TestingHelpers</RootNamespace>
+    <AssemblyName>Autofac.TestingHelpers</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <NuGetPackageImportStamp>

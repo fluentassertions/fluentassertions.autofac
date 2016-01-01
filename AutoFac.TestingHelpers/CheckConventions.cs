@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using NEdifis.Conventions;
 using NUnit.Framework;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
     internal class CheckConventions : ConventionBase
     {
