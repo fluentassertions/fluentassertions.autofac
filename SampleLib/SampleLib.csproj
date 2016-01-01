@@ -66,12 +66,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DeviceState.cs" />
+    <Compile Include="IDeviceState.cs" />
+    <Compile Include="INamedInstance.cs" />
     <Compile Include="ISampleInstance.cs" />
     <Compile Include="ISampleService.cs" />
+    <Compile Include="NamedInstance.cs" />
+    <Compile Include="OnlineState.cs" />
     <Compile Include="SampleModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SampleModule_Should.cs" />
     <Compile Include="SampleService.cs" />
+    <Compile Include="SampleStarter.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AutoFac.TestingHelpers\AutoFac.TestingHelpers.csproj">

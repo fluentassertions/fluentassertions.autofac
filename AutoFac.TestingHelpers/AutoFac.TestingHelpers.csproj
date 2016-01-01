@@ -66,16 +66,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssertionExtensions_Should.cs" />
     <Compile Include="CheckConventions.cs" />
     <Compile Include="ContainerAssertions.cs" />
+    <Compile Include="ContainerAssertions_Should.cs" />
     <Compile Include="MockContainerBuilder.cs" />
     <Compile Include="MockContainerBuilderAssertions.cs" />
+    <Compile Include="MockContainerBuilderAssertions_Should.cs" />
     <Compile Include="MockContainerBuilder_Should.cs" />
     <Compile Include="Module.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="AssertionExtensions.cs" />
-    <Compile Include="ResolveAssertions.cs" />
+    <Compile Include="RegisterAssertions.cs" />
+    <Compile Include="RegisterAssertions_Should.cs" />
     <Compile Include="TestExtensions.cs" />
+    <Compile Include="TestExtensions_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using Autofac;
 using FluentAssertions;
 
@@ -16,35 +14,53 @@ namespace AutoFac.TestingHelpers
             _container = container;
         }
 
-        public void Register<TRegister>(string because = null)
+        public RegisterAssertions<TService> RegisterType<TService>()
         {
-            Register(typeof(TRegister), because);
+            return new RegisterAssertions<TService>(_container);
         }
 
-        public void Register(Type type, string because = null)
+        public RegisterAssertions RegisterType(Type type)
         {
-            _container.IsRegistered(type).Should().BeTrue(because ?? $"Type '{type}' should be registered but it is not.");
+            return new RegisterAssertions(_container, type);
         }
 
-        public void Register(IEnumerable<Type> types)
+        /*
+        public RegisterAssertions RegisterInstance(object instance)
         {
-            types.All(_container.IsRegistered).Should().BeTrue();
+            return new RegisterAssertions(_container, instance);
+        }*/
+
+        public void NotRegister<TService>(string because = null)
+        {
+            NotRegister(typeof(TService), because);
         }
 
-        public ResolveAssertions<TRegister> Resolve<TRegister>()
+        public void NotRegister(Type type, string because = null)
         {
-            Register<TRegister>();
-            return new ResolveAssertions<TRegister>(_container);
+            _container.IsRegistered(type).Should()
+                .BeFalse(because ?? $"Type '{type}' should not be registered but it is.");
         }
 
-        public void AutoActivate<TResolve>() where TResolve : IStartable
+        public void NotRegisterNamed<TService>(string name, string because = null)
         {
-            Resolve<IStartable>().As<TResolve>();
+            NotRegisterNamed(name, typeof(TService), because);
         }
 
-        public void AutoActivate(Type type, params Type[] moreTypes)
+        public void NotRegisterNamed(string name, Type type, string because = null)
         {
-            Resolve<IStartable>().As(type, moreTypes);
+            _container.IsRegisteredWithName(name, type).Should()
+                .BeFalse(because ?? $"Type '{type}' should not be registered with name '{name}' but it is.");
         }
+
+        /*
+        public RegisterAssertions<IStartable> AutoActivate<TResolve>() where TResolve : IStartable
+        {
+            return new RegisterAssertions<IStartable>(_container).As<TResolve>();
+        }
+
+        public RegisterAssertions<IStartable> AutoActivate(Type type, params Type[] moreTypes)
+        {
+            return new RegisterAssertions<IStartable>(_container).As(type, moreTypes);
+        }*/
     }
 }

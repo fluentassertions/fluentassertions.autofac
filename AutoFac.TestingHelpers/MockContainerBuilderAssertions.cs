@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Reflection;
 using FluentAssertions;
@@ -12,6 +13,20 @@ namespace AutoFac.TestingHelpers
         public MockContainerBuilderAssertions(MockContainerBuilder builder)
         {
             _builder = builder;
+        }
+
+        public void RegisterModule<TModule>(string because = "") where TModule : Module, new()
+        {
+            var moduleCallback = _builder.Callbacks
+                .FirstOrDefault(callback => callback.Target is TModule && callback.Method.Name == nameof(Module.Configure));
+            moduleCallback.Should().NotBeNull(because);
+        }
+
+        public void RegisterModule(Type moduleType, string because = "")
+        {
+            var moduleCallback = _builder.Callbacks
+                .FirstOrDefault(callback => callback.Target.GetType() == moduleType && callback.Method.Name == nameof(Module.Configure));
+            moduleCallback.Should().NotBeNull(because);
         }
 
         public void RegisterAllModulesInAssembly(Assembly assembly)
