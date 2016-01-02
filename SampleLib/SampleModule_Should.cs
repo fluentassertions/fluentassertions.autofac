@@ -26,12 +26,12 @@ namespace SampleLib
             _container.Should().RegisterType<SampleService>().As<ISampleService>();
         }
 
-        /*
         [Test]
         public void Register_SampleInstance()
         {
-            _container.Should().RegisterType(SampleModule.SampleInstance).As<ISampleInstance>();
-        }*/
+            _container.Should().RegisterInstance(SampleModule.SampleInstance)
+                .As<ISampleInstance>();
+        }
 
         [Test]
         [TestCase(typeof(INamedInstance), "SampleName")]
@@ -50,18 +50,10 @@ namespace SampleLib
         }
 
 
-        /*
         [Test]
-        public void AutoActivacte_SampleStarter()
+        public void AutoActivate_SampleStarter()
         {
-            _container.Should().AutoActivate<SampleStarter>();
+            _container.Should().RegisterType<SampleStarter>().AutoActivate();
         }
-
-        [Test]
-        [TestCase(typeof(SampleStarter))]
-        public void AutoActivacte(Type serviceType)
-        {
-            _container.Should().AutoActivate(serviceType);
-        }*/
     }
 }

@@ -7,7 +7,6 @@ namespace Autofac.TestingHelpers
 {
     internal class CheckConventions : ConventionBase
     {
-        // ReSharper disable once UnusedMember.Local
         private static IEnumerable<Type> TypesToTest { get; } = ClassesToTestFor<CheckConventions>();
 
         public CheckConventions()

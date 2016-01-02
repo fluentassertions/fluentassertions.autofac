@@ -1,9 +1,7 @@
 ﻿using System;
-using NEdifis.Attributes;
 
 namespace Autofac.TestingHelpers
 {
-    [ExcludeFromConventions("testing helper")]
     public static class Module<TModule> where TModule : Module, new()
     {
         public static IContainer GetTestContainer(Action<ContainerBuilder> arrange = null)

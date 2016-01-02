@@ -14,10 +14,8 @@ namespace SampleLib
             builder.RegisterInstance(SampleInstance).SingleInstance();
 
             builder.RegisterType<NamedInstance>().Named<INamedInstance>("SampleName");
-
             builder.RegisterType<OnlineState>().Keyed<IDeviceState>(DeviceState.Online);
-
-            //builder.RegisterType<SampleStarter>().AutoActivate();
+            builder.RegisterType<SampleStarter>().AutoActivate();
         }
     }
 }

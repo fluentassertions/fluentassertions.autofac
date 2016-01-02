@@ -23,11 +23,11 @@ namespace Autofac.TestingHelpers
             return new RegisterAssertions(_container, type);
         }
 
-        /*
         public RegisterAssertions RegisterInstance(object instance)
         {
-            return new RegisterAssertions(_container, instance);
-        }*/
+            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            return new RegisterAssertions(_container, instance.GetType());
+        }
 
         public void NotRegister<TService>(string because = null)
         {
@@ -37,7 +37,7 @@ namespace Autofac.TestingHelpers
         public void NotRegister(Type type, string because = null)
         {
             _container.IsRegistered(type).Should()
-                .BeFalse(because ?? $"Type '{type}' should not be registered but it is.");
+                .BeFalse(because ?? $"Type '{type}' should not be registered");
         }
 
         public void NotRegisterNamed<TService>(string name, string because = null)
@@ -48,18 +48,18 @@ namespace Autofac.TestingHelpers
         public void NotRegisterNamed(string name, Type type, string because = null)
         {
             _container.IsRegisteredWithName(name, type).Should()
-                .BeFalse(because ?? $"Type '{type}' should not be registered with name '{name}' but it is.");
+                .BeFalse(because ?? $"Type '{type}' should not be registered with name '{name}'");
         }
 
-        /*
-        public RegisterAssertions<IStartable> AutoActivate<TResolve>() where TResolve : IStartable
+        public void NotRegisterKeyed<TService>(object key, string because = null)
         {
-            return new RegisterAssertions<IStartable>(_container).As<TResolve>();
+            NotRegisterKeyed(key, typeof(TService), because);
         }
 
-        public RegisterAssertions<IStartable> AutoActivate(Type type, params Type[] moreTypes)
+        public void NotRegisterKeyed(object key, Type type, string because = null)
         {
-            return new RegisterAssertions<IStartable>(_container).As(type, moreTypes);
-        }*/
+            _container.IsRegisteredWithKey(key, type).Should()
+                .BeFalse(because ?? $"Type '{type}' should not be registered with key '{key}'");
+        }
     }
 }
