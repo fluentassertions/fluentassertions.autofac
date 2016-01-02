@@ -6,3 +6,5 @@
 [![Issue Stats](http://issuestats.com/github/awesome-inc/Autofac.TestingHelpers/badge/pr)](http://issuestats.com/github/awesome-inc/Autofac.TestingHelpers)
 
 # Autofac.TestingHelpers
+
+Fluently testing your Autofac configuration.
