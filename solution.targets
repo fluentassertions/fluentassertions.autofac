@@ -55,6 +55,11 @@
 		<NUnitResultFormat>nunit3</NUnitResultFormat>
 	</PropertyGroup>
 
+	<!--## Specifying your repository token for coveralls.io -->
+	<PropertyGroup>
+		<CoverAllsToken>StrKCmdAGKwZk0MoLSU9c4rDxKOpKCnr5</CoverAllsToken>
+	</PropertyGroup>
+
 	<!-- ## Uncomment	to override the default nuget server to push packages to in the 'Deploy' target
 	<PropertyGroup>
 		<NugetSourceToDeploy>https://www.nuget.org</NugetSourceToDeploy>
