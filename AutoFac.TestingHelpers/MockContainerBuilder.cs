@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Autofac;
 using Autofac.Core;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
     public class MockContainerBuilder : ContainerBuilder
     {

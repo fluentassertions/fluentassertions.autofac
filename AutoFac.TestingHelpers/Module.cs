@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
-using Autofac;
-using NEdifis.Attributes;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
-    [ExcludeFromCodeCoverage]
-    [ExcludeFromConventions("testing helper")]
     public static class Module<TModule> where TModule : Module, new()
     {
-        public static IContainer GetContainer(Action<ContainerBuilder> arrange = null)
+        public static IContainer GetTestContainer(Action<ContainerBuilder> arrange = null)
         {
-            return new TModule().GetContainer(arrange);
+            return new TModule().Container(arrange);
         }
 
-        public static MockContainerBuilder GetBuilder(Action<ContainerBuilder> arrange = null)
+        public static MockContainerBuilder GetTestBuilder(Action<ContainerBuilder> arrange = null)
         {
-            return new TModule().GetBuilder(arrange);
+            return new TModule().Builder(arrange);
         }
     }
 }

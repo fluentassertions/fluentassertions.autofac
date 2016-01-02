@@ -4,14 +4,14 @@ using FluentAssertions;
 using NEdifis.Attributes;
 using NUnit.Framework;
 
-namespace AutoFac.TestingHelpers
+namespace Autofac.TestingHelpers
 {
     [TestFixtureFor(typeof(MockContainerBuilder))]
     // ReSharper disable once InconsistentNaming
     internal class MockContainerBuilder_Should
     {
         [Test]
-        public void Is_Empty_At_Start()
+        public void Be_Empty_At_Start()
         {
             var sut = new MockContainerBuilder();
             sut.Callbacks.Should().BeEmpty();

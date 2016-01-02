@@ -1,1 +1,1 @@
-# AutoFac.TestingHelpers
+# Autofac.TestingHelpers
