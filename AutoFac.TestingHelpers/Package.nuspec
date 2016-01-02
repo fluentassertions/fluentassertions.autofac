@@ -1,15 +1,15 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>AutoFac.TestingHelpers</id>
+    <id>Autofac.TestingHelpers</id>
     <version>$Version$</version>
-    <title>AutoFac.TestingHelpers</title>
+    <title>Autofac.TestingHelpers</title>
     <authors>Awesome Incremented and Contributors</authors>
     <owners>Awesome Incremented and Contributors</owners>
     <licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Fluently testing your AutoFac configuration.</description>
-    <summary>Fluently testing your AutoFac configuration.</summary>
+    <description>Fluently testing your Autofac configuration.</description>
+    <summary>Fluently testing your Autofac configuration.</summary>
     <copyright/>
     <releaseNotes>Revision: $Revision$</releaseNotes>
     <projectUrl>https://github.com/awesome-inc/AutoFac.TestingHelpers</projectUrl>
@@ -21,6 +21,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release\AutoFac.TestingHelpers.dll" target="lib\net45"/>
+    <file src="bin\Release\Autofac.TestingHelpers.dll" target="lib\net45"/>
   </files>
 </package>
