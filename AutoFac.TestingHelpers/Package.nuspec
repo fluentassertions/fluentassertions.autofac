@@ -12,7 +12,7 @@
     <summary>Fluently testing your Autofac configuration.</summary>
     <copyright/>
     <releaseNotes>Revision: $Revision$</releaseNotes>
-    <projectUrl>https://github.com/awesome-inc/AutoFac.TestingHelpers</projectUrl>
+    <projectUrl>https://github.com/awesome-inc/Autofac.TestingHelpers</projectUrl>
     <developmentDependency>true</developmentDependency>
     <dependencies>
 	  <dependency id="Autofac" version="3.5.2" />
