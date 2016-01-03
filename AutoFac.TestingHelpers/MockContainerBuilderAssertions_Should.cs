@@ -15,8 +15,8 @@ namespace Autofac.TestingHelpers
             var assembly = typeof(MockContainerBuilderAssertions_Should).Assembly;
             sut.RegisterAssemblyModules(assembly);
 
-            sut.Should().RegisterAllModulesInAssembly(assembly);
-            sut.Should().RegisterModule<SampleModule>();
+            sut.Should().RegisteredModulesIn(assembly);
+            sut.Should().RegisteredModule<SampleModule>();
         }
 
         [Test]
@@ -24,8 +24,8 @@ namespace Autofac.TestingHelpers
         {
             var sut = new MockContainerBuilder();
             sut.RegisterModule<SampleModule>();
-            sut.Should().RegisterModule<SampleModule>();
-            sut.Should().RegisterModule(typeof(SampleModule));
+            sut.Should().RegisteredModule<SampleModule>();
+            sut.Should().RegisteredModule(typeof(SampleModule));
         }
 
         public class SampleModule : Module
