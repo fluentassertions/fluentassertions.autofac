@@ -14,32 +14,22 @@ namespace Autofac.TestingHelpers
             _builder = builder;
         }
 
-        public void RegisterModule<TModule>(string because = "") where TModule : Module, new()
+        public void RegisteredModule<TModule>() where TModule : Module, new()
         {
-            var moduleCallback = _builder.Callbacks
-                .FirstOrDefault(callback => callback.Target is TModule && callback.Method.Name == nameof(Module.Configure));
-            moduleCallback.Should().NotBeNull(because);
+            RegisteredModule(typeof(TModule));
         }
 
-        public void RegisterModule(Type moduleType, string because = "")
+        public void RegisteredModule(Type moduleType)
         {
             var moduleCallback = _builder.Callbacks
                 .FirstOrDefault(callback => callback.Target.GetType() == moduleType && callback.Method.Name == nameof(Module.Configure));
-            moduleCallback.Should().NotBeNull(because);
+            moduleCallback.Should().NotBeNull($"Module '{moduleType}' should be registered");
         }
 
-        public void RegisterAllModulesInAssembly(Assembly assembly)
+        public void RegisteredModulesIn(Assembly assembly)
         {
-            var expectedModules = assembly.GetTypes().Where(t => typeof(Module).IsAssignableFrom(t)).ToArray();
-
-            var callbacks = _builder.Callbacks;
-            callbacks.Count.Should().BeGreaterOrEqualTo(expectedModules.Length);
-
-            foreach (var callback in callbacks)
-            {
-                var module = callback.Target as Module;
-                if (module != null) callback.Method.Name.Should().Be(nameof(Module.Configure));
-            }
+            var moduleTypes = assembly.GetTypes().Where(t => typeof(Module).IsAssignableFrom(t)).ToList();
+            moduleTypes.ForEach(RegisteredModule);
         }
     }
 }
