@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using FluentAssertions;
+using NUnit.Framework;
 
 namespace Autofac.TestingHelpers
 {
@@ -15,6 +16,8 @@ namespace Autofac.TestingHelpers
             if (container == null) throw new ArgumentNullException(nameof(container));
             _container = container;
             _instances = _container.Resolve<IEnumerable<TService>>().ToList();
+            if (!_instances.Any())
+                throw new AssertionException($"Expected container to resolve '{typeof(TService)}'.");
         }
 
         public RegistrationAssertions As<TImplementation>()

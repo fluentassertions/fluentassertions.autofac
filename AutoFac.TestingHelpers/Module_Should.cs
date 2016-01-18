@@ -13,18 +13,17 @@ namespace Autofac.TestingHelpers
         public void Provide_test_container()
         {
             var container = Module<SampleModule>.GetTestContainer();
-            ((object)container).Should().NotBeNull();
+            container.Should().NotBeNull();
         }
 
         [Test]
         public void Provide_test_builder()
         {
             var builder = Module<SampleModule>.GetTestBuilder();
-            builder.Should().RegisteredModule<SampleModule>();
+            builder.ShouldHave().RegisteredModule<SampleModule>();
         }
 
         [ExcludeFromCodeCoverage]
         private class SampleModule : Module { }
-        
     }
 }

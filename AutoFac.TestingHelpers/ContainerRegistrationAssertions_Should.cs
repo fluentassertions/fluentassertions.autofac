@@ -12,7 +12,7 @@ namespace Autofac.TestingHelpers
         [Test]
         public void RegisterType()
         {
-            var sut = Configure(builder => builder.RegisterType<Dummy>()).Should().Have();
+            var sut = Configure(builder => builder.RegisterType<Dummy>()).ShouldHave();
             sut.Registered<Dummy>();
             sut.Registered(typeof(Dummy));
         }
@@ -22,13 +22,13 @@ namespace Autofac.TestingHelpers
         {
             var instance = new Dummy();
             var container = Configure(builder => builder.RegisterInstance(instance));
-            container.Should().Have().Registered(instance);
+            container.ShouldHave().Registered(instance);
         }
 
         [Test]
         public void NotRegister()
         {
-            var sut = Configure().Should().Have();
+            var sut = Configure().ShouldHave();
             sut.NotRegistered<IDisposable>();
             sut.NotRegistered(typeof(IDisposable));
             sut.NotRegistered<IDisposable>("foo");

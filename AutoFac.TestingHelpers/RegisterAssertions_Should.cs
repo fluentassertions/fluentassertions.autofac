@@ -45,7 +45,7 @@ namespace Autofac.TestingHelpers
         {
             var builder = new ContainerBuilder();
             arrange?.Invoke(builder);
-            return builder.Build().Should().Have();
+            return builder.Build().ShouldHave();
         }
 
         // ReSharper disable ClassNeverInstantiated.Local

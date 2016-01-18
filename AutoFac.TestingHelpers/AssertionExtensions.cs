@@ -2,12 +2,17 @@
 {
     public static class AssertionExtensions
     {
-        public static ContainerAssertions Should(this IContainer container)
+        public static ResolveAssertions<TService> ShouldResolve<TService>(this IContainer container)
         {
-            return new ContainerAssertions(container);
+            return new ResolveAssertions<TService>(container);
         }
 
-        public static MockContainerBuilderAssertions Should(this MockContainerBuilder builder)
+        public static ContainerRegistrationAssertions ShouldHave(this IContainer container)
+        {
+            return new ContainerRegistrationAssertions(container);
+        }
+
+        public static MockContainerBuilderAssertions ShouldHave(this MockContainerBuilder builder)
         {
             return new MockContainerBuilderAssertions(builder);
         }

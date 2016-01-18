@@ -16,20 +16,20 @@ namespace SampleLib
         [TestCase(typeof(SampleService), typeof(ISampleService))]
         public void Register(Type serviceType, Type contractType)
         {
-            _container.Should().Have().Registered(serviceType).As(contractType);
+            _container.ShouldHave().Registered(serviceType).As(contractType);
         }
 
         [Test]
         public void Register_SampleService()
         {
-            _container.Should().Have().Registered(typeof(SampleService)).As(typeof(ISampleService));
-            _container.Should().Have().Registered<SampleService>().As<ISampleService>();
+            _container.ShouldHave().Registered(typeof(SampleService)).As(typeof(ISampleService));
+            _container.ShouldHave().Registered<SampleService>().As<ISampleService>();
         }
 
         [Test]
         public void Register_SampleInstance()
         {
-            _container.Should().Have().Registered(SampleModule.SampleInstance)
+            _container.ShouldHave().Registered(SampleModule.SampleInstance)
                 .As<ISampleInstance>();
         }
 
@@ -37,23 +37,22 @@ namespace SampleLib
         [TestCase(typeof(INamedInstance), "SampleName")]
         public void Register_Named(Type type, string name)
         {
-            _container.Should().Have().Registered<NamedInstance>().Named<INamedInstance>(name);
-            _container.Should().Have().Registered(typeof(NamedInstance)).Named(name, type);
+            _container.ShouldHave().Registered<NamedInstance>().Named<INamedInstance>(name);
+            _container.ShouldHave().Registered(typeof(NamedInstance)).Named(name, type);
         }
 
         [Test]
         [TestCase(typeof(IDeviceState), DeviceState.Online)]
         public void Register_Keyed(Type type, DeviceState key)
         {
-            _container.Should().Have().Registered<OnlineState>().Keyed<IDeviceState>(key);
-            _container.Should().Have().Registered(typeof(OnlineState)).Keyed(key, type);
+            _container.ShouldHave().Registered<OnlineState>().Keyed<IDeviceState>(key);
+            _container.ShouldHave().Registered(typeof(OnlineState)).Keyed(key, type);
         }
-
 
         [Test]
         public void AutoActivate_SampleStarter()
         {
-            _container.Should().Have().Registered<SampleStarter>().AutoActivate();
+            _container.ShouldHave().Registered<SampleStarter>().AutoActivate();
         }
     }
 }

@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="AssertionExtensions_Should.cs" />
     <Compile Include="CheckConventions.cs" />
-    <Compile Include="ContainerAssertions.cs" />
     <Compile Include="ContainerRegistrationAssertions_Should.cs" />
     <Compile Include="ContainerRegistrationAssertions.cs" />
     <Compile Include="MockContainerBuilder.cs" />
