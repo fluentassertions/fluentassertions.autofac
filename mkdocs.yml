@@ -4,3 +4,5 @@ repo_url: https://github.com/awesome-inc/Autofac.TestingHelpers
 
 pages:
 - Home: index.md
+- Usage: usage.md
+- Why?: why.md
