@@ -1,6 +1,8 @@
-site_name: Autofac.TestingHelpers
+site_name: FluentAssertions.Autofac
 theme: readthedocs
-repo_url: https://github.com/awesome-inc/Autofac.TestingHelpers
+repo_url: https://github.com/awesome-inc/FluentAssertions.Autofac
 
 pages:
 - Home: index.md
+- Usage: usage.md
+- Why?: why.md

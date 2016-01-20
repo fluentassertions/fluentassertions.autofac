@@ -1,8 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyDescription("Autofac.TestingHelpers")]
-[assembly: AssemblyProduct("Autofac.TestingHelpers")]
+[assembly: AssemblyDescription("FluentAssertions.Autofac")]
+[assembly: AssemblyProduct("FluentAssertions.Autofac")]
 
 #if DEBUG
 [assembly: AssemblyConfiguration("Debug")]
@@ -11,7 +11,7 @@ using System.Runtime.InteropServices;
 #endif
 
 [assembly: AssemblyCompany("Awesome Incremented")]
-[assembly: AssemblyCopyright("Copyright © Awesome Inc. 2016")]
+[assembly: AssemblyCopyright("Copyright © Awesome Inc. and Contributors 2016")]
 [assembly: AssemblyTrademark("Awesome Incremented")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
