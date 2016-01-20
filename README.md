@@ -2,9 +2,7 @@
 [![Documentation Status](https://readthedocs.org/projects/fluentassertionsautofac/badge/?version=latest)](http://fluentassertionsautofac.rtfd.org/en/latest/) 
 [![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/) 
 [![NuGet](https://img.shields.io/nuget/dt/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/) 
-[![Coverage Status](https://coveralls.io/repos/awesome-inc/FluentAssertions.Autofac/badge.svg?branch=develop&service=github)](https://coveralls.io/github/awesome-inc/FluentAssertions.Autofac)
-[![Issue Stats](http://issuestats.com/github/awesome-inc/FluentAssertions.Autofac/badge/issue)](http://issuestats.com/github/awesome-inc/FluentAssertions.Autofac)
-[![Issue Stats](http://issuestats.com/github/awesome-inc/FluentAssertions.Autofac/badge/pr)](http://issuestats.com/github/awesome-inc/FluentAssertions.Autofac)
+[![Coverage Status](https://coveralls.io/repos/github/awesome-inc/FluentAssertions.Autofac/badge.svg)](https://coveralls.io/github/awesome-inc/FluentAssertions.Autofac)
 
 # FluentAssertions.Autofac
 
