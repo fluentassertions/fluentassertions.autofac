@@ -1,10 +1,10 @@
-[![Build Status](https://ci.appveyor.com/api/projects/status/9l0ibv4tjx9a9m57?svg=true)](https://ci.appveyor.com/project/awesome-inc-build/autofac-testinghelpers) 
-[![Documentation Status](https://readthedocs.org/projects/autofactestinghelpers/badge/?version=latest)](http://autofactestinghelpers.readthedocs.org/en/latest/) 
-[![NuGet](https://img.shields.io/nuget/v/Autofac.TestingHelpers.svg?style=flat-square)](https://www.nuget.org/packages/Autofac.TestingHelpers/) 
-[![NuGet](https://img.shields.io/nuget/dt/Autofac.TestingHelpers.svg?style=flat-square)](https://www.nuget.org/packages/Autofac.TestingHelpers/) 
-[![Coverage Status](https://coveralls.io/repos/awesome-inc/AutoFac.TestingHelpers/badge.svg?branch=develop&service=github)](https://coveralls.io/github/awesome-inc/AutoFac.TestingHelpers)
-[![Issue Stats](http://issuestats.com/github/awesome-inc/Autofac.TestingHelpers/badge/issue)](http://issuestats.com/github/awesome-inc/Autofac.TestingHelpers)
-[![Issue Stats](http://issuestats.com/github/awesome-inc/Autofac.TestingHelpers/badge/pr)](http://issuestats.com/github/awesome-inc/Autofac.TestingHelpers)
+[![Build status](https://ci.appveyor.com/api/projects/status/u42b929walkd6086?svg=true)](https://ci.appveyor.com/project/awesome-inc-build/fluentassertions-autofac)
+[![Documentation Status](https://readthedocs.org/projects/fluentassertionsautofac/badge/?version=latest)](http://fluentassertionsautofac.rtfd.org/en/latest/) 
+[![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/) 
+[![NuGet](https://img.shields.io/nuget/dt/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/) 
+[![Coverage Status](https://coveralls.io/repos/awesome-inc/FluentAssertions.Autofac/badge.svg?branch=develop&service=github)](https://coveralls.io/github/awesome-inc/FluentAssertions.Autofac)
+[![Issue Stats](http://issuestats.com/github/awesome-inc/FluentAssertions.Autofac/badge/issue)](http://issuestats.com/github/awesome-inc/FluentAssertions.Autofac)
+[![Issue Stats](http://issuestats.com/github/awesome-inc/FluentAssertions.Autofac/badge/pr)](http://issuestats.com/github/awesome-inc/FluentAssertions.Autofac)
 
 # FluentAssertions.Autofac
 

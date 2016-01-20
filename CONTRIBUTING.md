@@ -4,7 +4,7 @@ We love contributions. To get started contributing you might need:
 
  - [Get started with git](http://rogerdudler.github.io/git-guide)
  - [How to create a pull request](https://help.github.com/articles/using-pull-requests)
- - [An issue to work on](https://github.com/awesome-inc/Autofac.TestingHelpers/labels/up-for-grabs) - We are on [Up for grabs](http://up-for-grabs.net/), our up for grabs issues are tagged `up-for-grabs`
+ - [An issue to work on](https://github.com/awesome-inc/FluentAssertions.Autofac/labels/up-for-grabs) - We are on [Up for grabs](http://up-for-grabs.net/), our up for grabs issues are tagged `up-for-grabs`
  - An understanding of how [we write tests](#writing-tests)
 
 Once you know how to create a pull request and have an issue to work on, just post a comment saying you will work on it.
@@ -20,7 +20,7 @@ Issues are also welcome, [failing tests](#writing-tests) are even more welcome.
 
 ## Writing Tests
 
-It is easy to write tests in `Autfac.TestingHelpers`. Test fixtures are located directly beside the code in classes ending with `_Should.cs`.
+It is easy to write tests in `FluentAssertions.Autofac`. Test fixtures are located directly beside the code in classes ending with `_Should.cs`.
 
 ### 1. Find appropriate fixture
 Find where your issue would logically sit, i.e. find the class closest to your issue.

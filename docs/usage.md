@@ -1,8 +1,8 @@
 # Usage
  
- Available on [Nuget](https://www.nuget.org) under [Autofac.TestingHelpers](https://www.nuget.org/packages/Autofac.TestingHelpers/)
+ Available on [Nuget](https://www.nuget.org) under [FluentAssertions.Autofac](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 
-    Install-Package Autofac.TestingHelpers
+    Install-Package FluentAssertions.Autofac
 
 TODO
 

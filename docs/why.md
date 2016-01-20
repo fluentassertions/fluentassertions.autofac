@@ -1,3 +1,3 @@
-# Why use Autofac.TestingHelpers
+# Why use FluentAssertions.Autofac
 
 TODO
