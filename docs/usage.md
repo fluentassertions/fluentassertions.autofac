@@ -4,5 +4,22 @@
 
     Install-Package FluentAssertions.Autofac
 
-TODO
+Testing registration:
+
+    container.ShouldHave().Registered<SuperCoolService>()
+        .AsSelf()
+        .As<ICoolService>()
+        .Singleton();
+
+    container.ShouldHave().Registered(superCoolInstance);
+
+    container.ShouldHave().Registered<OtherCoolService>()
+                .Named<ICoolService<("prettyCool");
+
+    container.ShouldHave().NotRegistered<UncoolService>("uncool");
+
+Testing you can actually resolve an instance which verifies your registration is complete:
+
+    container.ShouldResolve<ICoolService>().As<SuperCoolService>()
+        .AutoActivate();
 
