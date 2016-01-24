@@ -12,5 +12,5 @@ Fluently testing your Autofac configuration.
 
 - [Documentation](http://fluentassertionsautofac.readthedocs.org/en/latest)
 - [Contributing](https://github.com/awesome-inc/FluentAssertions.Autofac/blob/develop/CONTRIBUTING.md)
-- [Usage](http://fluentassertionsautofac.readthedocs.org/en/latest/usage/usage/)
+- [Usage](http://fluentassertionsautofac.readthedocs.org/en/latest/usage/)
 - [Why?](http://fluentassertionsautofac.readthedocs.org/en/latest/why)
