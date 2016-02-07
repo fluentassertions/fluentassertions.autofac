@@ -6,7 +6,10 @@
 
 ## Test Registration
 
-    container.ShouldHave().Registered<SuperCoolService>()
+Testing your DI configuration logic works by testing against your container:
+
+	var container = Configure();
+	container.ShouldHave().Registered<SuperCoolService>()
         .AsSelf()
         .As<ICoolService>()
         .Singleton();
