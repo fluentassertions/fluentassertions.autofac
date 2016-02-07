@@ -47,7 +47,7 @@ You can also retreive a testable builder like this
 In general, when implementing modules you will typically be subclassing Autofac's module base class `Module` which requires a parameterless constructor. And this is fine in most cases. 
 
 However, we have had some more special use cases where we definitely 
-wanted some module to take constructor parameters. In this you cannot use
+wanted some module to take constructor parameters. In this case you cannot use the generic idiom
 
     builder.RegisterModule<TModule>();
 
