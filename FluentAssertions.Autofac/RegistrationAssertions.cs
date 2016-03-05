@@ -1,22 +1,26 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using Autofac;
 using Autofac.Core;
 using Autofac.Core.Lifetime;
+using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac
 {
-    public class RegistrationAssertions
+    [DebuggerNonUserCode]
+    public class RegistrationAssertions : ReferenceTypeAssertions<IContainer, RegistrationAssertions>
     {
-        protected IContainer Container;
         protected Type Type;
         private readonly IComponentRegistration _registration;
 
-        public RegistrationAssertions(IContainer container, Type type)
+        protected override string Context => nameof(IContainer);
+
+        public RegistrationAssertions(IContainer subject, Type type)
         {
-            if (container == null) throw new ArgumentNullException(nameof(container));
+            if (subject == null) throw new ArgumentNullException(nameof(subject));
             if (type == null) throw new ArgumentNullException(nameof(type));
-            Container = container;
+            Subject = subject;
             Type = type;
             _registration = GetRegistration();
         }
@@ -28,7 +32,7 @@ namespace FluentAssertions.Autofac
 
         public RegistrationAssertions Named(string name, Type type)
         {
-            Container.IsRegisteredWithName(name, type)
+            Subject.IsRegisteredWithName(name, type)
                 .Should().BeTrue($"Type '{type}' should be registered with name '{name}'");
             return this;
         }
@@ -40,7 +44,7 @@ namespace FluentAssertions.Autofac
 
         public RegistrationAssertions Keyed(object key, Type type)
         {
-            Container.IsRegisteredWithKey(key, type)
+            Subject.IsRegisteredWithKey(key, type)
                 .Should().BeTrue($"Type '{type}' should be registered with key '{key}'");
             return this;
         }
@@ -128,7 +132,7 @@ namespace FluentAssertions.Autofac
 
         private IComponentRegistration GetRegistration()
         {
-            var registration = Container.ComponentRegistry.Registrations
+            var registration = Subject.ComponentRegistry.Registrations
                 .FirstOrDefault(r => r.Activator.LimitType == Type);
             registration.Should().NotBeNull($"Type '{Type}' should be registered");
             return registration;

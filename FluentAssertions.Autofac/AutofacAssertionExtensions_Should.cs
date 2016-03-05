@@ -14,14 +14,14 @@ namespace FluentAssertions.Autofac
         public void Provide_builder_extension()
         {
             var builder = new MockContainerBuilder();
-            builder.ShouldHave().Should().BeOfType<MockContainerBuilderAssertions>();
+            builder.Should().Should().BeOfType<MockContainerBuilderAssertions>();
         }
 
         [Test]
         public void Provide_register_extension()
         {
             var container = new ContainerBuilder().Build();
-            container.ShouldHave().Should().BeOfType<ContainerRegistrationAssertions>();
+            container.Should().Have().Should().BeOfType<ContainerRegistrationAssertions>();
         }
 
         [Test]
@@ -30,7 +30,7 @@ namespace FluentAssertions.Autofac
             var builder = new ContainerBuilder();
             builder.RegisterInstance(Substitute.For<IDisposable>());
             var container = builder.Build();
-            container.ShouldResolve<IDisposable>().Should().BeOfType<ResolveAssertions<IDisposable>>();
+            container.Should().Resolve<IDisposable>().Should().BeOfType<ResolveAssertions<IDisposable>>();
         }
     }
 }

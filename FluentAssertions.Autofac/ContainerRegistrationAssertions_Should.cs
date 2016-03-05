@@ -13,7 +13,7 @@ namespace FluentAssertions.Autofac
         [Test]
         public void RegisterType()
         {
-            var sut = Configure(builder => builder.RegisterType<Dummy>()).ShouldHave();
+            var sut = Configure(builder => builder.RegisterType<Dummy>()).Should().Have();
             sut.Registered<Dummy>();
             sut.Registered(typeof(Dummy));
         }
@@ -23,13 +23,13 @@ namespace FluentAssertions.Autofac
         {
             var instance = new Dummy();
             var container = Configure(builder => builder.RegisterInstance(instance));
-            container.ShouldHave().Registered(instance);
+            container.Should().Have().Registered(instance);
         }
 
         [Test]
         public void NotRegister()
         {
-            var sut = Configure().ShouldHave();
+            var sut = Configure().Should().Have();
             sut.NotRegistered<IDisposable>();
             sut.NotRegistered(typeof(IDisposable));
             sut.NotRegistered<IDisposable>("foo");

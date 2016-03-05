@@ -1,21 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using Autofac;
+using FluentAssertions.Primitives;
 using NUnit.Framework;
 
 namespace FluentAssertions.Autofac
 {
-    public class ResolveAssertions<TService>
+    [DebuggerNonUserCode]
+    public class ResolveAssertions<TService> : ReferenceTypeAssertions<IContainer, ResolveAssertions<TService>>
     {
-        private readonly IContainer _container;
         private readonly List<TService> _instances;
 
         public ResolveAssertions(IContainer container)
         {
             if (container == null) throw new ArgumentNullException(nameof(container));
-            _container = container;
-            _instances = _container.Resolve<IEnumerable<TService>>().ToList();
+            Subject = container;
+            _instances = Subject.Resolve<IEnumerable<TService>>().ToList();
             if (!_instances.Any())
                 throw new AssertionException($"Expected container to resolve '{typeof(TService)}'.");
         }
@@ -36,7 +38,9 @@ namespace FluentAssertions.Autofac
             _instances.Should().Contain(instance => instance.GetType() == type,
                 $"Type '{typeof (TService)}' should be resolved as '{type}'");
 
-            return new RegistrationAssertions(_container, type);
+            return new RegistrationAssertions(Subject, type);
         }
+
+        protected override string Context => nameof(IContainer);
     }
 }

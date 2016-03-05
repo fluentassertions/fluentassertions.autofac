@@ -20,7 +20,7 @@ namespace FluentAssertions.Autofac
         public void Provide_test_builder()
         {
             var builder = Module<SampleModule>.GetTestBuilder();
-            builder.ShouldHave().RegisteredModule<SampleModule>();
+            builder.Should().RegisterModule<SampleModule>();
         }
 
         [ExcludeFromCodeCoverage]

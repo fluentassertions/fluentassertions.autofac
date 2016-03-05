@@ -1,20 +1,17 @@
-﻿using Autofac;
+﻿using System.Diagnostics;
+using Autofac;
 
 namespace FluentAssertions.Autofac
 {
+    [DebuggerNonUserCode]
     public static class AutofacAssertionExtensions
     {
-        public static ResolveAssertions<TService> ShouldResolve<TService>(this IContainer container)
+        public static ContainerAssertions Should(this IContainer container)
         {
-            return new ResolveAssertions<TService>(container);
+            return new ContainerAssertions(container);
         }
 
-        public static ContainerRegistrationAssertions ShouldHave(this IContainer container)
-        {
-            return new ContainerRegistrationAssertions(container);
-        }
-
-        public static MockContainerBuilderAssertions ShouldHave(this MockContainerBuilder builder)
+        public static MockContainerBuilderAssertions Should(this MockContainerBuilder builder)
         {
             return new MockContainerBuilderAssertions(builder);
         }

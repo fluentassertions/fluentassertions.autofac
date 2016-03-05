@@ -81,7 +81,7 @@ namespace FluentAssertions.Autofac
         {
             var builder = new ContainerBuilder();
             arrange?.Invoke(builder);
-            return builder.Build().ShouldHave();
+            return builder.Build().Should().Have();
         }
 
         // ReSharper disable ClassNeverInstantiated.Local

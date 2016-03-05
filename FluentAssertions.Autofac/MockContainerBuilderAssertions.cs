@@ -1,35 +1,39 @@
 using System;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using FluentAssertions.Primitives;
 using Module = Autofac.Module;
 
 namespace FluentAssertions.Autofac
 {
-    public class MockContainerBuilderAssertions
+    [DebuggerNonUserCode]
+    public class MockContainerBuilderAssertions : ReferenceTypeAssertions<MockContainerBuilder, MockContainerBuilderAssertions>
     {
-        private readonly MockContainerBuilder _builder;
+        protected override string Context => nameof(MockContainerBuilder);
 
-        public MockContainerBuilderAssertions(MockContainerBuilder builder)
+        public MockContainerBuilderAssertions(MockContainerBuilder subject)
         {
-            _builder = builder;
+            if (subject == null) throw new ArgumentNullException(nameof(subject));
+            Subject = subject;
         }
 
-        public void RegisteredModule<TModule>() where TModule : Module, new()
+        public void RegisterModule<TModule>() where TModule : Module, new()
         {
-            RegisteredModule(typeof(TModule));
+            RegisterModule(typeof(TModule));
         }
 
-        public void RegisteredModule(Type moduleType)
+        public void RegisterModule(Type moduleType)
         {
-            var moduleCallback = _builder.Callbacks
+            var moduleCallback = Subject.Callbacks
                 .FirstOrDefault(callback => callback.Target.GetType() == moduleType && callback.Method.Name == nameof(Module.Configure));
             moduleCallback.Should().NotBeNull($"Module '{moduleType}' should be registered");
         }
 
-        public void RegisteredModulesIn(Assembly assembly)
+        public void RegisterModulesIn(Assembly assembly)
         {
             var moduleTypes = assembly.GetTypes().Where(t => typeof(Module).IsAssignableFrom(t)).ToList();
-            moduleTypes.ForEach(RegisteredModule);
+            moduleTypes.ForEach(RegisterModule);
         }
     }
 }

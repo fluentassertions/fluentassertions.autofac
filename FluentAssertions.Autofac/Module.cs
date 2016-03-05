@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Autofac;
 
 namespace FluentAssertions.Autofac
 {
+    [DebuggerNonUserCode]
     public static class Module<TModule> where TModule : Module, new()
     {
         public static IContainer GetTestContainer(

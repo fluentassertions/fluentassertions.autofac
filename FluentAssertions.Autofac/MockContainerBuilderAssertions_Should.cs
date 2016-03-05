@@ -16,8 +16,8 @@ namespace FluentAssertions.Autofac
             var assembly = typeof(MockContainerBuilderAssertions_Should).Assembly;
             sut.RegisterAssemblyModules(assembly);
 
-            sut.ShouldHave().RegisteredModulesIn(assembly);
-            sut.ShouldHave().RegisteredModule<SampleModule>();
+            sut.Should().RegisterModulesIn(assembly);
+            sut.Should().RegisterModule<SampleModule>();
         }
 
         [Test]
@@ -25,8 +25,8 @@ namespace FluentAssertions.Autofac
         {
             var sut = new MockContainerBuilder();
             sut.RegisterModule<SampleModule>();
-            sut.ShouldHave().RegisteredModule<SampleModule>();
-            sut.ShouldHave().RegisteredModule(typeof(SampleModule));
+            sut.Should().RegisterModule<SampleModule>();
+            sut.Should().RegisterModule(typeof(SampleModule));
         }
 
         public class SampleModule : Module
