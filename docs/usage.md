@@ -9,23 +9,23 @@
 Testing your DI configuration logic works by testing against your container:
 
 	var container = Configure();
-	container.ShouldHave().Registered<SuperCoolService>()
+	container.Should().Have().Registered<SuperCoolService>()
         .AsSelf()
         .As<ICoolService>()
         .Singleton();
 
-    container.ShouldHave().Registered(superCoolInstance);
+    container.Should().Have().Registered(superCoolInstance);
 
-    container.ShouldHave().Registered<OtherCoolService>()
+    container.Should().Have().Registered<OtherCoolService>()
                 .Named<ICoolService<("prettyCool");
 
-    container.ShouldHave().NotRegistered<UncoolService>("uncool");
+    container.Should().Have().NotRegistered<UncoolService>("uncool");
 
 ## Test Resolving
 	
 You can also test actually resolving an instance which verifies your registration is complete:
 
-    container.ShouldResolve<ICoolService>().As<SuperCoolService>()
+    container.Should().Resolve<ICoolService>().As<SuperCoolService>()
         .AutoActivate();
 
 ## Testing Autofac Modules
@@ -35,13 +35,13 @@ With an application growing in complexity you want to modularize your configurat
 Here is a simple example verifying that the module `MyCoolModule` registers the `SuperCoolService` implementation
 
     Module<MyCoolModule>.GetTestContainer()
-	    .ShouldHave().Registered<SuperCoolService>()
+	    .Should().Have().Registered<SuperCoolService>()
 		...
 
 You can also retreive a testable builder like this
 
     Module<MyCoolModule>.GetTestBuilder()
-	    .ShouldHave().RegisteredModule<SomeOtherModule>()
+	    .Should().Have().RegisteredModule<SomeOtherModule>()
 		...
 
 In general, when implementing modules you will typically be subclassing Autofac's module base class `Module` which requires a parameterless constructor. And this is fine in most cases. 
@@ -93,6 +93,6 @@ Say one thing your module does is registering some other modules like this
 
 This is a use case where you verify that some callbacks have been registered not on the container but on the builder instead
 
-    Module<MyCoolModule>.GetTestBuilder().ShouldHave()
-        .RegisteredModule<ModuleA>()
-        .RegisteredModulesIn(typeof(MyType).Assembly);
+    Module<MyCoolModule>.GetTestBuilder().Should()
+        .RegisterModule<ModuleA>()
+        .RegisterModulesIn(typeof(MyType).Assembly);
