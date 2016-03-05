@@ -49,7 +49,6 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="FluentAssertions.Autofac.NuGet.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentAssertions.Autofac.Net45\FluentAssertions.Autofac.Net45.csproj">

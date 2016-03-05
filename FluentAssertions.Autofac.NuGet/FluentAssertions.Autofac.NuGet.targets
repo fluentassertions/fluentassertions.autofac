@@ -4,4 +4,5 @@
   <Target Name="Test" DependsOnTargets="Build" />
   <Target Name="Coverage" DependsOnTargets="Test" />
   <Target Name="CoverageReport" DependsOnTargets="Coverage" />
+  <Target Name="CoverageUpload" DependsOnTargets="Coverage" />
 </Project>
