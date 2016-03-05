@@ -68,7 +68,7 @@
   <ItemGroup>
     <Compile Include="AutofacAssertionExtensions_Should.cs" />
     <Compile Include="CheckConventions.cs" />
-    <Compile Include="ContainerRegistrationAssertions.cs" />
+    <Compile Include="ContainerRegistrationAssertions_Should.cs" />
     <Compile Include="MockContainerBuilderAssertions_Should.cs" />
     <Compile Include="MockContainerBuilder_Should.cs" />
     <Compile Include="Module_Should.cs" />

@@ -11,7 +11,7 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AutofacAssertionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContainerAssertions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ContainerRegistrationAssertions_Should.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContainerRegistrationAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MockContainerBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MockContainerBuilderAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Module.cs" />
