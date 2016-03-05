@@ -1,4 +1,5 @@
-﻿Microsoft Visual Studio Solution File, Format Version 12.00
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
@@ -29,9 +30,6 @@ EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shproj", "{0041C31D-E06F-430F-85E3-B8F1B1CF0ED0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.NuGet", "FluentAssertions.Autofac.NuGet\FluentAssertions.Autofac.NuGet.csproj", "{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}"
-	ProjectSection(ProjectDependencies) = postProject
-		{825699DA-478C-45FF-AFEA-F5FC5A36789C} = {825699DA-478C-45FF-AFEA-F5FC5A36789C}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
