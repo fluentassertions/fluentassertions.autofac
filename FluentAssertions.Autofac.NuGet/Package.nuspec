@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<package >
+	<metadata>
+		<id>FluentAssertions.Autofac</id>
+		<version>$Version$</version>
+		<title>FluentAssertions.Autofac</title>
+		<authors>Awesome Incremented and Contributors</authors>
+		<owners>Awesome Incremented and Contributors</owners>
+		<licenseUrl>http://www.opensource.org/licenses/mit-license.php</licenseUrl>
+		<requireLicenseAcceptance>false</requireLicenseAcceptance>
+		<description>Fluent Assertions extensions for Autofac</description>
+		<summary>Fluent Assertions extensions for Autofac</summary>
+		<copyright/>
+		<releaseNotes>Revision: $Revision$</releaseNotes>
+		<projectUrl>https://github.com/awesome-inc/FluentAssertions.Autofac</projectUrl>
+		<developmentDependency>true</developmentDependency>
+		<dependencies>
+		<dependency id="Autofac" version="3.5.2" />
+		<dependency id="FluentAssertions" version="4.2.2" />
+		<dependency id="NSubstitute" version="1.9.2" />
+		</dependencies>
+	</metadata>
+	<files>
+		<file src="..\FluentAssertions.Autofac.Net45\bin\Release\FluentAssertions.Autofac.dll" target="lib\net45"/>
+	</files>
+</package>

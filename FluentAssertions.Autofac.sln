@@ -1,9 +1,8 @@
-﻿
-Microsoft Visual Studio Solution File, Format Version 12.00
+﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac", "FluentAssertions.Autofac\FluentAssertions.Autofac.csproj", "{825699DA-478C-45FF-AFEA-F5FC5A36789C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.Net45", "FluentAssertions.Autofac.Net45\FluentAssertions.Autofac.Net45.csproj", "{825699DA-478C-45FF-AFEA-F5FC5A36789C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{915DFDB6-990E-4068-899E-F84163AC7A9D}"
 	ProjectSection(SolutionItems) = preProject
@@ -27,7 +26,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{ABFD44D3-9
 		docs\index.md = docs\index.md
 	EndProjectSection
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shproj", "{0041C31D-E06F-430F-85E3-B8F1B1CF0ED0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.NuGet", "FluentAssertions.Autofac.NuGet\FluentAssertions.Autofac.NuGet.csproj", "{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}"
+	ProjectSection(ProjectDependencies) = postProject
+		{825699DA-478C-45FF-AFEA-F5FC5A36789C} = {825699DA-478C-45FF-AFEA-F5FC5A36789C}
+	EndProjectSection
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Shared\Shared.projitems*{825699da-478c-45ff-afea-f5fc5a36789c}*SharedItemsImports = 4
+		Shared\Shared.projitems*{0041c31d-e06f-430f-85e3-b8f1b1cf0ed0}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -41,6 +51,10 @@ Global
 		{C39AF172-EE04-45D6-84B8-1842818F8585}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C39AF172-EE04-45D6-84B8-1842818F8585}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C39AF172-EE04-45D6-84B8-1842818F8585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
