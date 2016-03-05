@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Skip tests for this project -->
+  <Target Name="Test" DependsOnTargets="Build" />
+  <Target Name="Coverage" DependsOnTargets="Test" />
+  <Target Name="CoverageReport" DependsOnTargets="Coverage" />
+  <Target Name="CoverageUpload" DependsOnTargets="Coverage" />
+</Project>

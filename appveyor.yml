@@ -18,7 +18,7 @@
     - ps: gitversion /l console /output buildserver
     - nuget setapikey %apiKey% -Verbosity quiet
   build_script:
-    - build.bat /t:Deploy /v:m
+    - build.bat /t:CoverageUpload;Deploy /v:m
 # all other branches
 -
   install:
@@ -31,4 +31,4 @@
   before_build:
     - ps: gitversion /l console /output buildserver
   build_script:
-    - build.bat /t:Package /v:m
+    - build.bat /t:CoverageUpload;Package /v:m

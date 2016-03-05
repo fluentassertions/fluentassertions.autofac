@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>0041c31d-e06f-430f-85e3-b8f1b1cf0ed0</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Shared</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)AutofacAssertionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContainerAssertions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ContainerRegistrationAssertions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MockContainerBuilder.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MockContainerBuilderAssertions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Module.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RegisterAssertions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RegistrationAssertions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ResolveAssertions.cs" />
+  </ItemGroup>
+</Project>
