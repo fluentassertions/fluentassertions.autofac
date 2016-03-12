@@ -6,6 +6,8 @@
 
 # FluentAssertions.Autofac
 
+[![Join the chat at https://gitter.im/awesome-inc/FluentAssertions.Autofac](https://badges.gitter.im/awesome-inc/FluentAssertions.Autofac.svg)](https://gitter.im/awesome-inc/FluentAssertions.Autofac?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Fluently testing your Autofac configuration.
 
 ## Quick Links
