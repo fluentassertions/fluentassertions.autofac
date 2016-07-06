@@ -17,7 +17,7 @@ namespace FluentAssertions.Autofac
             var container = Configure();
             container.Invoking(x => x.Should().Resolve<IDisposable>())
                 .ShouldThrow<AssertionException>()
-                .WithMessage($"Expected container to resolve '{typeof (IDisposable)}'.");
+                .WithMessage($"Expected container to resolve '{typeof (IDisposable)}' but it did not.");
 
             var disposable = Substitute.For<IDisposable>();
             container = Configure(builder => builder.RegisterInstance(disposable));
