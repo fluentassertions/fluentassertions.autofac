@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Autofac;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
-using NUnit.Framework;
 
 namespace FluentAssertions.Autofac
 {
@@ -18,8 +18,10 @@ namespace FluentAssertions.Autofac
             if (container == null) throw new ArgumentNullException(nameof(container));
             Subject = container;
             _instances = Subject.Resolve<IEnumerable<TService>>().ToList();
-            if (!_instances.Any())
-                throw new AssertionException($"Expected container to resolve '{typeof(TService)}'.");
+
+            Execute.Assertion
+                .ForCondition(_instances.Any())
+                .FailWith($"Expected container to resolve '{typeof(TService)}' but it did not.");
         }
 
         public RegistrationAssertions As<TImplementation>()
