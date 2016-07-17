@@ -1,7 +1,11 @@
 using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Autofac;
+using Autofac.Builder;
+using Autofac.Util;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Module = Autofac.Module;
 
@@ -10,7 +14,9 @@ namespace FluentAssertions.Autofac
     /// <summary>
     ///     Contains a number of methods to assert that an <see cref="MockContainerBuilder" /> is in the expected state.
     /// </summary>
-    [DebuggerNonUserCode]
+#if !DEBUG
+    [System.Diagnostics.DebuggerNonUserCode]
+#endif
     public class MockContainerBuilderAssertions : ReferenceTypeAssertions<MockContainerBuilder, MockContainerBuilderAssertions>
     {
         /// <summary>
@@ -30,6 +36,7 @@ namespace FluentAssertions.Autofac
         {
             if (subject == null) throw new ArgumentNullException(nameof(subject));
             Subject = subject;
+            _modules = Subject.GetModules().ToList();
         }
 
         /// <summary>
@@ -47,9 +54,11 @@ namespace FluentAssertions.Autofac
         /// <param name="moduleType">The module type</param>
         public void RegisterModule(Type moduleType)
         {
-            var moduleCallback = Subject.Callbacks
-                .FirstOrDefault(callback => callback.Target.GetType() == moduleType && callback.Method.Name == nameof(Module.Configure));
-            moduleCallback.Should().NotBeNull($"Module '{moduleType}' should be registered");
+            Traverse();
+            var module = _modules.FirstOrDefault(m => m.GetType() == moduleType);
+            Execute.Assertion
+                .ForCondition(module != null)
+                .FailWith($"Module '{moduleType}' should be registered but it was not.");
         }
 
         /// <summary>
@@ -60,6 +69,21 @@ namespace FluentAssertions.Autofac
         {
             var moduleTypes = assembly.GetTypes().Where(t => typeof(Module).IsAssignableFrom(t)).ToList();
             moduleTypes.ForEach(RegisterModule);
+        }
+
+        private bool _traversed;
+        private readonly List<Module> _modules;
+
+        private void Traverse()
+        {
+            if (_traversed) return;
+
+            var builder = new MockContainerBuilder();
+            _modules.ForEach(module => builder.Load(module));
+            var traversedModules = builder.GetModules();
+            _modules.AddRange(traversedModules);
+
+            _traversed = true;
         }
     }
 }

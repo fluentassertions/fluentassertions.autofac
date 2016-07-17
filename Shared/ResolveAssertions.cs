@@ -1,20 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Autofac;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
+using System.Reflection;
 
 namespace FluentAssertions.Autofac
 {
     /// <summary>
     ///     Contains a number of methods to assert that expected services can actually be resolved from an <see cref="IContainer" />.
     /// </summary>
-    [DebuggerNonUserCode]
-    public class ResolveAssertions<TService> : ReferenceTypeAssertions<IContainer, ResolveAssertions<TService>>
+#if !DEBUG
+    [System.Diagnostics.DebuggerNonUserCode]
+#endif
+    public class ResolveAssertions : ReferenceTypeAssertions<IContainer, ResolveAssertions>
     {
-        private readonly List<TService> _instances;
+        private readonly Type _serviceType;
+        private readonly List<object> _instances = new List<object>();
 
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
@@ -23,19 +26,27 @@ namespace FluentAssertions.Autofac
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
         protected override string Context => nameof(IContainer);
+
         /// <summary>
-        ///     Initializes a new instance of the <see cref="ResolveAssertions{TService}" /> class.
+        ///     Initializes a new instance of the <see cref="ResolveAssertions" /> class.
         /// </summary>
         /// <param name="container">The container</param>
-        public ResolveAssertions(IContainer container)
+        /// <param name="serviceType">The service type</param>
+        public ResolveAssertions(IContainer container, Type serviceType)
         {
+            _serviceType = serviceType;
             if (container == null) throw new ArgumentNullException(nameof(container));
             Subject = container;
-            _instances = Subject.Resolve<IEnumerable<TService>>().ToList();
+
+            var typeToResolve = typeof(IEnumerable<>).MakeGenericType(serviceType);
+            var array = Subject.Resolve(typeToResolve) as Array;
+            if (array != null)
+                _instances.AddRange(array.OfType<object>());
 
             Execute.Assertion
                 .ForCondition(_instances.Any())
-                .FailWith($"Expected container to resolve '{typeof(TService)}' but it did not.");
+                .FailWith($"Expected container to resolve '{_serviceType}' but it did not.");
+
         }
 
         /// <summary>
@@ -43,9 +54,8 @@ namespace FluentAssertions.Autofac
         /// </summary>
         /// <typeparam name="TImplementation">The type to resolve</typeparam>
         public RegistrationAssertions As<TImplementation>()
-            where TImplementation : TService
         {
-            return As(typeof (TImplementation));
+            return As(typeof(TImplementation));
         }
 
         /// <summary>
@@ -53,19 +63,34 @@ namespace FluentAssertions.Autofac
         /// </summary>
         public RegistrationAssertions AsSelf()
         {
-            return As<TService>();
+            return As(_serviceType);
+        }
+
+
+        /// <summary>
+        ///   Asserts that the service type has been registered with auto activation on the current <see cref="IContainer"/>.
+        /// </summary>
+        public void AutoActivate()
+        {
+            Subject.AssertAutoActivates(_serviceType);
         }
 
         /// <summary>
-        ///   Asserts that the specified implementation type can be resolved from the current <see cref="IContainer"/>.
+        ///   Asserts that the specified implementation type(s) can be resolved from the current <see cref="IContainer"/>.
         /// </summary>
         /// <param name="type">The type to resolve</param>
-        public RegistrationAssertions As(Type type)
+        /// <param name="types">Optional types to resolve</param>
+        public RegistrationAssertions As(Type type, params Type[] types)
+        {
+            AssertTypeResolved(type);
+            types.ToList().ForEach(AssertTypeResolved);
+            return new RegistrationAssertions(Subject, type);
+        }
+
+        private void AssertTypeResolved(Type type)
         {
             _instances.Should().Contain(instance => instance.GetType() == type,
-                $"Type '{typeof (TService)}' should be resolved as '{type}'");
-
-            return new RegistrationAssertions(Subject, type);
+                $"Type '{_serviceType}' should be resolved as '{type}'");
         }
     }
 }

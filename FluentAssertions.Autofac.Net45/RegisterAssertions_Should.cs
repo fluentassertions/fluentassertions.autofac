@@ -18,12 +18,10 @@ namespace FluentAssertions.Autofac
                 builder.RegisterType<Dummy>()
                     .AsSelf()
                     .As<IDisposable>()
+                    .AsImplementedInterfaces()
                 );
 
-            containerShouldHave.Registered<Dummy>()
-                .AsSelf()
-                .As<IDisposable>()
-                .As(typeof (IDisposable));
+            AssertAsRegistrations(containerShouldHave.Registered<Dummy>());
         }
 
         [Test]
@@ -34,12 +32,10 @@ namespace FluentAssertions.Autofac
             var containerShouldHave = Configure(builder =>
                 builder.RegisterInstance(instance)
                     .AsSelf()
-                    .As<IDisposable>());
+                    .As<IDisposable>()
+                    .AsImplementedInterfaces());
 
-            containerShouldHave.Registered(instance)
-                .AsSelf()
-                .As<IDisposable>()
-                .As(typeof (IDisposable));
+            AssertAsRegistrations(containerShouldHave.Registered(instance));
         }
 
         private static ContainerRegistrationAssertions Configure(Action<ContainerBuilder> arrange = null)
@@ -47,6 +43,16 @@ namespace FluentAssertions.Autofac
             var builder = new ContainerBuilder();
             arrange?.Invoke(builder);
             return builder.Build().Should().Have();
+        }
+
+        private static void AssertAsRegistrations(RegisterAssertions dummyShouldBeRegistered)
+        {
+            dummyShouldBeRegistered
+                .AsSelf()
+                .As<IDisposable>()
+                .As(typeof(IDisposable))
+                .As(typeof(IDisposable), typeof(Dummy))
+                .AsImplementedInterfaces();
         }
 
         // ReSharper disable ClassNeverInstantiated.Local

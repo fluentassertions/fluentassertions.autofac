@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)AutofacAssertionExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)AutofacExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContainerAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ContainerRegistrationAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MockContainerBuilder.cs" />
@@ -18,5 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)RegisterAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegistrationAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResolveAssertions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TypeScanningAssertions.cs" />
   </ItemGroup>
 </Project>

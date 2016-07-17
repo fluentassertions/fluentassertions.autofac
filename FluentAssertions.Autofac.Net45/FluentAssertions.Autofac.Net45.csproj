@@ -70,6 +70,7 @@
   <ItemGroup>
     <Compile Include="AutofacAssertionExtensions_Should.cs" />
     <Compile Include="CheckConventions.cs" />
+    <Compile Include="AutofacExtensions_Should.cs" />
     <Compile Include="ContainerAssertions_Should.cs" />
     <Compile Include="ContainerRegistrationAssertions_Should.cs" />
     <Compile Include="MockContainerBuilderAssertions_Should.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="ResolveAssertions_Should.cs" />
     <Compile Include="TestExtensions.cs" />
     <Compile Include="TestExtensions_Should.cs" />
+    <Compile Include="TypeScanningAssertions_Should.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

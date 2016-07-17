@@ -18,18 +18,30 @@ namespace FluentAssertions.Autofac
 
             sut.Should().RegisterModulesIn(assembly);
             sut.Should().RegisterModule<SampleModule>();
+            sut.Should().RegisterModule<SampleModule2>();
         }
 
         [Test]
         public void Support_testing_module_registration()
         {
-            var sut = new MockContainerBuilder();
-            sut.RegisterModule<SampleModule>();
-            sut.Should().RegisterModule<SampleModule>();
-            sut.Should().RegisterModule(typeof(SampleModule));
+            var builder = new MockContainerBuilder();
+            builder.RegisterModule<SampleModule>();
+
+            var builderShould = builder.Should();
+            builderShould.RegisterModule<SampleModule>();
+            builderShould.RegisterModule(typeof(SampleModule));
+
+            builderShould.RegisterModule<SampleModule2>();
         }
 
         public class SampleModule : Module
-        { }
+        {
+            protected override void Load(ContainerBuilder builder)
+            {
+                builder.RegisterModule<SampleModule2>();
+            }
+        }
+
+        public class SampleModule2 : Module { }
     }
 }
