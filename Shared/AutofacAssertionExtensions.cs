@@ -1,12 +1,13 @@
-﻿using System.Diagnostics;
-using Autofac;
+﻿using Autofac;
 
 namespace FluentAssertions.Autofac
 {
     /// <summary>
     ///     Contains extension methods for Autofac assertions.
     /// </summary>
-    [DebuggerNonUserCode]
+#if !DEBUG
+    [System.Diagnostics.DebuggerNonUserCode]
+#endif
     public static class AutofacAssertionExtensions
     {
         /// <summary>

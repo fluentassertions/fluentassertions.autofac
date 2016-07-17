@@ -7,7 +7,7 @@ using NUnit.Framework;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof (ResolveAssertions<>))]
+    [TestFixtureFor(typeof (ResolveAssertions))]
     // ReSharper disable InconsistentNaming
     internal class ResolveAssertions_Should
     {
@@ -37,6 +37,17 @@ namespace FluentAssertions.Autofac
             containerShould.Resolve<Dummy>().AsSelf();
             containerShould.Resolve<IDisposable>().As<Dummy>();
             containerShould.Resolve<IDisposable>().As(typeof(Dummy));
+        }
+
+        [Test]
+        public void Assert_AutoActivation()
+        {
+            var container = Configure(builder => builder.RegisterType<Dummy>().AsSelf().AutoActivate());
+            container.Should().Resolve<Dummy>().AutoActivate();
+
+            container = Configure(builder => builder.RegisterType<Dummy>().AutoActivate());
+            container.Should().AutoActivate<Dummy>();
+            container.Should().Invoking(x => x.Resolve<Dummy>()).ShouldThrow<AssertionException>("type not registered AS something");
         }
 
         private static IContainer Configure(Action<ContainerBuilder> arrange = null)

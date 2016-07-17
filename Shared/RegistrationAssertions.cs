@@ -1,6 +1,4 @@
 using System;
-using System.Diagnostics;
-using System.Linq;
 using Autofac;
 using Autofac.Core;
 using Autofac.Core.Lifetime;
@@ -11,13 +9,15 @@ namespace FluentAssertions.Autofac
     /// <summary>
     ///     Contains a number of methods to assert that an <see cref="IContainer" /> registers expected services.
     /// </summary>
-    [DebuggerNonUserCode]
+#if !DEBUG
+    [System.Diagnostics.DebuggerNonUserCode]
+#endif
     public class RegistrationAssertions : ReferenceTypeAssertions<IContainer, RegistrationAssertions>
     {
         /// <summary>
         ///    The type that should be registered on the container
         /// </summary>
-        protected readonly Type Type;
+        internal readonly Type Type;
         private readonly IComponentRegistration _registration;
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace FluentAssertions.Autofac
             if (type == null) throw new ArgumentNullException(nameof(type));
             Subject = subject;
             Type = type;
-            _registration = GetRegistration();
+            _registration = Subject.ComponentRegistry.GetRegistration(Type);
         }
 
         /// <summary>
@@ -201,22 +201,10 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///   Asserts the current service type has been registered with auto activation on the current <see cref="IContainer"/>.
         /// </summary>
-        /// <returns></returns>
         public RegistrationAssertions AutoActivate()
         {
-            _registration.Services.Should()
-                .Contain(service => service.Description == "AutoActivate",
-                    $"Type '{Type}' should be auto activated");
-
+            _registration.AssertAutoActivates(Type);
             return this;
-        }
-
-        private IComponentRegistration GetRegistration()
-        {
-            var registration = Subject.ComponentRegistry.Registrations
-                .FirstOrDefault(r => r.Activator.LimitType == Type);
-            registration.Should().NotBeNull($"Type '{Type}' should be registered");
-            return registration;
         }
     }
 }

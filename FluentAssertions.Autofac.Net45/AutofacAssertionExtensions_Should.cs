@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof(AutofacAssertionExtensions))]
+    [TestFixtureFor(typeof (AutofacAssertionExtensions))]
     // ReSharper disable InconsistentNaming
     internal class AutofacAssertionExtensions_Should
     {
@@ -30,7 +30,7 @@ namespace FluentAssertions.Autofac
             var builder = new ContainerBuilder();
             builder.RegisterInstance(Substitute.For<IDisposable>());
             var container = builder.Build();
-            container.Should().Resolve<IDisposable>().Should().BeOfType<ResolveAssertions<IDisposable>>();
+            container.Should().Resolve<IDisposable>().Should().BeOfType<ResolveAssertions>();
         }
     }
 }

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using Autofac;
 
 namespace FluentAssertions.Autofac
@@ -9,7 +9,9 @@ namespace FluentAssertions.Autofac
     /// <summary>
     ///     Contains a number of methods to assert that an <see cref="IContainer" /> is in the expected state.
     /// </summary>
-    [DebuggerNonUserCode]
+#if !DEBUG
+    [System.Diagnostics.DebuggerNonUserCode]
+#endif
     public class RegisterAssertions : RegistrationAssertions
     {
         /// <summary>
@@ -37,10 +39,11 @@ namespace FluentAssertions.Autofac
         ///   Asserts that the specified implementation type can be resolved from the current <see cref="IContainer"/>.
         /// </summary>
         /// <param name="type">The type to resolve</param>
-        public RegisterAssertions As(Type type)
+        /// <param name="types">Optional types to resolve</param>
+        public RegisterAssertions As(Type type, params Type[] types)
         {
-            var actual = Subject.Resolve(type);
-            actual.Should().BeOfType(Type, $"Type '{Type}' should be registered as '{type}'");
+            AssertResolveAs(type);
+            types?.ToList().ForEach(AssertResolveAs);
             return this;
         }
 
@@ -50,6 +53,28 @@ namespace FluentAssertions.Autofac
         public RegisterAssertions AsSelf()
         {
             return As(Type);
+        }
+
+        /// <summary>
+        ///   Asserts that all implemented interfaces of the registered service type can be resolved from the current <see cref="IContainer"/>.
+        /// </summary>
+        public RegisterAssertions AsImplementedInterfaces()
+        {
+            GetImplementedInterfaces(Type).ForEach(AssertResolveAs);
+            return this;
+        }
+
+        private void AssertResolveAs(Type serviceType)
+        {
+            new ResolveAssertions(Subject, serviceType).As(Type);
+        }
+
+        private static List<Type> GetImplementedInterfaces(Type type)
+        {
+            var interfaces = type.GetTypeInfo().ImplementedInterfaces.Where(i => i != typeof(IDisposable))
+                .ToList();
+            if (type.GetTypeInfo().IsInterface) interfaces.Add(type);
+            return interfaces;
         }
     }
 }

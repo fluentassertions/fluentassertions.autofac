@@ -1,5 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using Autofac;
+using Autofac.Util;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac
@@ -7,7 +12,9 @@ namespace FluentAssertions.Autofac
     /// <summary>
     ///     Contains a number of methods to assert that an <see cref="IContainer" /> is in the expected state.
     /// </summary>
-    [DebuggerNonUserCode]
+#if !DEBUG
+    [System.Diagnostics.DebuggerNonUserCode]
+#endif
     public class ContainerAssertions : ReferenceTypeAssertions<IContainer, ContainerAssertions>
     {
         /// <summary>
@@ -36,11 +43,54 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="ResolveAssertions{TService}"/> object that can be used to assert the current <see typeparamref="TService"/>.
+        ///     Returns an <see cref="ResolveAssertions"/> object that can be used to assert the current <see paramref="serviceType"/>.
         /// </summary>
-        public ResolveAssertions<TService> Resolve<TService>()
+        public ResolveAssertions Resolve(Type serviceType)
         {
-            return new ResolveAssertions<TService>(Subject);
+            return new ResolveAssertions(Subject, serviceType);
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="ResolveAssertions"/> object that can be used to assert the current <see typeparamref="TService"/>.
+        /// </summary>
+        public ResolveAssertions Resolve<TService>()
+        {
+            return Resolve(typeof(TService));
+        }
+
+        /// <summary>
+        ///   Asserts the specified type has been registered with auto activation on the current <see cref="IContainer"/>.
+        /// </summary>
+        public void AutoActivate(Type type)
+        {
+            Subject.AssertAutoActivates(type);
+        }
+
+        /// <summary>
+        ///   Asserts the specified type has been registered with auto activation on the current <see cref="IContainer"/>.
+        /// </summary>
+        public void AutoActivate<TService>()
+        {
+            AutoActivate(typeof(TService));
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="TypeScanningAssertions"/> object that can be used to assert registered types on the current <see cref="MockContainerBuilder"/>.
+        /// </summary>
+        /// <param name="assemblies"></param>
+        public TypeScanningAssertions RegisterAssemblyTypes(params Assembly[] assemblies)
+        {
+            var types = assemblies.SelectMany(assembly => assembly.GetLoadableTypes());
+            return new TypeScanningAssertions(Subject, types);
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="TypeScanningAssertions"/> object that can be used to assert registered types on the current <see cref="MockContainerBuilder"/>.
+        /// </summary>
+        /// <param name="types"></param>
+        public TypeScanningAssertions RegisterTypes(IEnumerable<Type> types)
+        {
+            return new TypeScanningAssertions(Subject, types);
         }
     }
 }
