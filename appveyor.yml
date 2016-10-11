@@ -3,7 +3,8 @@
   branches:
     only:
       - master
-      - /release.*/
+      - /hotfix/
+      - /release/
   install:
     - choco install gitversion.portable -pre -y
   test: off
@@ -19,6 +20,11 @@
     - nuget setapikey %apiKey% -Verbosity quiet
   build_script:
     - build.bat /t:CoverageUpload;Deploy /v:m
+  cache:
+    - packages -> **\packages.config
+    - C:\ProgramData\chocolatey\bin -> appveyor.yml
+    - C:\ProgramData\chocolatey\lib -> appveyor.yml
+
 # all other branches
 -
   install:
@@ -32,3 +38,7 @@
     - ps: gitversion /l console /output buildserver
   build_script:
     - build.bat /t:CoverageUpload;Package /v:m
+  cache:
+    - packages -> **\packages.config
+    - C:\ProgramData\chocolatey\bin -> appveyor.yml
+    - C:\ProgramData\chocolatey\lib -> appveyor.yml
