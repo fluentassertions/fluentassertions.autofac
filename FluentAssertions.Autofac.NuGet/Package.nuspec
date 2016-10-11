@@ -16,7 +16,7 @@
     <developmentDependency>true</developmentDependency>
     <dependencies>
       <dependency id="Autofac" version="[3.5.2,)" />
-      <dependency id="FluentAssertions" version="[4.10.0,)" />
+      <dependency id="FluentAssertions" version="[4.11.0,)" />
     </dependencies>
   </metadata>
   <files>
