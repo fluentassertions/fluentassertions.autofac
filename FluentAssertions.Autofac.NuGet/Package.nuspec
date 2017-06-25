@@ -21,5 +21,6 @@
   </metadata>
   <files>
     <file src="..\FluentAssertions.Autofac.Net45\bin\Release\FluentAssertions.Autofac.*" target="lib\net45"/>
+    <file src="..\FluentAssertions.Autofac.Dotnet\bin\Release\FluentAssertions.Autofac.*" target="lib\netstandard1.6"/>
   </files>
 </package>

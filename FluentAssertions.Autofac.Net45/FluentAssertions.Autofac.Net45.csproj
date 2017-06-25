@@ -75,7 +75,6 @@
     <Compile Include="RegisterAssertions_Should.cs" />
     <Compile Include="RegistrationAssertions_Should.cs" />
     <Compile Include="ResolveAssertions_Should.cs" />
-    <Compile Include="TestExtensions.cs" />
     <Compile Include="TestExtensions_Should.cs" />
     <Compile Include="TypeScanningAssertions_Should.cs" />
   </ItemGroup>

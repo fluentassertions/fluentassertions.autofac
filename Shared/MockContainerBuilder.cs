@@ -42,7 +42,7 @@ namespace FluentAssertions.Autofac
         {
             return Callbacks
                 .Where(callback => callback.Target is Module
-                    && callback.Method.Name == nameof(Module.Configure))
+                    && callback.GetMethodInfo().Name == nameof(Module.Configure))
                 .Select(callback => (Module)callback.Target);
         }
 

@@ -19,6 +19,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)RegisterAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegistrationAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResolveAssertions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)TestExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)TypeScanningAssertions.cs" />
   </ItemGroup>
 </Project>
