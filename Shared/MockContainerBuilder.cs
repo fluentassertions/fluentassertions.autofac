@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
+using Autofac.Builder;
 using Autofac.Core;
 using Module = Autofac.Module;
 
@@ -23,11 +24,10 @@ namespace FluentAssertions.Autofac
         /// This is primarily for extending the builder syntax.
         /// </remarks>
         /// <param name="configurationCallback">Callback to execute.</param>
-        public override void RegisterCallback(Action<IComponentRegistry> configurationCallback)
+        public override DeferredCallback RegisterCallback(Action<IComponentRegistry> configurationCallback)
         {
-            base.RegisterCallback(configurationCallback);
-
             Callbacks.Add(configurationCallback);
+            return base.RegisterCallback(configurationCallback);
         }
 
         /// <summary>
