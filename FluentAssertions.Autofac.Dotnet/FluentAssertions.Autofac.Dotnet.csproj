@@ -44,4 +44,12 @@
   </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  
+  <!-- Workaround for AppVeyor build using older VS2015 instead of VS2017, cf.:
+    https://github.com/dotnet/roslyn/issues/12918
+    -->
+  <PropertyGroup>
+    <NuGetTargetMoniker>.NETStandard,Version=v1.6</NuGetTargetMoniker>
+  </PropertyGroup>
+  
 </Project>
