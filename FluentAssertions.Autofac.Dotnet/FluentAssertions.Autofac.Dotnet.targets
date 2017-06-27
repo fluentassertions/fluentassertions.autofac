@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!-- Skip test. As of now, we have no explicit tests for netcore -->
+  <Target Name="Test" DependsOnTargets="Build" />
+  <Target Name="Coverage" DependsOnTargets="Test" />
+  <Target Name="CoverageReport" DependsOnTargets="Coverage" />
+  <Target Name="CoverageUpload" DependsOnTargets="Coverage" />
+  <Import Project="..\packages\GitVersionTask.3.6.5\build\dotnet\GitVersionTask.targets" Condition="Exists('..\packages\GitVersionTask.3.6.5\build\dotnet\GitVersionTask.targets')" />
+</Project>

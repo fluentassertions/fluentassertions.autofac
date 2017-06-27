@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.Net45", "FluentAssertions.Autofac.Net45\FluentAssertions.Autofac.Net45.csproj", "{825699DA-478C-45FF-AFEA-F5FC5A36789C}"
 EndProject
@@ -31,10 +31,13 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.NuGet", "FluentAssertions.Autofac.NuGet\FluentAssertions.Autofac.NuGet.csproj", "{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.Dotnet", "FluentAssertions.Autofac.Dotnet\FluentAssertions.Autofac.Dotnet.csproj", "{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		Shared\Shared.projitems*{825699da-478c-45ff-afea-f5fc5a36789c}*SharedItemsImports = 4
 		Shared\Shared.projitems*{0041c31d-e06f-430f-85e3-b8f1b1cf0ed0}*SharedItemsImports = 13
+		Shared\Shared.projitems*{825699da-478c-45ff-afea-f5fc5a36789c}*SharedItemsImports = 4
+		Shared\Shared.projitems*{b28bf51a-7f52-42cf-b0c3-98bab024c1ad}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +56,10 @@ Global
 		{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

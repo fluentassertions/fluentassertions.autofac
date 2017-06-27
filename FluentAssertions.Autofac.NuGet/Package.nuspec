@@ -15,11 +15,12 @@
     <projectUrl>https://github.com/awesome-inc/FluentAssertions.Autofac</projectUrl>
     <developmentDependency>true</developmentDependency>
     <dependencies>
-      <dependency id="Autofac" version="[3.5.2,)" />
+      <dependency id="Autofac" version="[4.6.0,)" />
       <dependency id="FluentAssertions" version="[4.11.0,)" />
     </dependencies>
   </metadata>
   <files>
     <file src="..\FluentAssertions.Autofac.Net45\bin\Release\FluentAssertions.Autofac.*" target="lib\net45"/>
+    <file src="..\FluentAssertions.Autofac.Dotnet\bin\Release\FluentAssertions.Autofac.*" target="lib\netstandard1.6"/>
   </files>
 </package>
