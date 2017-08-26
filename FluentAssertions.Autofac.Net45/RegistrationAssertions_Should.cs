@@ -77,6 +77,30 @@ namespace FluentAssertions.Autofac
             containerShouldHave .Registered<Dummy>().As<IDisposable>().AutoActivate();
         }
 
+        [Test]
+        public void Register_parameters()
+        {
+            var builder = new ContainerBuilder();
+
+            const string paramName = "name";
+            const string paramValue = "Name";
+
+            builder.RegisterType<Dummy>()
+                .As<IDisposable>()
+                .WithParameter(paramName, paramValue)
+                .WithParameter(new NamedParameter(paramName, paramValue))
+                .WithParameter(new PositionalParameter(0, paramValue));
+
+            var container = builder.Build();
+            container.Should().Have()
+                .Registered<Dummy>()
+                .As<IDisposable>()
+                .WithParameter(paramName, paramValue)
+                .WithParameter(new NamedParameter(paramName, paramValue))
+                .WithParameter(new PositionalParameter(0, paramValue))
+                ;
+        }
+
         private static ContainerRegistrationAssertions GetSut(Action<ContainerBuilder> arrange = null)
         {
             var builder = new ContainerBuilder();
@@ -94,5 +118,11 @@ namespace FluentAssertions.Autofac
         [ExcludeFromCodeCoverage]
         private class KeyedDummy : IComparable { public int CompareTo(object obj) { return 42; } }
 
+        [ExcludeFromCodeCoverage]
+        private class ParameterizedDummy : Dummy
+        {
+            public string Name { get; }
+            public ParameterizedDummy(string name) { Name = name; }
+        }
     }
 }
