@@ -32,8 +32,10 @@ namespace FluentAssertions.Autofac
 			containerShould.Have().Registered<AutoActivateService2>().As<IStartable>();
 		}
 
+	    // ReSharper disable ClassNeverInstantiated.Local
 		private class AutoActivateService { }
 		private class AutoActivateService2 : IStartable {
+		    // ReSharper restore ClassNeverInstantiated.Local
 			public void Start() { }
 		}
 	}

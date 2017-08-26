@@ -25,8 +25,7 @@ namespace FluentAssertions.Autofac
         /// <param name="subject">The subject</param>
         public ContainerRegistrationAssertions(IContainer subject)
         {
-            if (subject == null) throw new ArgumentNullException(nameof(subject));
-            Subject = subject;
+            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
         }
 
         /// <summary>

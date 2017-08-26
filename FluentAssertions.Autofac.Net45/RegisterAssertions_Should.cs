@@ -52,12 +52,11 @@ namespace FluentAssertions.Autofac
                 .As<IDisposable>()
                 .As(typeof(IDisposable))
                 .As(typeof(IDisposable), typeof(Dummy))
-                .AsImplementedInterfaces();
+                .AsImplementedInterfaces(); 
         }
 
         // ReSharper disable ClassNeverInstantiated.Local
         [ExcludeFromCodeCoverage]
         private class Dummy : IDisposable { public void Dispose() { } }
-
     }
 }

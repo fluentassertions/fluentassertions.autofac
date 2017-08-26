@@ -4753,20 +4753,11 @@
   },
   "project": {
     "restore": {
-      "projectUniqueName": "c:\\Users\\marce\\git\\oss\\FluentAssertions.Autofac\\FluentAssertions.Autofac.Dotnet\\FluentAssertions.Autofac.Dotnet.csproj",
+      "projectUniqueName": "C:\\Users\\marce\\git\\oss\\FluentAssertions.Autofac\\FluentAssertions.Autofac.Dotnet\\FluentAssertions.Autofac.Dotnet.csproj",
       "projectName": "FluentAssertions.Autofac.Dotnet",
-      "projectPath": "c:\\Users\\marce\\git\\oss\\FluentAssertions.Autofac\\FluentAssertions.Autofac.Dotnet\\FluentAssertions.Autofac.Dotnet.csproj",
-      "projectJsonPath": "c:\\Users\\marce\\git\\oss\\FluentAssertions.Autofac\\FluentAssertions.Autofac.Dotnet\\project.json",
-      "projectStyle": "ProjectJson",
-      "validateRuntimeAssets": true,
-      "files": {
-        "lib/netstandard1.6/FluentAssertions.Autofac.Dotnet.dll": "c:\\Users\\marce\\git\\oss\\FluentAssertions.Autofac\\FluentAssertions.Autofac.Dotnet\\bin\\placeholder\\netstandard1.6\\FluentAssertions.Autofac.Dotnet.dll"
-      },
-      "frameworks": {
-        "netstandard1.6": {
-          "projectReferences": {}
-        }
-      }
+      "projectPath": "C:\\Users\\marce\\git\\oss\\FluentAssertions.Autofac\\FluentAssertions.Autofac.Dotnet\\FluentAssertions.Autofac.Dotnet.csproj",
+      "projectJsonPath": "C:\\Users\\marce\\git\\oss\\FluentAssertions.Autofac\\FluentAssertions.Autofac.Dotnet\\project.json",
+      "projectStyle": "ProjectJson"
     },
     "dependencies": {
       "Autofac": "4.6.0",
