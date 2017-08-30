@@ -101,6 +101,30 @@ namespace FluentAssertions.Autofac
                 ;
         }
 
+        [Test]
+        public void Register_parametersMatchingPredicate()
+        {
+            var builder = new ContainerBuilder();
+            
+            builder.RegisterType<Dummy>()
+                .As<IDisposable>()
+                .WithParameter(new TypedParameter(typeof(string), "stringValue"))
+                .WithParameter(new TypedParameter(typeof(int), "intValue"));
+
+            Func<Parameter, bool> predicate1 =
+                p => p is TypedParameter
+                     && ((TypedParameter) p).Type == typeof(string)
+                     && ((TypedParameter) p).Value == "stringValue";
+            Func<Parameter, bool> predicate2 = p => p is TypedParameter;
+
+            var container = builder.Build();
+            container.Should().Have()
+                .Registered<Dummy>()
+                .As<IDisposable>()
+                .WithParameter(predicate1)
+                .WithParameter(predicate2, 2);
+        }
+
         private static ContainerRegistrationAssertions GetSut(Action<ContainerBuilder> arrange = null)
         {
             var builder = new ContainerBuilder();
