@@ -224,6 +224,44 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///   Asserts the current service type has been registered with the specified constructor parameter.
         /// </summary>
+        /// <param name="predicate">
+        ///     Must evaluate to <c>true</c> for a parameter for the assertion to pass.
+        /// </param>
+        /// <param name="matchCount">
+        ///     When <c>null</c>, assertion passes when one or more of the parameters matches the
+        ///     <paramref name="predicate"/>. When set to a value, exactly this number of parameters must match the
+        ///     <paramref name="predicate"/>.
+        /// </param>
+        /// <returns></returns>
+        public RegistrationAssertions WithParameter(
+            Func<Parameter, bool> predicate,
+            int? matchCount = null)
+        {
+            IEnumerable<Parameter> matchingParams = _parameters.Where(predicate);
+
+            if (matchCount.HasValue)
+            {
+                matchingParams
+                    .Count()
+                    .Should()
+                    .Be(
+                        matchCount.Value,
+                        $"exactly {matchCount.Value} parameter(s) matching a predicate should have been registered");
+            }
+            else
+            {
+                matchingParams
+                    .Any()
+                    .Should()
+                    .BeTrue("at least one parameter matching a predicate should have been registered");
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///   Asserts the current service type has been registered with the specified constructor parameter.
+        /// </summary>
         /// <param name="param">The parameter</param>
         public RegistrationAssertions WithParameter(NamedParameter param)
         {
