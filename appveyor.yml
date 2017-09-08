@@ -25,6 +25,8 @@ for:
       - master
       - /hotfix/
       - /release/
+  build_script:
+    - build.bat /t:CoverageUpload;Deploy /v:m
 # all other branches
 -
   build_script:
