@@ -41,8 +41,7 @@ namespace FluentAssertions.Autofac
         /// <exception cref="ArgumentNullException"></exception>
         public TypeScanningAssertions(IContainer subject, IEnumerable<Type> types)
         {
-            if (subject == null) throw new ArgumentNullException(nameof(subject));
-            Subject = subject;
+            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
             Types = FilterTypes(types);
             _registerAssertions = new Lazy<List<RegisterAssertions>>(
                 () => Types.Select(t => Subject.Should().Have().Registered(t)).ToList());

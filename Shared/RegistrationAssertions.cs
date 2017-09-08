@@ -1,13 +1,17 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using Autofac;
 using Autofac.Core;
+using Autofac.Core.Activators.Reflection;
 using Autofac.Core.Lifetime;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac
 {
     /// <summary>
-    ///     Contains a number of methods to assert that an <see cref="IContainer" /> registers expected services.
+    ///     Contains a number of methods to assert that an <see cref="IContainer" /> registers value services.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
@@ -19,6 +23,7 @@ namespace FluentAssertions.Autofac
         /// </summary>
         internal readonly Type Type;
         private readonly IComponentRegistration _registration;
+        private readonly IList<Parameter> _parameters;
 
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
@@ -35,11 +40,10 @@ namespace FluentAssertions.Autofac
         /// <param name="type">The type that should be registered on the container</param>
         public RegistrationAssertions(IContainer subject, Type type)
         {
-            if (subject == null) throw new ArgumentNullException(nameof(subject));
-            if (type == null) throw new ArgumentNullException(nameof(type));
-            Subject = subject;
-            Type = type;
+            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
+            Type = type ?? throw new ArgumentNullException(nameof(type));
             _registration = Subject.ComponentRegistry.GetRegistration(Type);
+            _parameters = GetParameters(_registration);
         }
 
         /// <summary>
@@ -205,6 +209,103 @@ namespace FluentAssertions.Autofac
         {
             _registration.AssertAutoActivates(Type);
             return this;
+        }
+
+        /// <summary>
+        ///   Asserts the current service type has been registered with the specified constructor parameter.
+        /// </summary>
+        /// <param name="name">The parameter name</param>
+        /// <param name="value">The parameter value</param>
+        public RegistrationAssertions WithParameter(string name, object value)
+        {
+            return WithParameter(new NamedParameter(name, value));
+        }
+
+        /// <summary>
+        ///   Asserts the current service type has been registered with the specified constructor parameter.
+        /// </summary>
+        /// <param name="predicate">
+        ///     Must evaluate to <c>true</c> for a parameter for the assertion to pass.
+        /// </param>
+        /// <param name="matchCount">
+        ///     When <c>null</c>, assertion passes when one or more of the parameters matches the
+        ///     <paramref name="predicate"/>. When set to a value, exactly this number of parameters must match the
+        ///     <paramref name="predicate"/>.
+        /// </param>
+        /// <returns></returns>
+        public RegistrationAssertions WithParameter(
+            Func<Parameter, bool> predicate,
+            int? matchCount = null)
+        {
+            IEnumerable<Parameter> matchingParams = _parameters.Where(predicate);
+
+            if (matchCount.HasValue)
+            {
+                matchingParams
+                    .Count()
+                    .Should()
+                    .Be(
+                        matchCount.Value,
+                        $"exactly {matchCount.Value} parameter(s) matching a predicate should have been registered");
+            }
+            else
+            {
+                matchingParams
+                    .Any()
+                    .Should()
+                    .BeTrue("at least one parameter matching a predicate should have been registered");
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        ///   Asserts the current service type has been registered with the specified constructor parameter.
+        /// </summary>
+        /// <param name="param">The parameter</param>
+        public RegistrationAssertions WithParameter(NamedParameter param)
+        {
+            var p = _parameters
+                .OfType<NamedParameter>()
+                .FirstOrDefault(np => np.Name == param.Name);
+
+            p.Should().NotBeNull($"Parameter '{param.Name}' should have been registered.");
+            p?.Value.ShouldBeEquivalentTo(param.Value, $"Parameter '{param.Name}' should have been registered with value '{param.Value}'.");
+
+            return this;
+        }
+
+        /// <summary>
+        ///   Asserts the current service type has been registered with the specified constructor parameter.
+        /// </summary>
+        /// <param name="param">The parameter</param>
+        public RegistrationAssertions WithParameter(PositionalParameter param)
+        {
+            var p = _parameters
+                .OfType<PositionalParameter>()
+                .FirstOrDefault(pp => pp.Position == param.Position);
+
+            p.Should().NotBeNull($"Parameter should have been registered at position '{param.Position}'.");
+            p?.Value.ShouldBeEquivalentTo(param.Value, $"Parameter at position '{param.Position}' should have been registered with value '{param.Value}'.");
+
+            return this;
+        }
+
+        private static IList<Parameter> GetParameters(IComponentRegistration registration)
+        {
+            var parms = new List<Parameter>();
+
+            var activator = registration.Activator as ReflectionActivator;
+            if (activator == null) return parms;
+            const string fieldName = "_defaultParameters";
+            const BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
+                                           BindingFlags.Static;
+            var field = activator.GetType().GetField(fieldName, bindFlags);
+            if (field == null) return parms;
+            if (field.GetValue(activator) is Parameter[] p)
+                parms.AddRange(p);
+
+            return parms;
         }
     }
 }

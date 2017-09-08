@@ -4,7 +4,6 @@ using System.Linq;
 using Autofac;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
-using System.Reflection;
 
 namespace FluentAssertions.Autofac
 {
@@ -35,8 +34,7 @@ namespace FluentAssertions.Autofac
         public ResolveAssertions(IContainer container, Type serviceType)
         {
             _serviceType = serviceType;
-            if (container == null) throw new ArgumentNullException(nameof(container));
-            Subject = container;
+            Subject = container ?? throw new ArgumentNullException(nameof(container));
 
             var typeToResolve = typeof(IEnumerable<>).MakeGenericType(serviceType);
             var array = Subject.Resolve(typeToResolve) as Array;

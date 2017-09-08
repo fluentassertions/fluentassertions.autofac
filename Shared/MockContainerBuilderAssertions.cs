@@ -2,9 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Autofac;
-using Autofac.Builder;
-using Autofac.Util;
 using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 using Module = Autofac.Module;
@@ -34,8 +31,7 @@ namespace FluentAssertions.Autofac
         /// <exception cref="ArgumentNullException"></exception>
         public MockContainerBuilderAssertions(MockContainerBuilder subject)
         {
-            if (subject == null) throw new ArgumentNullException(nameof(subject));
-            Subject = subject;
+            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
             _modules = Subject.GetModules().ToList();
         }
 
