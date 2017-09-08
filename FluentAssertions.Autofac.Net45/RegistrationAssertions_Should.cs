@@ -111,18 +111,19 @@ namespace FluentAssertions.Autofac
                 .WithParameter(new TypedParameter(typeof(string), "stringValue"))
                 .WithParameter(new TypedParameter(typeof(int), "intValue"));
 
-            Func<Parameter, bool> predicate1 =
-                p => p is TypedParameter
-                     && ((TypedParameter) p).Type == typeof(string)
-                     && ((TypedParameter) p).Value == "stringValue";
-            Func<Parameter, bool> predicate2 = p => p is TypedParameter;
+            bool IsString(Parameter p) => p is TypedParameter tp
+#pragma warning disable CS0252 // Possible unintended reference comparison; left hand side needs cast
+                && tp.Type == typeof(string) && tp.Value == "stringValue";
+#pragma warning restore CS0252 // Possible unintended reference comparison; left hand side needs cast
+
+            bool IsTyped(Parameter p) => p is TypedParameter;
 
             var container = builder.Build();
             container.Should().Have()
                 .Registered<Dummy>()
                 .As<IDisposable>()
-                .WithParameter(predicate1)
-                .WithParameter(predicate2, 2);
+                .WithParameter(IsString)
+                .WithParameter(IsTyped, 2);
         }
 
         private static ContainerRegistrationAssertions GetSut(Action<ContainerBuilder> arrange = null)
