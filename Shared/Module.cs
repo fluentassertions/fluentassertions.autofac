@@ -13,7 +13,7 @@ namespace FluentAssertions.Autofac
     public static class Module<TModule> where TModule : Module, new()
     {
         /// <summary>
-        ///    Returns a test <see cref="IContainer"/> that can be used to assert the the specified <see typeparamref="TModule"/>.
+        ///    Returns a test <see cref="IContainer"/> that can be used to assert the specified <see typeparamref="TModule"/>.
         /// </summary>
         /// <param name="arrange">optional builder arrangement for the module</param>
         public static IContainer GetTestContainer(Action<ContainerBuilder> arrange = null)
@@ -22,7 +22,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///    Returns a test <see cref="IContainer"/> that can be used to assert the the specified <see typeparamref="TModule"/>.
+        ///    Returns a test <see cref="IContainer"/> that can be used to assert the specified <see typeparamref="TModule"/>.
         /// </summary>
         /// <param name="arrange">optional builder arrangement for the module</param>
         public static IContainer GetTestContainer(Action<ContainerBuilder, TModule> arrange)
@@ -31,7 +31,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///    Returns a test <see cref="MockContainerBuilder"/> that can be used to assert the the specified <see typeparamref="TModule"/>.
+        ///    Returns a test <see cref="MockContainerBuilder"/> that can be used to assert the specified <see typeparamref="TModule"/>.
         /// </summary>
         /// <param name="arrange">optional builder arrangement for the module</param>
         public static MockContainerBuilder GetTestBuilder(Action<ContainerBuilder> arrange = null)
@@ -40,7 +40,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///    Returns a test <see cref="MockContainerBuilder"/> that can be used to assert the the specified <see typeparamref="TModule"/>.
+        ///    Returns a test <see cref="MockContainerBuilder"/> that can be used to assert the specified <see typeparamref="TModule"/>.
         /// </summary>
         /// <param name="arrange">optional builder arrangement for the module</param>
         public static MockContainerBuilder GetTestBuilder(Action<ContainerBuilder, TModule> arrange)

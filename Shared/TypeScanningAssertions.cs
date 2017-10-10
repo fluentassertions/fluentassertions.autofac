@@ -94,7 +94,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         /// Asserts that the scanned types can be resolved from the current <see cref="IContainer"/> 
-        /// as their implementend interfaces.
+        /// as their implemented interfaces.
         /// </summary>
         public TypeScanningAssertions AsImplementedInterfaces()
         {
