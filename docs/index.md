@@ -2,4 +2,4 @@
  
  Fluent Assertions extensions for Autofac.
  
- - Inroductory Blog Post [Fluently testing your Autofac configuration](http://awesome-incremented.blogspot.de/2016/01/fluently-testing-your-autofac.html)
+ - Introductory Blog Post [Fluently testing your Autofac configuration](http://awesome-incremented.blogspot.de/2016/01/fluently-testing-your-autofac.html)
