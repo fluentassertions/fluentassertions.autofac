@@ -1,10 +1,9 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/u42b929walkd6086?svg=true)](https://ci.appveyor.com/project/fluentassertions/fluentassertions-autofac)
-(http://fluentassertionsautofac.rtfd.io/en/latest/) 
 [![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/) 
 [![NuGet](https://img.shields.io/nuget/dt/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 [![Coverage Status](https://coveralls.io/repos/github/awesome-inc/FluentAssertions.Autofac/badge.svg)](https://coveralls.io/github/fluentassertions/fluentassertions.autofac)
-[![Documentation Status](https://readthedocs.org/projects/fluentassertionsautofac/badge/?version=latest)]
+[![Documentation Status](https://readthedocs.org/projects/fluentassertionsautofac/badge/?version=latest)](http://fluentassertionsautofac.rtfd.io/en/latest/) 
 
 This repository contains the [Fluent Assertions](http://fluentassertions.com/) extensions for [AutoFac](https://autofac.org/).  
 It is maintained by [@mkoertgen](https://github.com/mkoertgen).
