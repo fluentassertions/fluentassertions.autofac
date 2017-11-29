@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)MockContainerBuilder.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MockContainerBuilderAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Module.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RegisterGenericSourceAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegisterAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RegistrationAssertions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ResolveAssertions.cs" />

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using Autofac;
 using FluentAssertions.Primitives;
@@ -111,6 +111,14 @@ namespace FluentAssertions.Autofac
         {
             Subject.IsRegisteredWithKey(serviceKey, type).Should()
                 .BeFalse($"Type '{type}' should not be registered with key '{serviceKey}'");
+        }
+
+        /// <summary>
+        ///     Returns an <see cref="RegisterGenericSourceAssertions"/> object that can be used to assert the current <see cref="IContainer"/> and and the specified type..
+        /// </summary>
+        public RegisterGenericSourceAssertions RegisteredGeneric(Type genericComponentType)
+        {
+            return new RegisterGenericSourceAssertions(Subject, genericComponentType);
         }
     }
 }

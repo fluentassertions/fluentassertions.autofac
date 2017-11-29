@@ -16,6 +16,7 @@ namespace FluentAssertions.Autofac
         {
             var registration = registry.Registrations
                 .FirstOrDefault(r => r.Activator.LimitType == type);
+
             registration.Should().NotBeNull($"Type '{type}' should be registered");
             return registration;
         }
