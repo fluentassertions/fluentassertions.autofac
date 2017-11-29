@@ -47,6 +47,19 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
+        ///     Initializes a new instance of the <see cref="RegistrationAssertions" /> class.
+        /// </summary>
+        /// <param name="subject">The container</param>
+        /// <param name="registration"></param>
+        public RegistrationAssertions(IContainer subject, IComponentRegistration registration)
+        {
+            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
+            _registration = registration ?? throw new ArgumentNullException(nameof(registration));
+            Type = registration.Activator.LimitType;
+            _parameters = GetParameters(_registration);
+        }
+
+        /// <summary>
         ///   Asserts that the specified <see typeparamref="TService"/> has been registered on the current <see cref="IContainer"/> with the specified name.
         /// </summary>
         /// <param name="name">The service name</param>

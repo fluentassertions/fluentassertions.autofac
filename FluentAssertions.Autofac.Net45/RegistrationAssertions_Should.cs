@@ -44,28 +44,28 @@ namespace FluentAssertions.Autofac
             containerShouldHave.Registered<Dummy>().InstancePerDependency();
 
             containerShouldHave = GetSut(builder => builder.RegisterType<Dummy>().InstancePerLifetimeScope());
-            containerShouldHave .Registered<Dummy>().InstancePerLifetimeScope();
+            containerShouldHave.Registered<Dummy>().InstancePerLifetimeScope();
 
             containerShouldHave = GetSut(builder => builder.RegisterType<Dummy>().InstancePerMatchingLifetimeScope());
-            containerShouldHave .Registered<Dummy>().InstancePerMatchingLifetimeScope();
+            containerShouldHave.Registered<Dummy>().InstancePerMatchingLifetimeScope();
 
             containerShouldHave = GetSut(builder => builder.RegisterType<Dummy>().InstancePerRequest());
-            containerShouldHave .Registered<Dummy>().InstancePerRequest();
+            containerShouldHave.Registered<Dummy>().InstancePerRequest();
 
             containerShouldHave = GetSut(builder => builder.RegisterType<Dummy>().InstancePerOwned<ICloneable>());
-            containerShouldHave .Registered<Dummy>().InstancePerOwned<ICloneable>();
+            containerShouldHave.Registered<Dummy>().InstancePerOwned<ICloneable>();
         }
 
         [Test]
         public void Register_Ownership()
         {
             var containerShouldHave = GetSut(builder => builder.RegisterType<Dummy>().ExternallyOwned());
-            containerShouldHave .Registered<Dummy>()
+            containerShouldHave.Registered<Dummy>()
                 .ExternallyOwned()
                 .Owned(InstanceOwnership.ExternallyOwned);
 
             containerShouldHave = GetSut(builder => builder.RegisterType<Dummy>().OwnedByLifetimeScope());
-            containerShouldHave .Registered<Dummy>()
+            containerShouldHave.Registered<Dummy>()
                 .OwnedByLifetimeScope()
                 .Owned(InstanceOwnership.OwnedByLifetimeScope);
         }
@@ -74,7 +74,7 @@ namespace FluentAssertions.Autofac
         public void Register_AutoActivate()
         {
             var containerShouldHave = GetSut(builder => builder.RegisterType<Dummy>().As<IDisposable>().AutoActivate());
-            containerShouldHave .Registered<Dummy>().As<IDisposable>().AutoActivate();
+            containerShouldHave.Registered<Dummy>().As<IDisposable>().AutoActivate();
         }
 
         [Test]
@@ -105,7 +105,7 @@ namespace FluentAssertions.Autofac
         public void Register_parametersMatchingPredicate()
         {
             var builder = new ContainerBuilder();
-            
+
             builder.RegisterType<Dummy>()
                 .As<IDisposable>()
                 .WithParameter(new TypedParameter(typeof(string), "stringValue"))
