@@ -114,11 +114,12 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="RegisterGenericSourceAssertions"/> object that can be used to assert the current <see cref="IContainer"/> and and the specified type..
+        ///     Returns an <see cref="RegisterGenericSourceAssertions"/> object that can be used to assert the current <see cref="IContainer"/> 
+        ///     and the specified generic type.
         /// </summary>
-        public RegisterGenericSourceAssertions RegisteredGeneric(Type genericComponentType)
+        public RegisterGenericSourceAssertions RegisteredGeneric(Type genericComponentTypeDefinition)
         {
-            return new RegisterGenericSourceAssertions(Subject, genericComponentType);
+            return new RegisterGenericSourceAssertions(Subject, genericComponentTypeDefinition);
         }
     }
 }
