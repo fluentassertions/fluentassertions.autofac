@@ -1,11 +1,11 @@
 
-[![Build status](https://ci.appveyor.com/api/projects/status/u42b929walkd6086?svg=true)](https://ci.appveyor.com/project/fluentassertions/fluentassertions-autofac)
-[![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/) 
+[![Build status](https://ci.appveyor.com/api/projects/status/u42b929walkd6086?svg=true)](https://ci.appveyor.com/project/awesome-inc-build/fluentassertions-autofac)
+[![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 [![NuGet](https://img.shields.io/nuget/dt/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 [![Coverage Status](https://coveralls.io/repos/github/awesome-inc/FluentAssertions.Autofac/badge.svg)](https://coveralls.io/github/fluentassertions/fluentassertions.autofac)
-[![Documentation Status](https://readthedocs.org/projects/fluentassertionsautofac/badge/?version=latest)](http://fluentassertionsautofac.rtfd.io/en/latest/) 
+[![Documentation Status](https://readthedocs.org/projects/fluentassertionsautofac/badge/?version=latest)](http://fluentassertionsautofac.rtfd.io/en/latest/)
 
-This repository contains the [Fluent Assertions](http://fluentassertions.com/) extensions for [AutoFac](https://autofac.org/).  
+This repository contains the [Fluent Assertions](http://fluentassertions.com/) extensions for [AutoFac](https://autofac.org/).
 It is maintained by [@mkoertgen](https://github.com/mkoertgen).
 
 * See [www.fluentassertions.com](http://www.fluentassertions.com/) for more information about the main library.
@@ -51,7 +51,7 @@ container.Should().Have().Registered<SuperCoolService>()
 
 Find more examples in the documentation our the tests.
 
-### How to build 
+### How to build
 
 Clone and build using Visual Studio or the command line using [OneClickBuild](https://github.com/awesome-inc/OneClickBuild)
 
