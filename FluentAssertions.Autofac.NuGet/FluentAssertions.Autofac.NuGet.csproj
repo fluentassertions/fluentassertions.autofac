@@ -70,8 +70,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\GitVersionTask.3.6.5\build\dotnet\GitVersionTask.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GitVersionTask.3.6.5\build\dotnet\GitVersionTask.targets'))" />
     <Error Condition="!Exists('..\packages\OneClickBuild.1.11.4\build\OneClickBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\OneClickBuild.1.11.4\build\OneClickBuild.targets'))" />
+    <Error Condition="!Exists('C:\Users\marce\git\oss\fluentassertions\fluentassertions.autofac\packages\OneClickBuild.1.11.5\build\OneClickBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', 'C:\Users\marce\git\oss\fluentassertions\fluentassertions.autofac\packages\OneClickBuild.1.11.5\build\OneClickBuild.targets'))" />
   </Target>
   <Import Project="..\packages\OneClickBuild.1.11.4\build\OneClickBuild.targets" Condition="Exists('..\packages\OneClickBuild.1.11.4\build\OneClickBuild.targets')" />
+  <Import Project="C:\Users\marce\git\oss\fluentassertions\fluentassertions.autofac\packages\OneClickBuild.1.11.5\build\OneClickBuild.targets" Condition="Exists('C:\Users\marce\git\oss\fluentassertions\fluentassertions.autofac\packages\OneClickBuild.1.11.5\build\OneClickBuild.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

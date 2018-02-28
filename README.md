@@ -39,7 +39,7 @@ container.Should().Have().Registered<SuperCoolService>()
     .Singleton();
 ```
 
-Find more examples in the documentation our the tests.
+Find more examples in the [documentation](http://fluentassertionsautofac.readthedocs.io/en/latest) or the [tests]().
 
 ### How to build
 

@@ -1,23 +1,26 @@
 using System;
-using System.Diagnostics;
 using Autofac;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac
 {
+    /// <inheritdoc />
     /// <summary>
-    ///     Contains a number of methods to assert that an <see cref="IContainer" /> has registered expected services.
+    ///     Contains a number of methods to assert that an <see cref="T:Autofac.IContainer" /> has registered expected services.
     /// </summary>
-    [DebuggerNonUserCode]
+#if !DEBUG
+    [System.Diagnostics.DebuggerNonUserCode]
+#endif
     public class ContainerRegistrationAssertions : ReferenceTypeAssertions<IContainer, ContainerRegistrationAssertions>
     {
+        /// <inheritdoc />
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
 #if !PORTABLE && !CORE_CLR
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        protected override string Context => nameof(IContainer);
+        protected override string Identifier => nameof(IContainer);
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContainerRegistrationAssertions" /> class.
