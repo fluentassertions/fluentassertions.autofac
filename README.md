@@ -1,4 +1,3 @@
-
 # FluentAssertions.AutoFac
 
 [![Build status](https://ci.appveyor.com/api/projects/status/u42b929walkd6086?svg=true)](https://ci.appveyor.com/project/awesome-inc-build/fluentassertions-autofac)
@@ -14,23 +13,12 @@ It is maintained by [@mkoertgen](https://github.com/mkoertgen).
 
 ## Why?
 
-To test Ninject mappings using the [conventions extension](https://github.com/ninject/ninject.extensions.conventions) (or setup manually) are resolving.  Instead of finding out at runtime that your app won't run, you'll have a failing unit test instead.
+In general, the more you apply [Dependency Injection (DI)](http://martinfowler.com/articles/injection.html) the easier becomes unit testing and [Test-driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development).
 
-Tests are written like this:
+This is because the complexity of constructing all dependencies is shifted to the so called [Composition Root](http://blog.ploeh.dk/2011/07/28/CompositionRoot/), i.e. the place where you "wire up" and configure all your dependencies.
+Undoubtedly, the best way to do this is by using some [Inversion of Control (IoC)](http://martinfowler.com/articles/injection.html) container.
 
-```` c#
-[Test]
-public void Services_can_be_resolved_with_a_single_instance()
-{
-    // Arrange
-    var kernel = GetKernel();
-    var interfaces = FindAssembly.Containing<ISampleService>().GetPublicInterfaces()
-                                                              .EndingWith("Service");
-
-    // Assert
-    kernel.Should().Resolve(interfaces).WithSingleInstance();
-}
-````
+With an application growing in complexity, there is also growing need to organize and test the IoC configuration.
 
 ## Quickstart
 
