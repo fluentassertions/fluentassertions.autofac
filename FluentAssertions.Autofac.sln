@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.14
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.Net45", "FluentAssertions.Autofac.Net45\FluentAssertions.Autofac.Net45.csproj", "{825699DA-478C-45FF-AFEA-F5FC5A36789C}"
 EndProject
@@ -31,7 +31,7 @@ Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "Shared", "Shared\Shared.shp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.NuGet", "FluentAssertions.Autofac.NuGet\FluentAssertions.Autofac.NuGet.csproj", "{2AFDBFA5-8E08-4839-A57F-4DCCB3F80837}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.Dotnet", "FluentAssertions.Autofac.Dotnet\FluentAssertions.Autofac.Dotnet.csproj", "{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAssertions.Autofac.Dotnet", "FluentAssertions.Autofac.Dotnet\FluentAssertions.Autofac.Dotnet.csproj", "{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -66,5 +66,8 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{ABFD44D3-977D-4C11-99A6-DB45FFF8726B} = {915DFDB6-990E-4068-899E-F84163AC7A9D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {197B6C02-F01C-4A0E-99AB-757EBF1FD78A}
 	EndGlobalSection
 EndGlobal
