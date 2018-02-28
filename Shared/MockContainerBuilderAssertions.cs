@@ -8,21 +8,23 @@ using Module = Autofac.Module;
 
 namespace FluentAssertions.Autofac
 {
+    /// <inheritdoc />
     /// <summary>
-    ///     Contains a number of methods to assert that an <see cref="MockContainerBuilder" /> is in the expected state.
+    ///     Contains a number of methods to assert that an <see cref="T:FluentAssertions.Autofac.MockContainerBuilder" /> is in the expected state.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
 #endif
     public class MockContainerBuilderAssertions : ReferenceTypeAssertions<MockContainerBuilder, MockContainerBuilderAssertions>
     {
+        /// <inheritdoc />
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
 #if !PORTABLE && !CORE_CLR
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        protected override string Context => nameof(MockContainerBuilder);
+        protected override string Identifier => nameof(MockContainerBuilder);
 
         /// <summary>
         ///    Initializes a new instance of the <see cref="MockContainerBuilderAssertions" /> class.

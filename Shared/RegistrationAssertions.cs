@@ -10,8 +10,9 @@ using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac
 {
+    /// <inheritdoc />
     /// <summary>
-    ///     Contains a number of methods to assert that an <see cref="IContainer" /> registers value services.
+    ///     Contains a number of methods to assert that an <see cref="T:Autofac.IContainer" /> registers value services.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
@@ -25,13 +26,14 @@ namespace FluentAssertions.Autofac
         private readonly IComponentRegistration _registration;
         private readonly IList<Parameter> _parameters;
 
+        /// <inheritdoc />
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
 #if !PORTABLE && !CORE_CLR
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        protected override string Context => nameof(IContainer);
+        protected override string Identifier => nameof(IContainer);
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="RegistrationAssertions" /> class.
@@ -283,7 +285,7 @@ namespace FluentAssertions.Autofac
                 .FirstOrDefault(np => np.Name == param.Name);
 
             p.Should().NotBeNull($"Parameter '{param.Name}' should have been registered.");
-            p?.Value.ShouldBeEquivalentTo(param.Value, $"Parameter '{param.Name}' should have been registered with value '{param.Value}'.");
+            p?.Value.Should().BeEquivalentTo(param.Value, $"Parameter '{param.Name}' should have been registered with value '{param.Value}'.");
 
             return this;
         }
@@ -299,7 +301,7 @@ namespace FluentAssertions.Autofac
                 .FirstOrDefault(pp => pp.Position == param.Position);
 
             p.Should().NotBeNull($"Parameter should have been registered at position '{param.Position}'.");
-            p?.Value.ShouldBeEquivalentTo(param.Value, $"Parameter at position '{param.Position}' should have been registered with value '{param.Value}'.");
+            p?.Value.Should().BeEquivalentTo(param.Value, $"Parameter at position '{param.Position}' should have been registered with value '{param.Value}'.");
 
             return this;
         }
@@ -308,8 +310,7 @@ namespace FluentAssertions.Autofac
         {
             var parms = new List<Parameter>();
 
-            var activator = registration.Activator as ReflectionActivator;
-            if (activator == null) return parms;
+            if (!(registration.Activator is ReflectionActivator activator)) return parms;
             const string fieldName = "_defaultParameters";
             const BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
                                            BindingFlags.Static;

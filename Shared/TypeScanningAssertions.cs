@@ -8,8 +8,9 @@ using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac
 {
+    /// <inheritdoc />
     /// <summary>
-    ///     Contains a number of methods to assert registered types on an <see cref="IContainer" />.
+    ///     Contains a number of methods to assert registered types on an <see cref="T:Autofac.IContainer" />.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
@@ -25,13 +26,14 @@ namespace FluentAssertions.Autofac
 
         private List<RegisterAssertions> Register => _registerAssertions.Value;
 
+        /// <inheritdoc />
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
 #if !PORTABLE && !CORE_CLR
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-            protected override string Context => nameof(IContainer);
+        protected override string Identifier => nameof(IContainer);
 
         /// <summary>
         ///    Initializes a new instance of the <see cref="TypeScanningAssertions" /> class.

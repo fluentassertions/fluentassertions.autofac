@@ -58,7 +58,7 @@ namespace FluentAssertions.Autofac
             };
 
 
-            action.ShouldThrow<ArgumentNullException>()
+            action.Should().Throw<ArgumentNullException>()
                 .And
                 .ParamName
                 .Should()
@@ -84,7 +84,7 @@ namespace FluentAssertions.Autofac
             };
 
 
-            action.ShouldThrow<ArgumentException>()
+            action.Should().Throw<ArgumentException>()
                 .And
                 .ParamName
                 .Should()
@@ -109,7 +109,7 @@ namespace FluentAssertions.Autofac
                     .SingleInstance();
             };
 
-            action.ShouldThrow<ArgumentException>()
+            action.Should().Throw<ArgumentException>()
                 .And
                 .ParamName
                 .Should()
@@ -133,7 +133,7 @@ namespace FluentAssertions.Autofac
                     .SingleInstance();
             };
 
-            action.ShouldThrow<ArgumentNullException>()
+            action.Should().Throw<ArgumentNullException>()
                 .And
                 .ParamName
                 .Should()
@@ -158,7 +158,7 @@ namespace FluentAssertions.Autofac
                     .SingleInstance();
             };
 
-            action.ShouldThrow<ArgumentException>()
+            action.Should().Throw<ArgumentException>()
                 .And
                 .ParamName
                 .Should()
@@ -183,7 +183,7 @@ namespace FluentAssertions.Autofac
                     .SingleInstance();
             };
 
-            action.ShouldThrow<ArgumentException>()
+            action.Should().Throw<ArgumentException>()
                 .And
                 .ParamName
                 .Should()

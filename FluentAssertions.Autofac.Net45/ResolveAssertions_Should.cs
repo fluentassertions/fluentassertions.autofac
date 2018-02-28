@@ -16,7 +16,7 @@ namespace FluentAssertions.Autofac
         {
             var container = Configure();
             container.Invoking(x => x.Should().Resolve<IDisposable>())
-                .ShouldThrow<AssertionException>()
+                .Should().Throw<AssertionException>()
                 .WithMessage($"Expected container to resolve '{typeof (IDisposable)}' but it did not.");
 
             var disposable = Substitute.For<IDisposable>();
@@ -47,7 +47,7 @@ namespace FluentAssertions.Autofac
 
             container = Configure(builder => builder.RegisterType<Dummy>().AutoActivate());
             container.Should().AutoActivate<Dummy>();
-            container.Should().Invoking(x => x.Resolve<Dummy>()).ShouldThrow<AssertionException>("type not registered AS something");
+            container.Should().Invoking(x => x.Resolve<Dummy>()).Should().Throw<AssertionException>("type not registered AS something");
         }
 
         private static IContainer Configure(Action<ContainerBuilder> arrange = null)
