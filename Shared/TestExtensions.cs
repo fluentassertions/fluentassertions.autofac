@@ -16,7 +16,7 @@ namespace FluentAssertions.Autofac
         /// <param name="module">The module</param>
         /// <param name="arrange">optional builder arrangement for the module</param>
         public static IContainer Container<TModule>(this TModule module, Action<ContainerBuilder> arrange = null)
-            where TModule : Module, new()
+            where TModule : Module
         {
             if (module == null) throw new ArgumentNullException(nameof(module));
             var builder = Builder(module, arrange);
@@ -29,7 +29,7 @@ namespace FluentAssertions.Autofac
         /// <param name="module">The module</param>
         /// <param name="arrange">optional builder arrangement for the module</param>
         public static MockContainerBuilder Builder<TModule>(this TModule module, Action<ContainerBuilder> arrange = null)
-            where TModule : Module, new()
+            where TModule : Module
         {
             if (module == null) throw new ArgumentNullException(nameof(module));
             var builder = new MockContainerBuilder();
@@ -44,7 +44,7 @@ namespace FluentAssertions.Autofac
         /// <param name="module">The module</param>
         /// <param name="arrange">optional builder arrangement for the module</param>
         public static IContainer Container<TModule>(this TModule module, Action<ContainerBuilder, TModule> arrange)
-            where TModule : Module, new()
+            where TModule : Module
         {
             if (module == null) throw new ArgumentNullException(nameof(module));
             if (arrange == null) throw new ArgumentNullException(nameof(arrange));
@@ -58,7 +58,7 @@ namespace FluentAssertions.Autofac
         /// <param name="module">The module</param>
         /// <param name="arrange">optional builder arrangement for the module</param>
         public static MockContainerBuilder Builder<TModule>(this TModule module, Action<ContainerBuilder, TModule> arrange)
-            where TModule : Module, new()
+            where TModule : Module
         {
             if (module == null) throw new ArgumentNullException(nameof(module));
             if (arrange == null) throw new ArgumentNullException(nameof(arrange));

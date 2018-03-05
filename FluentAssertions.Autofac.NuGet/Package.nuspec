@@ -15,8 +15,8 @@
     <projectUrl>https://github.com/awesome-inc/FluentAssertions.Autofac</projectUrl>
     <developmentDependency>true</developmentDependency>
     <dependencies>
-      <dependency id="Autofac" version="[4.6.0,5.0.0)" />
-      <dependency id="FluentAssertions" version="[5.0.0,6.0.0)" />
+      <dependency id="Autofac" version="[4.6.2,5.0.0)" />
+      <dependency id="FluentAssertions" version="[5.1.2,6.0.0)" />
     </dependencies>
   </metadata>
   <files>
