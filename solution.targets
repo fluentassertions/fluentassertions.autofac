@@ -33,7 +33,7 @@
         <IsTestsAssembly>false</IsTestsAssembly>
         <IsTestsAssembly Condition="$(AssemblyName.Contains('.Tests'))">true</IsTestsAssembly>
     </PropertyGroup>
-    
+
     ## Adjust the OpenCover filter
     <Choose>
         <When Condition="$(IsTestsAssembly)">
@@ -68,7 +68,7 @@
 
   <!--## Specifying your repository token for coveralls.io -->
     <PropertyGroup>
-        <CoverAllsToken>otsvJrjINienN9cCi8NOHvcPUHsUz7enn</CoverAllsToken>
+        <CoverAllsToken>zfmMp4qU8Zyq9xipAv61vttisshVtkK2p</CoverAllsToken>
     </PropertyGroup>
 
   <!-- ## Uncomment to override the default nuget server to push packages to in the 'Deploy' target
@@ -79,7 +79,7 @@
 
   <!-- ## Uncomment to override the default filename 'Package.nuspec' of your NuGet package files:
     <PropertyGroup>
-        <NuspecFile>Package.nuspec</NuspecFile> 
+        <NuspecFile>Package.nuspec</NuspecFile>
     </PropertyGroup>
     -->
 
