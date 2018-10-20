@@ -23,10 +23,11 @@ for:
   branches:
     only:
       - master
-      - /hotfix/
-      - /release/
+  environment:
+    BUILD_TARGET: Package
   build_script:
-    - build.bat /t:CoverageUpload;Deploy /v:m
+    - cmd: if "%APPVEYOR_REPO_TAG%" == "true" set BUILD_TARGET=Deploy
+    - cmd: build.bat /t:CoverageUpload;%BUILD_TARGET% /v:m
 # all other branches
 -
   build_script:
