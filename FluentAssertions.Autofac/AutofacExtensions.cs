@@ -3,6 +3,9 @@ using System.Linq;
 using Autofac;
 using Autofac.Core;
 
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("FluentAssertions.Autofac.Tests")]
+
 namespace FluentAssertions.Autofac
 {
     internal static class AutofacExtensions

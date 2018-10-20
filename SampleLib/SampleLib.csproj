@@ -97,17 +97,17 @@
     <Compile Include="SampleStarter.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FluentAssertions.Autofac.Net45\FluentAssertions.Autofac.Net45.csproj">
-      <Project>{825699da-478c-45ff-afea-f5fc5a36789c}</Project>
-      <Name>FluentAssertions.Autofac.Net45</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FluentAssertions.Autofac\FluentAssertions.Autofac.csproj">
+      <Project>{51cbae5d-8dc3-4314-87a0-f97d058fd93d}</Project>
+      <Name>FluentAssertions.Autofac</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

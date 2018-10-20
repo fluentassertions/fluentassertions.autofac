@@ -53,16 +53,6 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\FluentAssertions.Autofac.Net45\FluentAssertions.Autofac.Net45.csproj">
-      <Project>{825699da-478c-45ff-afea-f5fc5a36789c}</Project>
-      <Name>FluentAssertions.Autofac.Net45</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FluentAssertions.Autofac.Dotnet\FluentAssertions.Autofac.Dotnet.csproj">
-      <Project>{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}</Project>
-      <Name>FluentAssertions.Autofac.Dotnet</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
