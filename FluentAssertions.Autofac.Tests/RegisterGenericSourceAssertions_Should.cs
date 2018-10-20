@@ -41,130 +41,46 @@ namespace FluentAssertions.Autofac
         [Fact]
         public void Register_Generic_ShouldThrow_ArgumentNullException_WhenGenericComponentTypeDefinition_IsNull()
         {
-            var containerShouldHave = GetSut(builder =>
-                builder.RegisterGeneric(typeof(Repository<>))
-                    .As(typeof(IRepository<>))
-                    .SingleInstance()
-            );
-
-            Action action = () =>
-            {
-                containerShouldHave
-                    .RegisteredGeneric(null)
-                    .As(typeof(IRepository<>))
-                    .SingleInstance();
-            };
-
-
-            action.Should().Throw<ArgumentNullException>()
-                .And
-                .ParamName
-                .Should()
-                .Be("genericComponentTypeDefinition");
+            AssertRegisterGenericThrows<ArgumentNullException>(null, typeof(IRepository<>));
         }
 
         [Fact]
         public void Register_Generic_ShouldThrow_ArgumentException_WhenGenericComponentTypeDefinition_IsNotGenericType()
         {
-            var containerShouldHave = GetSut(builder =>
-                builder.RegisterGeneric(typeof(Repository<>))
-                    .As(typeof(IRepository<>))
-                    .SingleInstance()
-            );
-
-            var genericComponentTypeDefinition = typeof(NotGenericRepository);
-            Action action = () =>
-            {
-                containerShouldHave
-                    .RegisteredGeneric(genericComponentTypeDefinition)
-                    .As(typeof(IRepository<>))
-                    .SingleInstance();
-            };
-
-
-            action.Should().Throw<ArgumentException>()
-                .And
-                .ParamName
-                .Should()
-                .Be(nameof(genericComponentTypeDefinition));
+            AssertRegisterGenericThrows(typeof(NotGenericRepository), typeof(IRepository<>));
         }
 
         [Fact]
         public void Register_Generic_ShouldThrow_ArgumentException_WhenGenericComponentTypeDefinition_IsNotGenericTypeDefinition()
         {
-            var containerShouldHave = GetSut(builder =>
-                builder.RegisterGeneric(typeof(Repository<>))
-                    .As(typeof(IRepository<>))
-                    .SingleInstance()
-            );
-
-            var genericComponentTypeDefinition = typeof(Repository<object>);
-            Action action = () =>
-            {
-                containerShouldHave
-                    .RegisteredGeneric(genericComponentTypeDefinition)
-                    .As(typeof(IRepository<>))
-                    .SingleInstance();
-            };
-
-            action.Should().Throw<ArgumentException>()
-                .And
-                .ParamName
-                .Should()
-                .Be(nameof(genericComponentTypeDefinition));
+            AssertRegisterGenericThrows(typeof(IRepository<object>), typeof(IRepository<>));
         }
 
         [Fact]
         public void Register_Generic_ShouldThrow_ArgumentNullException_WhenGenericServiceTypeDefinition_IsNull()
         {
-            var containerShouldHave = GetSut(builder =>
-                builder.RegisterGeneric(typeof(Repository<>))
-                    .As(typeof(IRepository<>))
-                    .SingleInstance()
-            );
-
-            Action action = () =>
-            {
-                containerShouldHave
-                    .RegisteredGeneric(typeof(Repository<>))
-                    .As(null)
-                    .SingleInstance();
-            };
-
-            action.Should().Throw<ArgumentNullException>()
-                .And
-                .ParamName
-                .Should()
-                .Be("genericServiceTypeDefinition");
+            AssertRegisterGenericThrows<ArgumentNullException>(typeof(IRepository<>), null);
         }
 
         [Fact]
         public void Register_Generic_ShouldThrow_ArgumentException_WhenGenericServiceTypeDefinition_IsNotGenericType()
         {
-            var containerShouldHave = GetSut(builder =>
-                builder.RegisterGeneric(typeof(Repository<>))
-                    .As(typeof(IRepository<>))
-                    .SingleInstance()
-            );
-
-            var genericServiceTypeDefinition = typeof(IRepository);
-            Action action = () =>
-            {
-                containerShouldHave
-                    .RegisteredGeneric(typeof(Repository<>))
-                    .As(genericServiceTypeDefinition)
-                    .SingleInstance();
-            };
-
-            action.Should().Throw<ArgumentException>()
-                .And
-                .ParamName
-                .Should()
-                .Be(nameof(genericServiceTypeDefinition));
+            AssertRegisterGenericThrows(typeof(IRepository<>), typeof(IRepository));
         }
 
         [Fact]
         public void Register_Generic_ShouldThrow_ArgumentException_WhenGenericServiceTypeDefinition_IsNotGenericTypeDefinition()
+        {
+            AssertRegisterGenericThrows(typeof(IRepository<>), typeof(IRepository<object>));
+        }
+
+        private static void AssertRegisterGenericThrows(Type componentType, Type serviceType)
+        {
+            AssertRegisterGenericThrows<ArgumentException>(componentType, serviceType);
+        }
+
+        private static void AssertRegisterGenericThrows<TException>(Type componentType, Type serviceType)
+            where TException : ArgumentException
         {
             var containerShouldHave = GetSut(builder =>
                 builder.RegisterGeneric(typeof(Repository<>))
@@ -172,20 +88,11 @@ namespace FluentAssertions.Autofac
                     .SingleInstance()
             );
 
-            var genericServiceTypeDefinition = typeof(IRepository<object>);
-            Action action = () =>
-            {
-                containerShouldHave
-                    .RegisteredGeneric(typeof(Repository<>))
-                    .As(genericServiceTypeDefinition)
-                    .SingleInstance();
-            };
-
-            action.Should().Throw<ArgumentException>()
-                .And
-                .ParamName
-                .Should()
-                .Be(nameof(genericServiceTypeDefinition));
+            containerShouldHave.Invoking(x => x
+                .RegisteredGeneric(componentType)
+                .As(serviceType)
+                .SingleInstance()
+            ).Should().Throw<TException>();
         }
 
         private static ContainerRegistrationAssertions GetSut(Action<ContainerBuilder> arrange = null)
@@ -196,11 +103,10 @@ namespace FluentAssertions.Autofac
         }
 
         private interface IRepository { }
-
+        // ReSharper disable UnusedTypeParameter
         private interface IRepository<TEntity> : IRepository { }
-
         private interface IMultipleRepository<TEntity1, TEntity2> : IRepository { }
-
+        // ReSharper restore UnusedTypeParameter
         [ExcludeFromCodeCoverage]
         private class Repository<TEntity> : IRepository<TEntity> { }
 

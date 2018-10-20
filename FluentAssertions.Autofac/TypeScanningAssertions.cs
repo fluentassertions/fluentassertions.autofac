@@ -1,4 +1,3 @@
-#if NET45 || NET47 || NETSTANDARD2_0 || NETCOREAPP2_0
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +30,9 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
+#if NET45 || NET47 || NETSTANDARD2_0 || NETCOREAPP2_0
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
@@ -133,4 +135,3 @@ namespace FluentAssertions.Autofac
         }
     }
 }
-#endif

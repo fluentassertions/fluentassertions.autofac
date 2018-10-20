@@ -21,6 +21,9 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
+#if NET45 || NET47 || NETSTANDARD2_0 || NETCOREAPP2_0
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
@@ -32,7 +35,6 @@ namespace FluentAssertions.Autofac
             Subject = container;
         }
 
-#if NET45 || NET47 || NETSTANDARD2_0 || NETCOREAPP2_0
         /// <summary>
         ///     Returns an <see cref="ContainerRegistrationAssertions"/> object that can be used to assert the current <see cref="IContainer"/>.
         /// </summary>
@@ -40,7 +42,6 @@ namespace FluentAssertions.Autofac
         {
             return new ContainerRegistrationAssertions(Subject);
         }
-#endif
 
         /// <summary>
         ///     Returns an <see cref="ResolveAssertions"/> object that can be used to assert the current <see paramref="serviceType"/>.
@@ -74,7 +75,6 @@ namespace FluentAssertions.Autofac
             AutoActivate(typeof(TService));
         }
 
-#if NET45 || NET47 || NETSTANDARD2_0 || NETCOREAPP2_0
         /// <summary>
         ///     Returns an <see cref="TypeScanningAssertions"/> object that can be used to assert registered types on the current <see cref="MockContainerBuilder"/>.
         /// </summary>
@@ -93,6 +93,5 @@ namespace FluentAssertions.Autofac
         {
             return new TypeScanningAssertions(Subject, types);
         }
-#endif
     }
 }

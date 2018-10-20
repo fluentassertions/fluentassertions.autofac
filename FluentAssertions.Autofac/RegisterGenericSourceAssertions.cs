@@ -1,6 +1,6 @@
-#if NET45 || NET47 || NETSTANDARD2_0 || NETCOREAPP2_0
 using System;
 using System.Linq;
+using System.Reflection;
 using Autofac;
 using Autofac.Core;
 using FluentAssertions.Primitives;
@@ -22,6 +22,9 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
+#if NET45 || NET47 || NETSTANDARD2_0 || NETCOREAPP2_0
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
@@ -32,11 +35,7 @@ namespace FluentAssertions.Autofac
         public RegisterGenericSourceAssertions(IContainer subject, Type genericComponentTypeDefinition)
         {
             Subject = subject ?? throw new ArgumentNullException(nameof(subject));
-
-            if (genericComponentTypeDefinition == null) throw new ArgumentNullException(nameof(genericComponentTypeDefinition));
-            if (!genericComponentTypeDefinition.IsGenericTypeDefinition)
-                throw new ArgumentException("Component type must be a generic type definition.", nameof(genericComponentTypeDefinition));
-
+            AssertGenericType(genericComponentTypeDefinition);
             _genericComponentTypeDefinition = genericComponentTypeDefinition;
         }
 
@@ -46,33 +45,29 @@ namespace FluentAssertions.Autofac
         /// <param name="genericServiceTypeDefinition">The type to resolve</param>
         public RegistrationAssertions As(Type genericServiceTypeDefinition)
         {
-            if (genericServiceTypeDefinition == null) throw new ArgumentNullException(nameof(genericServiceTypeDefinition));
-            if (!genericServiceTypeDefinition.IsGenericTypeDefinition)
-                throw new ArgumentException("Service type must be a generic type definition.", nameof(genericServiceTypeDefinition));
-
+            AssertGenericType(genericServiceTypeDefinition);
             var componentServicePairText = $"Component={_genericComponentTypeDefinition.FullName} Service={genericServiceTypeDefinition.FullName}";
 
             _genericComponentTypeDefinition.GetGenericArguments().Length.Should()
                 .Be(genericServiceTypeDefinition.GetGenericArguments().Length,
-                    $"The generic arguments count of both generic component and generic service must be equals. {componentServicePairText}.");
+                    $"the generic arguments count of both generic component and generic service must be equal. {componentServicePairText}.");
 
             var argumentTypes = Enumerable.Repeat(typeof(object),
                 _genericComponentTypeDefinition.GetGenericArguments().Length).ToArray();
-
             var componentType = _genericComponentTypeDefinition.MakeGenericType(argumentTypes);
             var serviceType = genericServiceTypeDefinition.MakeGenericType(argumentTypes);
 
             componentType.Should()
                 .Implement(serviceType,
-                    $"Component must implement specified service. {componentServicePairText}.");
+                    $"component must implement specified service. {componentServicePairText}.");
 
             var registration = GetRegistrationFromSources(serviceType);
             registration.Should()
                 .NotBeNull(
-                    $"It must be a registration source providing registrations for service {genericServiceTypeDefinition.FullName}");
+                    $"it must be a registration source providing registrations for service {genericServiceTypeDefinition.FullName}");
 
             registration.Activator.LimitType.Should()
-                .Be(componentType, $"The generic component type definition in the registration must be {_genericComponentTypeDefinition.FullName}.");
+                .Be(componentType, $"the generic component type definition in the registration must be {_genericComponentTypeDefinition.FullName}.");
 
             return new RegistrationAssertions(Subject, registration);
         }
@@ -95,6 +90,17 @@ namespace FluentAssertions.Autofac
 
             return null;
         }
+
+        private static void AssertGenericType(Type genericTypeDefinition)
+        {
+            if (genericTypeDefinition == null) throw new ArgumentNullException(nameof(genericTypeDefinition));
+#if NET45 || NET47 || NETSTANDARD2_0 || NETCOREAPP2_0
+            if (!genericTypeDefinition.IsGenericTypeDefinition)
+                throw new ArgumentException("Type must be a generic type definition.",
+                    nameof(genericTypeDefinition));
+#else
+            throw new NotSupportedException("Not supported in .NET Standard 1.x");
+#endif
+        }
     }
 }
-#endif
