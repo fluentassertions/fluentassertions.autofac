@@ -1,22 +1,20 @@
 using System;
 using Autofac.Core;
-using NEdifis.Attributes;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof(MockContainerBuilder))]
     // ReSharper disable once InconsistentNaming
-    internal class MockContainerBuilder_Should
+    public class MockContainerBuilder_Should
     {
-        [Test]
+        [Fact]
         public void Be_Empty_At_Start()
         {
             var sut = new MockContainerBuilder();
             sut.Callbacks.Should().BeEmpty();
         }
 
-        [Test]
+        [Fact]
         public void Register_And_Return_Callbacks()
         {
             var sut = new MockContainerBuilder();

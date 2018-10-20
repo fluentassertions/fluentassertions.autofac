@@ -1,16 +1,14 @@
 using System.Linq;
 using Autofac;
 using Autofac.Core;
-using NEdifis.Attributes;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof (AutofacExtensions))]
     // ReSharper disable InconsistentNaming
-    internal class AutofacExtensions_Should
+    public class AutofacExtensions_Should
     {
-        [Test]
+        [Fact]
         public void Get_Registrations()
         {
             var builder = new ContainerBuilder();

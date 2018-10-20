@@ -1,6 +1,6 @@
-﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <Project ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <!-- Skip test. As of now, we have no explicit tests for netcore -->
+  <!-- Skip test. As of now, we have no explicit tests for net45 -->
   <Target Name="Test" DependsOnTargets="Build" />
   <Target Name="Coverage" DependsOnTargets="Test" />
   <Target Name="CoverageReport" DependsOnTargets="Coverage" />

@@ -1,4 +1,4 @@
 namespace SampleLib
 {
-    internal enum DeviceState { Online, Offline }
+    public enum DeviceState { Online, Offline }
 }

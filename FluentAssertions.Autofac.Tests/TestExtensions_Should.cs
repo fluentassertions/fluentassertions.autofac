@@ -1,16 +1,14 @@
 using System;
 using Autofac;
-using NEdifis.Attributes;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof(TestExtensions))]
     // ReSharper disable InconsistentNaming
-    internal class TestExtensions_Should
+    public class TestExtensions_Should
     {
-        [Test]
+        [Fact]
         public void Provide_builder()
         {
             var module = new SampleModule();
@@ -33,7 +31,7 @@ namespace FluentAssertions.Autofac
             container.Resolve<ICustomFormatter>().Should().NotBeNull();
         }
 
-        [Test]
+        [Fact]
         public void Provide_container()
         {
             var module = new SampleModule();

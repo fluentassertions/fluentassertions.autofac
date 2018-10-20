@@ -1,14 +1,12 @@
 using Autofac;
-using NEdifis.Attributes;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof(MockContainerBuilderAssertions))]
     // ReSharper disable InconsistentNaming
-    internal class MockContainerBuilderAssertions_Should
+    public class MockContainerBuilderAssertions_Should
     {
-        [Test]
+        [Fact]
         public void Support_testing_assembly_modules_registrations()
         {
             var sut = new MockContainerBuilder();
@@ -21,7 +19,7 @@ namespace FluentAssertions.Autofac
             sut.Should().RegisterModule<SampleModule2>();
         }
 
-        [Test]
+        [Fact]
         public void Support_testing_module_registration()
         {
             var builder = new MockContainerBuilder();

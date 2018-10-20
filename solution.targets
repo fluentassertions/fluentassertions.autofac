@@ -14,10 +14,9 @@
     <Target Name="Coverage" DependsOnTargets="Build;OpenCoverWithNUnit"/>
     -->
 
-  <!-- ## Using XUnit (default) ##
+  <!-- ## Using XUnit (default) -->
     <Target Name="Test" DependsOnTargets="Build;TestWithXUnit"/>
     <Target Name="Coverage" DependsOnTargets="Build;OpenCoverWithXUnit"/>
-    -->
 
   <!-- ## Default targets ##
     <Target Name="CoverageReport" DependsOnTargets="OpenCoverReport"/>

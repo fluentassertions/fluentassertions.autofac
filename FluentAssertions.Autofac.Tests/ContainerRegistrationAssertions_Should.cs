@@ -1,16 +1,14 @@
-﻿using System;
+using System;
 using System.Diagnostics.CodeAnalysis;
 using Autofac;
-using NEdifis.Attributes;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof (ContainerRegistrationAssertions))]
     // ReSharper disable InconsistentNaming
-    internal class ContainerRegistrationAssertions_Should
+    public class ContainerRegistrationAssertions_Should
     {
-        [Test]
+        [Fact]
         public void RegisterType()
         {
             var sut = Configure(builder => builder.RegisterType<Dummy>()).Should().Have();
@@ -18,7 +16,7 @@ namespace FluentAssertions.Autofac
             sut.Registered(typeof(Dummy));
         }
 
-        [Test]
+        [Fact]
         public void RegisterInstance()
         {
             var instance = new Dummy();
@@ -26,7 +24,7 @@ namespace FluentAssertions.Autofac
             container.Should().Have().Registered(instance);
         }
 
-        [Test]
+        [Fact]
         public void NotRegister()
         {
             var sut = Configure().Should().Have();

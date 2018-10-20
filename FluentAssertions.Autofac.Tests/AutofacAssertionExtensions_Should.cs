@@ -1,30 +1,28 @@
-﻿using System;
+using System;
 using Autofac;
-using NEdifis.Attributes;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof (AutofacAssertionExtensions))]
     // ReSharper disable InconsistentNaming
-    internal class AutofacAssertionExtensions_Should
+    public class AutofacAssertionExtensions_Should
     {
-        [Test]
+        [Fact]
         public void Provide_builder_extension()
         {
             var builder = new MockContainerBuilder();
             builder.Should().Should().BeOfType<MockContainerBuilderAssertions>();
         }
 
-        [Test]
+        [Fact]
         public void Provide_register_extension()
         {
             var container = new ContainerBuilder().Build();
             container.Should().Have().Should().BeOfType<ContainerRegistrationAssertions>();
         }
 
-        [Test]
+        [Fact]
         public void Provide_resolve_extension()
         {
             var builder = new ContainerBuilder();

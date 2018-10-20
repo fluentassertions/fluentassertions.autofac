@@ -33,9 +33,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.Nu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAssertions.Autofac.Dotnet", "FluentAssertions.Autofac.Dotnet\FluentAssertions.Autofac.Dotnet.csproj", "{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.Tests", "FluentAssertions.Autofac.Tests\FluentAssertions.Autofac.Tests.csproj", "{6D3E0357-8BFA-49DC-B180-F2D2F2CE7F4B}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Shared\Shared.projitems*{0041c31d-e06f-430f-85e3-b8f1b1cf0ed0}*SharedItemsImports = 13
+		Shared\Shared.projitems*{6d3e0357-8bfa-49dc-b180-f2d2f2ce7f4b}*SharedItemsImports = 4
 		Shared\Shared.projitems*{825699da-478c-45ff-afea-f5fc5a36789c}*SharedItemsImports = 4
 		Shared\Shared.projitems*{b28bf51a-7f52-42cf-b0c3-98bab024c1ad}*SharedItemsImports = 4
 	EndGlobalSection
@@ -60,6 +63,10 @@ Global
 		{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B28BF51A-7F52-42CF-B0C3-98BAB024C1AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D3E0357-8BFA-49DC-B180-F2D2F2CE7F4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D3E0357-8BFA-49DC-B180-F2D2F2CE7F4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D3E0357-8BFA-49DC-B180-F2D2F2CE7F4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D3E0357-8BFA-49DC-B180-F2D2F2CE7F4B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

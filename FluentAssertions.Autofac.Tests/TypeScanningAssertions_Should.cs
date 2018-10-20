@@ -1,14 +1,12 @@
 using Autofac;
-using NEdifis.Attributes;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof (TypeScanningAssertions))]
     // ReSharper disable InconsistentNaming
-    internal class TypeScanningAssertions_Should
+    public class TypeScanningAssertions_Should
     {
-        [Test]
+        [Fact]
         public void Support_type_scanning()
         {
             var builder = new MockContainerBuilder();

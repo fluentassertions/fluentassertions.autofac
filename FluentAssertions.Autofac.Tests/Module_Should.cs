@@ -1,16 +1,14 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using Autofac;
-using NEdifis.Attributes;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof(Module<>))]
     // ReSharper disable InconsistentNaming
-    internal class Module_Should
+    public class Module_Should
     {
-        [Test]
+        [Fact]
         public void Provide_test_container()
         {
             var container = Module<SampleModule>.GetTestContainer((builder,module) =>
@@ -20,7 +18,7 @@ namespace FluentAssertions.Autofac
             container.Should().NotBeNull();
         }
 
-        [Test]
+        [Fact]
         public void Provide_test_builder()
         {
             var builder = Module<SampleModule>.GetTestBuilder((b,m) =>

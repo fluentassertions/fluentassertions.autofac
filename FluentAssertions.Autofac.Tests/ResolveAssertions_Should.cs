@@ -1,22 +1,20 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Autofac;
-using NEdifis.Attributes;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof (ResolveAssertions))]
     // ReSharper disable InconsistentNaming
-    internal class ResolveAssertions_Should
+    public class ResolveAssertions_Should
     {
-        [Test]
+        [Fact]
         public void Resolve()
         {
             var container = Configure();
             container.Invoking(x => x.Should().Resolve<IDisposable>())
-                .Should().Throw<AssertionException>()
+                .Should().Throw<Exception>()
                 .WithMessage($"Expected container to resolve '{typeof (IDisposable)}' but it did not.");
 
             var disposable = Substitute.For<IDisposable>();
@@ -24,7 +22,7 @@ namespace FluentAssertions.Autofac
             container.Should().Resolve<IDisposable>();
         }
 
-        [Test]
+        [Fact]
         public void Resolve_As()
         {
             var containerShould = Configure(builder =>
@@ -39,7 +37,7 @@ namespace FluentAssertions.Autofac
             containerShould.Resolve<IDisposable>().As(typeof(Dummy));
         }
 
-        [Test]
+        [Fact]
         public void Assert_AutoActivation()
         {
             var container = Configure(builder => builder.RegisterType<Dummy>().AsSelf().AutoActivate());
@@ -47,7 +45,7 @@ namespace FluentAssertions.Autofac
 
             container = Configure(builder => builder.RegisterType<Dummy>().AutoActivate());
             container.Should().AutoActivate<Dummy>();
-            container.Should().Invoking(x => x.Resolve<Dummy>()).Should().Throw<AssertionException>("type not registered AS something");
+            container.Should().Invoking(x => x.Resolve<Dummy>()).Should().Throw<Exception>("type not registered AS something");
         }
 
         private static IContainer Configure(Action<ContainerBuilder> arrange = null)

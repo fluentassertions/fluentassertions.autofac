@@ -1,16 +1,14 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Autofac;
-using NEdifis.Attributes;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof(RegisterGenericSourceAssertions))]
     // ReSharper disable InconsistentNaming
-    internal class RegisterGenericSourceAssertions_Should
+    public class RegisterGenericSourceAssertions_Should
     {
-        [Test]
+        [Fact]
         public void Register_Generic()
         {
             var containerShouldHave = GetSut(builder =>
@@ -25,7 +23,7 @@ namespace FluentAssertions.Autofac
                 .SingleInstance();
         }
 
-        [Test]
+        [Fact]
         public void Register_Generic_WithMultiple_GenericArgumentTypes()
         {
             var containerShouldHave = GetSut(builder =>
@@ -40,7 +38,7 @@ namespace FluentAssertions.Autofac
                 .SingleInstance();
         }
 
-        [Test]
+        [Fact]
         public void Register_Generic_ShouldThrow_ArgumentNullException_WhenGenericComponentTypeDefinition_IsNull()
         {
             var containerShouldHave = GetSut(builder =>
@@ -65,7 +63,7 @@ namespace FluentAssertions.Autofac
                 .Be("genericComponentTypeDefinition");
         }
 
-        [Test]
+        [Fact]
         public void Register_Generic_ShouldThrow_ArgumentException_WhenGenericComponentTypeDefinition_IsNotGenericType()
         {
             var containerShouldHave = GetSut(builder =>
@@ -91,7 +89,7 @@ namespace FluentAssertions.Autofac
                 .Be(nameof(genericComponentTypeDefinition));
         }
 
-        [Test]
+        [Fact]
         public void Register_Generic_ShouldThrow_ArgumentException_WhenGenericComponentTypeDefinition_IsNotGenericTypeDefinition()
         {
             var containerShouldHave = GetSut(builder =>
@@ -116,7 +114,7 @@ namespace FluentAssertions.Autofac
                 .Be(nameof(genericComponentTypeDefinition));
         }
 
-        [Test]
+        [Fact]
         public void Register_Generic_ShouldThrow_ArgumentNullException_WhenGenericServiceTypeDefinition_IsNull()
         {
             var containerShouldHave = GetSut(builder =>
@@ -140,7 +138,7 @@ namespace FluentAssertions.Autofac
                 .Be("genericServiceTypeDefinition");
         }
 
-        [Test]
+        [Fact]
         public void Register_Generic_ShouldThrow_ArgumentException_WhenGenericServiceTypeDefinition_IsNotGenericType()
         {
             var containerShouldHave = GetSut(builder =>
@@ -165,7 +163,7 @@ namespace FluentAssertions.Autofac
                 .Be(nameof(genericServiceTypeDefinition));
         }
 
-        [Test]
+        [Fact]
         public void Register_Generic_ShouldThrow_ArgumentException_WhenGenericServiceTypeDefinition_IsNotGenericTypeDefinition()
         {
             var containerShouldHave = GetSut(builder =>

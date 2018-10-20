@@ -2,16 +2,14 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using Autofac.Core;
-using NEdifis.Attributes;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-    [TestFixtureFor(typeof(RegistrationAssertions))]
     // ReSharper disable InconsistentNaming
-    internal class RegistrationAssertions_Should
+    public class RegistrationAssertions_Should
     {
-        [Test]
+        [Fact]
         public void Register_Named()
         {
             var containerShouldHave = GetSut(builder =>
@@ -23,7 +21,7 @@ namespace FluentAssertions.Autofac
                 .Keyed<ICloneable>("Dummy");
         }
 
-        [Test]
+        [Fact]
         public void Register_Keyed()
         {
             var containerShouldHave = GetSut(builder =>
@@ -34,7 +32,7 @@ namespace FluentAssertions.Autofac
                 .Keyed<IComparable>(42);
         }
 
-        [Test]
+        [Fact]
         public void Register_Lifetime()
         {
             var containerShouldHave = GetSut(builder => builder.RegisterType<Dummy>().SingleInstance());
@@ -56,7 +54,7 @@ namespace FluentAssertions.Autofac
             containerShouldHave.Registered<Dummy>().InstancePerOwned<ICloneable>();
         }
 
-        [Test]
+        [Fact]
         public void Register_Ownership()
         {
             var containerShouldHave = GetSut(builder => builder.RegisterType<Dummy>().ExternallyOwned());
@@ -70,14 +68,14 @@ namespace FluentAssertions.Autofac
                 .Owned(InstanceOwnership.OwnedByLifetimeScope);
         }
 
-        [Test]
+        [Fact]
         public void Register_AutoActivate()
         {
             var containerShouldHave = GetSut(builder => builder.RegisterType<Dummy>().As<IDisposable>().AutoActivate());
             containerShouldHave.Registered<Dummy>().As<IDisposable>().AutoActivate();
         }
 
-        [Test]
+        [Fact]
         public void Register_parameters()
         {
             var builder = new ContainerBuilder();
@@ -101,7 +99,7 @@ namespace FluentAssertions.Autofac
                 ;
         }
 
-        [Test]
+        [Fact]
         public void Register_parametersMatchingPredicate()
         {
             var builder = new ContainerBuilder();

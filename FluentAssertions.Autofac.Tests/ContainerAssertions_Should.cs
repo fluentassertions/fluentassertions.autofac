@@ -1,16 +1,14 @@
-﻿using System;
+using System;
 using Autofac;
-using NEdifis.Attributes;
 using NSubstitute;
-using NUnit.Framework;
+using Xunit;
 
 namespace FluentAssertions.Autofac
 {
-	[TestFixtureFor(typeof (ContainerAssertions))]
 	// ReSharper disable InconsistentNaming
-	internal class ContainerAssertions_Should
+	public class ContainerAssertions_Should
 	{
-		[Test]
+		[Fact]
 		public void Provide_assertions()
 		{
 			var builder = new ContainerBuilder();
