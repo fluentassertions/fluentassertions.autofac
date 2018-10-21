@@ -12,13 +12,14 @@ environment:
     secure: lrwREUV4nO99AU0A6xVx/MNF0BaJc8A1B8dwEGMLqmYKGqD5E7PJ/IC9RHcle6pk
 before_build:
   - ps: gitversion /l console /output buildserver
-  - nuget setapikey %apiKey% -Verbosity quiet
+  #- nuget setapikey %apiKey% -Verbosity quiet
 cache:
   - packages -> **\packages.config
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
   - C:\ProgramData\chocolatey\lib -> appveyor.yml
 
 build_script:
-  - cmd: set BUILD_TARGET=Package
-  - cmd: if "%APPVEYOR_REPO_TAG%" == "true" set BUILD_TARGET=Deploy
-  - cmd: build.bat /t:CoverageUpload;%BUILD_TARGET% /v:m
+  #- cmd: set BUILD_TARGET=Package
+  #- cmd: if "%APPVEYOR_REPO_TAG%" == "true" set BUILD_TARGET=Deploy
+  #- cmd: build.bat /t:CoverageUpload;%BUILD_TARGET% /v:m
+  - cmd: dotnet test /v:m

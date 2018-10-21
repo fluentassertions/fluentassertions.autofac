@@ -1,0 +1,5 @@
+﻿<Project>
+  <Target Name="VSTest">
+    <MSBuild Projects="@(ProjectReference)" Targets="VSTestIfTestProject" Properties="%(ProjectReference.AdditionalProperties)" />
+  </Target>
+</Project>

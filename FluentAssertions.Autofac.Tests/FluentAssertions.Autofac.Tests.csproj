@@ -1,15 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;net47;netstandard1.3;netstandard1.6;netstandard2.0;netcoreapp2.0;netcoreapp2.1</TargetFrameworks>
+    <!--xUnit does not support .NETStandarda, cf.: https://xunit.github.io/docs/why-no-netstandard -->
+    <!--<TargetFrameworks>net45;net47;netstandard1.3;netstandard1.6;netstandard2.0;netcoreapp2.0;netcoreapp2.1</TargetFrameworks>-->
+    <!--<TargetFrameworks>net452;net47;netcoreapp2.0;netcoreapp2.1</TargetFrameworks>-->
+    <!-- skip other targets for testing (since all tests same, except netstandard!) -->
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <RootNamespace>FluentAssertions.Autofac</RootNamespace>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <CollectCoverage Condition="'$(CollectCoverage)' == ''">true</CollectCoverage>
-    <CoverletOutput Condition="'$(CoverletOutput)' == ''">$(SolutionDir)testresults</CoverletOutput>
-    <CoverletOutputFormat Condition="'$(CoverletOutputFormat)' == ''">opencover</CoverletOutputFormat>
   </PropertyGroup>
 
   <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard1.'))">
@@ -22,7 +20,7 @@
     <ProjectReference Include="..\FluentAssertions.Autofac\FluentAssertions.Autofac.csproj" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
-    <PackageReference Include="xunit.extensibility.execution" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
     <PackageReference Include="NSubstitute" Version="3.1.0" />
     <PackageReference Include="coverlet.msbuild" Version="2.3.1" />
   </ItemGroup>
