@@ -1,5 +1,4 @@
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using Xunit;
 
@@ -28,7 +27,9 @@ namespace FluentAssertions.Autofac
             builder.Should().RegisterModule<SampleModule>();
         }
 
-        [ExcludeFromCodeCoverage]
+#if !NETSTANDARD_1X
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         private class SampleModule : Module { }
     }
 }

@@ -16,7 +16,6 @@ namespace FluentAssertions.Autofac
             var builder = module.Builder();
             ((object) builder).Should().BeOfType<MockContainerBuilder>();
 
-            builder.RegisterInstance(Substitute.For<ICloneable>());
             builder.RegisterInstance(Substitute.For<IComparable>());
             builder.RegisterInstance(Substitute.For<IConvertible>());
             builder.RegisterInstance(Substitute.For<ICustomFormatter>());
@@ -24,8 +23,6 @@ namespace FluentAssertions.Autofac
             var container = builder.Build();
 
             container.Resolve<IDisposable>().Should().NotBeNull();
-
-            container.Resolve<ICloneable>().Should().NotBeNull();
             container.Resolve<IComparable>().Should().NotBeNull();
             container.Resolve<IConvertible>().Should().NotBeNull();
             container.Resolve<ICustomFormatter>().Should().NotBeNull();
@@ -38,14 +35,11 @@ namespace FluentAssertions.Autofac
 
             var container = module.Container(builder =>
             {
-                builder.RegisterInstance(Substitute.For<ICloneable>());
                 builder.RegisterInstance(Substitute.For<IConvertible>());
                 builder.RegisterInstance(Substitute.For<ICustomFormatter>());
             });
 
             container.Resolve<IDisposable>().Should().NotBeNull();
-
-            container.Resolve<ICloneable>().Should().NotBeNull();
             container.Resolve<IConvertible>().Should().NotBeNull();
             container.Resolve<ICustomFormatter>().Should().NotBeNull();
         }

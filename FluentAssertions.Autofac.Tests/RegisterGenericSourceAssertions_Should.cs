@@ -1,5 +1,4 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using Xunit;
 
@@ -107,13 +106,20 @@ namespace FluentAssertions.Autofac
         private interface IRepository<TEntity> : IRepository { }
         private interface IMultipleRepository<TEntity1, TEntity2> : IRepository { }
         // ReSharper restore UnusedTypeParameter
-        [ExcludeFromCodeCoverage]
+
+#if !NETSTANDARD_1X
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         private class Repository<TEntity> : IRepository<TEntity> { }
 
-        [ExcludeFromCodeCoverage]
+#if !NETSTANDARD_1X
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         private class MultipleRepository<TEntity1, TEntity2> : IMultipleRepository<TEntity1, TEntity2> { }
 
-        [ExcludeFromCodeCoverage]
+#if !NETSTANDARD_1X
+        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
         private class NotGenericRepository : IRepository<object> { }
     }
 }

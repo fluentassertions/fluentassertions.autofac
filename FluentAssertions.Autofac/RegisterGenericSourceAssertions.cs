@@ -22,7 +22,7 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
-#if NET45 || NET47 || NETSTANDARD2_0 || NETCOREAPP2_0
+#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
         protected override string Identifier => nameof(IContainer);
@@ -94,12 +94,12 @@ namespace FluentAssertions.Autofac
         private static void AssertGenericType(Type genericTypeDefinition)
         {
             if (genericTypeDefinition == null) throw new ArgumentNullException(nameof(genericTypeDefinition));
-#if NET45 || NET47 || NETSTANDARD2_0 || NETCOREAPP2_0
+#if NETSTANDARD_1X
+            throw new NotSupportedException("Not supported in .NET Standard 1.x");
+#else
             if (!genericTypeDefinition.IsGenericTypeDefinition)
                 throw new ArgumentException("Type must be a generic type definition.",
                     nameof(genericTypeDefinition));
-#else
-            throw new NotSupportedException("Not supported in .NET Standard 1.x");
 #endif
         }
     }
