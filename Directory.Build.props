@@ -10,8 +10,6 @@
         <CollectCoverage Condition="'$(NCrunch)' == ''">true</CollectCoverage>
         <CoverletOutput>$(SolutionDir)/testresults/$(MSBuildProjectName).Coverage.xml</CoverletOutput>
         <CoverletOutputFormat>opencover</CoverletOutputFormat>
-        <!-- TODO: should be set securely from outside by AppVeyor -->
-        <CoverAllsToken>zfmMp4qU8Zyq9xipAv61vttisshVtkK2p</CoverAllsToken>
     </PropertyGroup>
 
     <PropertyGroup>
@@ -32,7 +30,7 @@
         <!-- TODO: Common NuGet metadata, cf.: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
         <PackageOutputPath Condition="'$(PackageOutputPath)'==''">$(SolutionDir)</PackageOutputPath>
         <NuspecFile>Package.nuspec</NuspecFile>
-        <!-- Note: Must be set lazy (via target). 
+        <!-- Note: Must be set lazy (via target).
           <NuspecProperties>Version=$(GitVersion_NuGetVersion);$(GitVersion_Sha)ision=$(GitVersion_Sha)</NuspecProperties>
         -->
     </PropertyGroup>

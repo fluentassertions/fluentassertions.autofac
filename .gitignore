@@ -196,3 +196,5 @@ FakesAssemblies/
 *.opt
 
 .idea/*
+
+tools/*
