@@ -1,0 +1,25 @@
+<Project>
+    <PropertyGroup>
+        <!-- dotnetcore does not always set SolutionDir, cf.:
+             https://github.com/Microsoft/msbuild/issues/2342#issuecomment-348975069-->
+        <SolutionDir Condition="'$(SolutionDir)'==''">$(MSBuildThisFileDirectory)</SolutionDir>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <!-- coverlet configuration, cf.: https://github.com/tonerdo/coverlet -->
+        <CollectCoverage>true</CollectCoverage>
+        <CoverletOutput>$(SolutionDir)/testresults/$(MSBuildProjectName).Coverage.xml</CoverletOutput>
+        <CoverletOutputFormat>opencover</CoverletOutputFormat>
+        <!-- TODO: should be set securely from outside by AppVeyor -->
+        <CoverAllsToken>zfmMp4qU8Zyq9xipAv61vttisshVtkK2p</CoverAllsToken>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
+    <ItemGroup Condition="'$(SkipSolutionInfo)' != 'true'">
+        <Compile Include="$(SolutionDir)\SolutionInfo.cs">
+            <Link>Properties\SolutionInfo.cs</Link>
+        </Compile>
+    </ItemGroup>
+</Project>

@@ -1,10 +1,4 @@
 <Project>
-    <PropertyGroup>
-        <CollectCoverage>true</CollectCoverage>
-        <CoverletOutput>$(SolutionDir)/testresults/$(RootNamespace).Coverage.xml</CoverletOutput>
-        <CoverletOutputFormat>opencover</CoverletOutputFormat>
-    </PropertyGroup>
-
     <Target Name="VSTestIfTestProject">
         <CallTarget Targets="VSTest" Condition="'$(IsTestProject)' == 'true'" />
     </Target>

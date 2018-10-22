@@ -1,5 +1,7 @@
-﻿<Project>
+<Project>
   <Target Name="VSTest">
-    <MSBuild Projects="@(ProjectReference)" Targets="VSTestIfTestProject" Properties="%(ProjectReference.AdditionalProperties)" />
+      <!-- skip non-test projects for `dotnet test`, cf.:
+           https://github.com/Microsoft/vstest/issues/1129#issuecomment-344762968 -->
+      <MSBuild Projects="@(ProjectReference)" Targets="VSTestIfTestProject" Properties="%(ProjectReference.AdditionalProperties)" />
   </Target>
 </Project>

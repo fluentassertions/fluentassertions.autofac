@@ -8,15 +8,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.gitignore = .gitignore
 		after.FluentAssertions.Autofac.sln.targets = after.FluentAssertions.Autofac.sln.targets
 		appveyor.yml = appveyor.yml
-		before.FluentAssertions.Autofac.sln.targets = before.FluentAssertions.Autofac.sln.targets
-		build.bat = build.bat
+		Directory.Build.props = Directory.Build.props
 		Directory.Build.targets = Directory.Build.targets
-		empty.targets = empty.targets
 		GitVersion.yml = GitVersion.yml
 		LICENSE = LICENSE
 		mkdocs.yml = mkdocs.yml
 		README.md = README.md
-		solution.targets = solution.targets
 		SolutionInfo.cs = SolutionInfo.cs
 	EndProjectSection
 EndProject
@@ -27,9 +24,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{ABFD44D3-9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAssertions.Autofac", "FluentAssertions.Autofac\FluentAssertions.Autofac.csproj", "{51CBAE5D-8DC3-4314-87A0-F97D058FD93D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentAssertions.Autofac.Tests", "FluentAssertions.Autofac.Tests\FluentAssertions.Autofac.Tests.csproj", "{849ECBE8-53FB-4EC9-AAC7-1E028DA76F0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAssertions.Autofac.Tests", "FluentAssertions.Autofac.Tests\FluentAssertions.Autofac.Tests.csproj", "{849ECBE8-53FB-4EC9-AAC7-1E028DA76F0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleLib", "SampleLib\SampleLib.csproj", "{0AC7EB5C-948C-4636-A853-8E6FBC39E862}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleLib", "SampleLib\SampleLib.csproj", "{0AC7EB5C-948C-4636-A853-8E6FBC39E862}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
