@@ -18,9 +18,9 @@ cache:
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
   - C:\ProgramData\chocolatey\lib -> appveyor.yml
   - tools -> appveyor.yml
+  - '%USERPROFILE%\.nuget\packages -> **\*.csproj'
 
 build_script:
-  - cmd: dotnet build /v:m
   - cmd: dotnet test /v:m
   - cmd: dotnet pack /v:m
   - cmd: tools\csmacnz.Coveralls.exe --opencover -i testresults\FluentAssertions.Autofac.Tests.Coverage.xml
