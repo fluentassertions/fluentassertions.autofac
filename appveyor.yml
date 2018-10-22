@@ -18,7 +18,8 @@ cache:
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
   - C:\ProgramData\chocolatey\lib -> appveyor.yml
   - tools -> appveyor.yml
-  - '%USERPROFILE%\.nuget\packages -> **\*.csproj'
+  # ~400 MB! Should probably not be cached!
+  #- '%USERPROFILE%\.nuget\packages -> **\*.csproj'
 
 build_script:
   - cmd: dotnet test /v:m
