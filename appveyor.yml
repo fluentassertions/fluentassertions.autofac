@@ -20,6 +20,8 @@ cache:
   - tools -> appveyor.yml
 
 build_script:
-  - cmd: 'dotnet test /v:m && dotnet pack /v:m'
+  - cmd: dotnet build /v:m
+  - cmd: dotnet test /v:m
+  - cmd: dotnet pack /v:m
   - cmd: tools\csmacnz.Coveralls.exe --opencover -i testresults\FluentAssertions.Autofac.Tests.Coverage.xml
   #-cmd: if "%APPVEYOR_REPO_TAG%" == "true" dotnet nuget push -k %apiKey%
