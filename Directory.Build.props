@@ -1,8 +1,10 @@
 <Project>
     <PropertyGroup>
-        <!-- dotnetcore does not always set SolutionDir, cf.:
+        <!-- dotnet does not always set SolutionDir, cf.:
              https://github.com/Microsoft/msbuild/issues/2342#issuecomment-348975069-->
         <SolutionDir Condition="'$(SolutionDir)'==''">$(MSBuildThisFileDirectory)</SolutionDir>
+        <!-- dotnet seems to use the first configuration in the .sln by default -->
+        <Configuration Condition="'$(Configuraton)'==''">Release</Configuration>
     </PropertyGroup>
 
     <PropertyGroup>
