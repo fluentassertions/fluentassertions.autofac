@@ -22,4 +22,11 @@
             <Link>Properties\SolutionInfo.cs</Link>
         </Compile>
     </ItemGroup>
+
+    <!-- TODO: Common NuGet metadata, cf.: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
+    <PropertyGroup>
+        <!--<IsPackable>true</IsPackable>-->
+        <PackageVersion Condition="'$(PackageVersion)'==''">$(GitVersion_NuGetVersion)</PackageVersion>
+        <PackageOutputPath Condition="'$(PackageOutputPath)'==''">$(SolutionDir)</PackageOutputPath>
+    </PropertyGroup>
 </Project>

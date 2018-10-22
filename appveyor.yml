@@ -11,10 +11,10 @@ environment:
   apiKey:
     secure: lrwREUV4nO99AU0A6xVx/MNF0BaJc8A1B8dwEGMLqmYKGqD5E7PJ/IC9RHcle6pk
 before_build:
-  - ps: gitversion /l console /output buildserver
+  - ps: gitversion /l console /output buildserver /updateassemblyinfo SolutionInfo.cs
   #- nuget setapikey %apiKey% -Verbosity quiet
 cache:
-  - packages -> **\packages.config
+  #- packages -> **\packages.config # TODO: cache dotnt/nuget packages
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
   - C:\ProgramData\chocolatey\lib -> appveyor.yml
 
