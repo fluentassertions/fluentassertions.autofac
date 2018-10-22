@@ -1,4 +1,3 @@
-# common configuration for ALL branches
 image: Visual Studio 2017
 install:
   - choco install gitversion.portable -pre -y
@@ -11,15 +10,12 @@ environment:
   apiKey:
     secure: lrwREUV4nO99AU0A6xVx/MNF0BaJc8A1B8dwEGMLqmYKGqD5E7PJ/IC9RHcle6pk
 before_build:
-  - ps: gitversion /l console /output buildserver /updateassemblyinfo SolutionInfo.cs
-  #- nuget setapikey %apiKey% -Verbosity quiet
+  - ps: gitversion /l console /output buildserver
 cache:
-  #- packages -> **\packages.config # TODO: cache dotnt/nuget packages
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
   - C:\ProgramData\chocolatey\lib -> appveyor.yml
 
 build_script:
-  #- cmd: set BUILD_TARGET=Package
-  #- cmd: if "%APPVEYOR_REPO_TAG%" == "true" set BUILD_TARGET=Deploy
-  #- cmd: build.bat /t:CoverageUpload;%BUILD_TARGET% /v:m
-  - cmd: dotnet test /v:m
+  - cmd: 'dotnet test /v:m && dotnet pack /v:m'
+  #- TODO: coveralls upload testresults\*.Coverage.xml
+  #- TODO: cmd: if "%APPVEYOR_REPO_TAG%" == "true" dotnet nuget push -k %apiKey%

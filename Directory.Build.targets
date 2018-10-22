@@ -1,5 +1,12 @@
 <Project>
+    <!-- Skip non tests-projects -->
     <Target Name="VSTestIfTestProject">
         <CallTarget Targets="VSTest" Condition="'$(IsTestProject)' == 'true'" />
+    </Target>
+    <!-- Set NuSpec properties from GitVersionTask -->
+    <Target Name="_Set_My_NuSpec_Properties" AfterTargets="GetVersion">
+        <CreateProperty Value="Version=$(GitVersion_NuGetVersion);Revision=$(GitVersion_Sha)">
+            <Output TaskParameter="Value" PropertyName="NuspecProperties" />
+        </CreateProperty>
     </Target>
 </Project>

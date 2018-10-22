@@ -7,17 +7,20 @@
 
     <PropertyGroup>
         <!-- coverlet configuration, cf.: https://github.com/tonerdo/coverlet -->
-        <CollectCoverage>true</CollectCoverage>
+        <CollectCoverage Condition="'$(NCrunch)' == ''">true</CollectCoverage>
         <CoverletOutput>$(SolutionDir)/testresults/$(MSBuildProjectName).Coverage.xml</CoverletOutput>
         <CoverletOutputFormat>opencover</CoverletOutputFormat>
         <!-- TODO: should be set securely from outside by AppVeyor -->
         <CoverAllsToken>zfmMp4qU8Zyq9xipAv61vttisshVtkK2p</CoverAllsToken>
     </PropertyGroup>
 
-    <!-- GitVersion -->
     <PropertyGroup>
         <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-        <UpdateAssemblyInfo>true</UpdateAssemblyInfo>
+        <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+        <!-- Enable GitVersion for SDK build (default: off).
+             TODO: Sort out warning NMSBT010, cf.: https://github.com/GitTools/GitVersion/issues/1467
+        -->
+        <UpdateAssemblyInfo Condition="'$(NCrunch)' == ''">true</UpdateAssemblyInfo>
     </PropertyGroup>
     <ItemGroup Condition="'$(SkipSolutionInfo)' != 'true'">
         <Compile Include="$(SolutionDir)\SolutionInfo.cs">
@@ -25,8 +28,12 @@
         </Compile>
     </ItemGroup>
 
-    <!-- TODO: Common NuGet metadata, cf.: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
     <PropertyGroup>
+        <!-- TODO: Common NuGet metadata, cf.: https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
         <PackageOutputPath Condition="'$(PackageOutputPath)'==''">$(SolutionDir)</PackageOutputPath>
+        <NuspecFile>Package.nuspec</NuspecFile>
+        <!-- Note: Must be set lazy (via target). 
+          <NuspecProperties>Version=$(GitVersion_NuGetVersion);$(GitVersion_Sha)ision=$(GitVersion_Sha)</NuspecProperties>
+        -->
     </PropertyGroup>
 </Project>

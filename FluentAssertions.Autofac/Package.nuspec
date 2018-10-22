@@ -13,6 +13,7 @@
     <copyright/>
     <releaseNotes>Revision: $Revision$</releaseNotes>
     <projectUrl>https://github.com/awesome-inc/FluentAssertions.Autofac</projectUrl>
+    <repository type="git" url="https://github.com/awesome-inc/FluentAssertions.Autofac" />
     <developmentDependency>true</developmentDependency>
     <dependencies>
       <dependency id="Autofac" version="[4.6.2,5.0.0)" />
@@ -20,6 +21,6 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="..\FluentAssertions.Autofac\bin\Release\**\*.*" include="FluentAssertions.Autofac.*" target="lib"/>
+    <file src="..\FluentAssertions.Autofac\bin\Release\**\FluentAssertions.Autofac.*" exclude="**\*.pdb;**\*.deps.json" target="lib"/>
   </files>
 </package>
