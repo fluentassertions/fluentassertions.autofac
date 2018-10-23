@@ -24,5 +24,5 @@ cache:
 build_script:
   - cmd: dotnet test /v:m
   - cmd: dotnet pack /v:m --configuration Release
-  - cmd: %COVERALLS% --opencover -i testresults\FluentAssertions.Autofac.Tests.Coverage.xml
-  - cmd: if "%APPVEYOR_REPO_TAG%" == "true" dotnet nuget push *.nupkg -k %NUGET_API_KEY% -s %NUGET_SOURCE%
+  - cmd: '%COVERALLS% --opencover -i testresults\FluentAssertions.Autofac.Tests.Coverage.xml'
+  - cmd: 'if "%APPVEYOR_REPO_TAG%" == "true" dotnet nuget push *.nupkg -k %NUGET_API_KEY% -s %NUGET_SOURCE%'
