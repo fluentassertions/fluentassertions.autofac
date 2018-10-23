@@ -8,21 +8,20 @@ assembly_info:
 nuget:
   disable_publish_on_pr: true
 environment:
-  apiKey:
-    secure: lrwREUV4nO99AU0A6xVx/MNF0BaJc8A1B8dwEGMLqmYKGqD5E7PJ/IC9RHcle6pk
   COVERALLS_REPO_TOKEN:
     secure: MrIsjBB5ll9iSPzArtLT7hIjzhERKvgOZVt9b6yaZnfsSx5m+L708JwFTAEJJllw
+  NUGET_API_KEY:
+    secure: lrwREUV4nO99AU0A6xVx/MNF0BaJc8A1B8dwEGMLqmYKGqD5E7PJ/IC9RHcle6pk
+  NUGET_SOURCE: https://api.nuget.org/v3/index.json
 before_build:
   - ps: gitversion /l console /output buildserver
 cache:
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
   - C:\ProgramData\chocolatey\lib -> appveyor.yml
   - tools -> appveyor.yml
-  # ~400 MB! Should probably not be cached!
-  #- '%USERPROFILE%\.nuget\packages -> **\*.csproj'
 
 build_script:
   - cmd: dotnet test /v:m
   - cmd: dotnet pack /v:m --configuration Release
   - cmd: tools\csmacnz.Coveralls.exe --opencover -i testresults\FluentAssertions.Autofac.Tests.Coverage.xml
-  #-cmd: if "%APPVEYOR_REPO_TAG%" == "true" dotnet nuget push -k %apiKey%
+  - cmd: if "%APPVEYOR_REPO_TAG%" == "true" dotnet nuget push *.nupkg -k %NUGET_API_KEY% -s %NUGET_SOURCE%
