@@ -27,9 +27,6 @@ namespace FluentAssertions.Autofac
             builder.Should().RegisterModule<SampleModule>();
         }
 
-#if !NETSTANDARD_1X
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         private class SampleModule : Module { }
     }
 }

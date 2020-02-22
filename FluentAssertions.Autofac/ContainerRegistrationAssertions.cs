@@ -17,9 +17,7 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
-#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
