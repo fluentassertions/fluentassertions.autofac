@@ -4,18 +4,17 @@
     <IsTestProject>false</IsTestProject>
   </PropertyGroup>
   <PropertyGroup>
-    <TargetFrameworks>net45;net47;netstandard1.3;netstandard1.6;netstandard2.0;netcoreapp2.0;netcoreapp2.1</TargetFrameworks>
+      <!-- https://docs.microsoft.com/en-us/dotnet/standard/frameworks#latest-target-framework-versions -->
+      <TargetFrameworks>net48;netstandard2.1;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
   </PropertyGroup>
-  <PropertyGroup Condition="$(TargetFramework.StartsWith('netstandard1.'))">
-    <DefineConstants>NETSTANDARD_1X</DefineConstants>
-  </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="4.8.1" />
-    <PackageReference Include="FluentAssertions" Version="5.4.2" />
-    <PackageReference Include="GitVersionTask" Version="4.0.0">
-      <PrivateAssets>all</PrivateAssets>
+    <PackageReference Include="Autofac" Version="5.1.2" />
+    <PackageReference Include="FluentAssertions" Version="5.10.2" />
+    <PackageReference Include="GitVersionTask" Version="5.1.3">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 </Project>
