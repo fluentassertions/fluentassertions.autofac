@@ -34,7 +34,15 @@ Task("Restore")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    DotNetCoreRestore();
+    // LibGit2Sharp.LockedFileException: The index is locked. This might be due to a concurrent or crashed process
+    // long standing issue, cf.: https://github.com/GitTools/GitVersion/issues/1031
+    // One Workaround is to disable paralleization
+    // cf.: https://cakebuild.net/api/Cake.Common.Tools.DotNetCore.Restore/DotNetCoreRestoreSettings/F7D1EF2D
+    var settings = new DotNetCoreRestoreSettings
+    {
+        DisableParallel = isCiBuild,
+    };
+    DotNetCoreRestore(project, settings);
 });
 
 //-------------------------------------------------------------
