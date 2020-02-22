@@ -10,13 +10,14 @@
     <!-- Configurations for data collectors -->
     <DataCollectionRunSettings>
         <DataCollectors>
-            <DataCollector friendlyName="XPlat code coverage">
+            <DataCollector friendlyName="XPlat Code Coverage">
                 <Configuration>
                     <Format>opencover</Format>
                     <!-- [Assembly-Filter]Type-Filter -->
+                    <!--
                     <Include>[FluentAssertions.Autofac.*]FluentAssertions.Autofac.*</Include>
                     <Exclude>[*.Tests]*</Exclude>
-                    <SingleHit>true</SingleHit>
+                    <SingleHit>true</SingleHit> -->
                 </Configuration>
             </DataCollector>
         </DataCollectors>
