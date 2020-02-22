@@ -107,19 +107,13 @@ namespace FluentAssertions.Autofac
         private interface IMultipleRepository<TEntity1, TEntity2> : IRepository { }
         // ReSharper restore UnusedTypeParameter
 
-#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         private class Repository<TEntity> : IRepository<TEntity> { }
 
-#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         private class MultipleRepository<TEntity1, TEntity2> : IMultipleRepository<TEntity1, TEntity2> { }
 
-#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         private class NotGenericRepository : IRepository<object> { }
     }
 }

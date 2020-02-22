@@ -1,4 +1,3 @@
-using System.Reflection;
 using Autofac;
 using Xunit;
 using Module = Autofac.Module;
@@ -14,9 +13,6 @@ namespace FluentAssertions.Autofac
             var sut = new MockContainerBuilder();
 
             var assembly = typeof(MockContainerBuilderAssertions_Should)
-#if NETSTANDARD_1X
-                .GetTypeInfo()
-#endif
                 .Assembly;
             sut.RegisterAssemblyModules(assembly);
 

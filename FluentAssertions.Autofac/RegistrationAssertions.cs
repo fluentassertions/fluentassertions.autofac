@@ -30,9 +30,7 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
-#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
@@ -308,18 +306,18 @@ namespace FluentAssertions.Autofac
 
         private static IList<Parameter> GetParameters(IComponentRegistration registration)
         {
-            var parms = new List<Parameter>();
+            var parameters = new List<Parameter>();
 
-            if (!(registration.Activator is ReflectionActivator activator)) return parms;
+            if (!(registration.Activator is ReflectionActivator activator)) return parameters;
             const string fieldName = "_defaultParameters";
             const BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
                                            BindingFlags.Static;
             var field = activator.GetType().GetField(fieldName, bindFlags);
-            if (field == null) return parms;
+            if (field == null) return parameters;
             if (field.GetValue(activator) is Parameter[] p)
-                parms.AddRange(p);
+                parameters.AddRange(p);
 
-            return parms;
+            return parameters;
         }
     }
 }

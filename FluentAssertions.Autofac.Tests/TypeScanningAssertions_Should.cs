@@ -9,9 +9,6 @@ namespace FluentAssertions.Autofac
         [Fact]
         public void Support_type_scanning()
         {
-#if NETSTANDARD_1X
-           // TODO: Assert.Inconclusive ?            
-#else
             var builder = new MockContainerBuilder();
             builder.RegisterAssemblyTypes(typeof(IDummy).Assembly)
                 .Where(t => t.IsAssignableTo<IDummy>())
@@ -37,15 +34,14 @@ namespace FluentAssertions.Autofac
                 .AsImplementedInterfaces()
                 .As<IDummy>()
                 .As(t => t.GetInterfaces()[0]);
-#endif
         }
 
         // ReSharper disable ClassNeverInstantiated.Local
         private interface IDummy { }
-        // ReSharper disable UnusedMember.Local
+        // ReSharper disable UnusedType.Local
         private class Dummy1 : IDummy { }
         private class Dummy2 : IDummy { }
-        // ReSharper restore UnusedMember.Local
+        // ReSharper restore UnusedType.Local
         private class Dummy3 : IDummy { }
     }
 }

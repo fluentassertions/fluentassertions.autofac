@@ -23,9 +23,7 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
-#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
@@ -39,8 +37,7 @@ namespace FluentAssertions.Autofac
             Subject = container ?? throw new ArgumentNullException(nameof(container));
 
             var typeToResolve = typeof(IEnumerable<>).MakeGenericType(serviceType);
-            var array = Subject.Resolve(typeToResolve) as Array;
-            if (array != null)
+            if (Subject.Resolve(typeToResolve) is Array array)
                 _instances.AddRange(array.OfType<object>());
 
             Execute.Assertion

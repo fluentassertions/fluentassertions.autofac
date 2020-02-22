@@ -1,5 +1,7 @@
 using System;
-using Autofac.Core;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using Autofac.Core.Registration;
 using Xunit;
 
 namespace FluentAssertions.Autofac
@@ -15,19 +17,18 @@ namespace FluentAssertions.Autofac
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
         public void Register_And_Return_Callbacks()
         {
             var sut = new MockContainerBuilder();
 
-            Action<IComponentRegistry> cb1 = registry => { };
+            Action<IComponentRegistryBuilder> cb1 = registry => { };
             sut.RegisterCallback(cb1);
-            sut.Callbacks.Should().HaveCount(1);
-            sut.Callbacks.Should().OnlyContain(action => action == cb1);
+            sut.Callbacks.Single().Callback.Should().Be(cb1);
 
-            Action<IComponentRegistry> cb2 = registry => { };
+            Action<IComponentRegistryBuilder> cb2 = registry => { };
             sut.RegisterCallback(cb2);
-            sut.Callbacks.Should().HaveCount(2);
-            sut.Callbacks.Should().OnlyContain(action => action == cb1||action==cb2);
+            sut.Callbacks.Last().Callback.Should().Be(cb2);
         }
     }
 }

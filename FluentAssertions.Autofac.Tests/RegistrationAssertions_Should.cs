@@ -130,25 +130,17 @@ namespace FluentAssertions.Autofac
             return builder.Build().Should().Have();
         }
 
-#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         // ReSharper disable ClassNeverInstantiated.Local
         private class Dummy : IDisposable { public void Dispose() { } }
 
-#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         private class NamedDummy : IDisposable { public void Dispose() { } }
 
-#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         private class KeyedDummy : IComparable { public int CompareTo(object obj) { return 42; } }
 
-#if !NETSTANDARD_1X
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         // ReSharper disable once UnusedMember.Local
         private class ParameterizedDummy : Dummy
         {

@@ -1,12 +1,13 @@
-# FluentAssertions.AutoFac
+# FluentAssertions.Autofac
 
 [![Build status](https://ci.appveyor.com/api/projects/status/u42b929walkd6086?svg=true)](https://ci.appveyor.com/project/awesome-inc-build/fluentassertions-autofac)
 [![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 [![NuGet](https://img.shields.io/nuget/dt/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
-[![Coverage Status](https://coveralls.io/repos/github/fluentassertions/fluentassertions.autofac/badge.svg?branch=master)](https://coveralls.io/github/fluentassertions/fluentassertions.autofac?branch=master)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=awesome-inc_FluentAssertions.Autofac&metric=alert_status)](https://sonarcloud.io/dashboard?id=awesome-inc_FluentAssertions.Autofac)
+<!-- [![Coverage Status](https://coveralls.io/repos/github/fluentassertions/fluentassertions.autofac/badge.svg? branch=master)](https://coveralls.io/github/fluentassertions/fluentassertions.autofac?branch=master) -->
 [![Documentation Status](https://readthedocs.org/projects/fluentassertionsautofac/badge/?version=latest)](http://fluentassertionsautofac.rtfd.io/en/latest/)
 
-This repository contains the [Fluent Assertions](http://fluentassertions.com/) extensions for [AutoFac](https://autofac.org/).
+This repository contains the [Fluent Assertions](http://fluentassertions.com/) extensions for [Autofac](https://autofac.org/).
 It is maintained by [@mkoertgen](https://github.com/mkoertgen).
 
 * See [www.fluentassertions.com](http://www.fluentassertions.com/) for more information about the main library.
@@ -27,10 +28,10 @@ With an application growing in complexity, there is also growing need to organiz
 Install the NuGet package
 
 ```powershell
-PM> Install-Package FluentAssertions.AutoFac
+PM> Install-Package FluentAssertions.Autofac
 ```
 
-and start writing tests for your AutoFac configuration.
+and start writing tests for your Autofac configuration.
 
 ```csharp
 container.Should().Have().Registered<SuperCoolService>()
