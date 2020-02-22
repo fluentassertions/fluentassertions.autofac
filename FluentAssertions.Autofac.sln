@@ -8,22 +8,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
-		after.FluentAssertions.Autofac.sln.targets = after.FluentAssertions.Autofac.sln.targets
 		appveyor.yml = appveyor.yml
+		build.cake = build.cake
+		build.ps1 = build.ps1
+		cake.config = cake.config
 		CONTRIBUTING.md = CONTRIBUTING.md
-		Directory.Build.props = Directory.Build.props
-		Directory.Build.targets = Directory.Build.targets
+		coverage.runsettings = coverage.runsettings
 		FluentAssertions.Autofac.v3.ncrunchsolution = FluentAssertions.Autofac.v3.ncrunchsolution
 		GitVersion.yml = GitVersion.yml
 		LICENSE = LICENSE
 		mkdocs.yml = mkdocs.yml
 		README.md = README.md
+		solution.targets = solution.targets
 		SolutionInfo.cs = SolutionInfo.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{ABFD44D3-977D-4C11-99A6-DB45FFF8726B}"
-	ProjectSection(SolutionItems) = preProject
-		docs\index.md = docs\index.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAssertions.Autofac", "FluentAssertions.Autofac\FluentAssertions.Autofac.csproj", "{51CBAE5D-8DC3-4314-87A0-F97D058FD93D}"
@@ -31,6 +28,13 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentAssertions.Autofac.Tests", "FluentAssertions.Autofac.Tests\FluentAssertions.Autofac.Tests.csproj", "{849ECBE8-53FB-4EC9-AAC7-1E028DA76F0D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleLib", "SampleLib\SampleLib.csproj", "{0AC7EB5C-948C-4636-A853-8E6FBC39E862}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{19E4231F-F592-4CF4-A00A-3477066288E3}"
+	ProjectSection(SolutionItems) = preProject
+		docs\index.md = docs\index.md
+		docs\usage.md = docs\usage.md
+		docs\why.md = docs\why.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,9 +57,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{ABFD44D3-977D-4C11-99A6-DB45FFF8726B} = {915DFDB6-990E-4068-899E-F84163AC7A9D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {197B6C02-F01C-4A0E-99AB-757EBF1FD78A}

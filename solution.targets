@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <LangVersion>latest</LangVersion>
+        <DebugType>full</DebugType>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <!-- https://docs.microsoft.com/en-us/dotnet/core/tools/csproj#nuget-metadata-properties -->
+        <Authors>FluentAssertions and Contributors</Authors>
+        <Product>FluentAssertions.Autofac</Product>
+        <Company>FluentAssertions</Company>
+        <NeutralLanguage>en</NeutralLanguage>
+        <Copyright>Copyright © FluentAssertions 2017-2020</Copyright>
+        <Description>Fluent Assertions extensions for Autofac</Description>
+        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+        <!-- See GitHub project tags -->
+        <PackageTags>autofac;fluent-assertions;ioc;tdd;dotnet-core</PackageTags>
+        <RepositoryUrl>https://github.com/fluentassertions/fluentassertions.autofac</RepositoryUrl>
+        <!-- Workaround GitVersionTask failing to load Newtonsoft.Json=12, cf. https://gitter.im/GitTools/GitVersion# -->
+        <WriteVersionInfoToBuildLog>false</WriteVersionInfoToBuildLog>
+    </PropertyGroup>
+</Project>
