@@ -16,9 +16,13 @@ namespace FluentAssertions.Autofac
                 .Assembly;
             sut.RegisterAssemblyModules(assembly);
 
-            sut.Should().RegisterModulesIn(assembly);
+            sut.Should().RegisterAssemblyModules(assembly);
             sut.Should().RegisterModule<SampleModule>();
             sut.Should().RegisterModule<SampleModule2>();
+
+#pragma warning disable 618
+            sut.Should().RegisterModulesIn(assembly);
+#pragma warning restore 618
         }
 
         [Fact]

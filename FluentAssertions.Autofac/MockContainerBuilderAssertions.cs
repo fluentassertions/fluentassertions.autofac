@@ -61,11 +61,31 @@ namespace FluentAssertions.Autofac
         ///    Asserts that the modules contained in the specified assembly have been registered on the current <see cref="MockContainerBuilder"/>.
         /// </summary>
         /// <param name="assembly">The module assembly</param>
+        [Obsolete("Use 'RegisterAssemblyModules'")]
         public void RegisterModulesIn(Assembly assembly)
+        {
+            RegisterModulesOf(assembly);
+        }
+
+        /// <summary>
+        ///    Asserts that the modules contained in the specified assembly have been registered on the current <see cref="MockContainerBuilder"/>.
+        /// </summary>
+        /// <param name="assembly">The module assembly</param>
+        /// <param name="assemblies">More assemblies to assert</param>
+        public void RegisterAssemblyModules(Assembly assembly, params Assembly[] assemblies)
+        {
+            Enumerable.Repeat(assembly, 1)
+                .Concat(assemblies)
+                .ToList()
+                .ForEach(RegisterModulesOf);
+        }
+
+        private void RegisterModulesOf(Assembly assembly)
         {
             var moduleTypes = assembly.GetTypes().Where(t => typeof(Module).IsAssignableFrom(t)).ToList();
             moduleTypes.ForEach(RegisterModule);
         }
+
 
         private bool _traversed;
         private readonly List<Module> _modules;
