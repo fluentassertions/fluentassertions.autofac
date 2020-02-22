@@ -4,25 +4,16 @@ assembly_info:
   patch: false
 nuget:
   disable_publish_on_pr: true
-environment:
-  COVERALLS: tools\csmacnz.Coveralls.exe
-  COVERALLS_REPO_TOKEN:
-    secure: MrIsjBB5ll9iSPzArtLT7hIjzhERKvgOZVt9b6yaZnfsSx5m+L708JwFTAEJJllw
+cache:
+  - tools -> tools\packages.config
+environment: # https://ci.appveyor.com/tools/encrypt
+  SONAR_LOGIN:
+    secure: l2/mdQdg/lTP5RDqDK8CeiEqwD5OCb9xKuF6MEbZHWMost5D9CpGAeuIm303tgUk
   NUGET_API_KEY:
     secure: lrwREUV4nO99AU0A6xVx/MNF0BaJc8A1B8dwEGMLqmYKGqD5E7PJ/IC9RHcle6pk
-  NUGET_SOURCE: https://api.nuget.org/v3/index.json
-install:
-  - choco install gitversion.portable -pre -y
-  - if not exist %COVERALLS% dotnet tool install coveralls.net --tool-path ./tools
-before_build:
-  - ps: gitversion /l console /output buildserver
-cache:
-  - C:\ProgramData\chocolatey\bin -> appveyor.yml
-  - C:\ProgramData\chocolatey\lib -> appveyor.yml
-  - tools -> appveyor.yml
 
+# Note that 'ps' will continue on non-terminating errors, cf.:
+# - https://www.appveyor.com/docs/build-configuration/#interpreters-and-scripts
+# - https://github.com/SharpeRAD/Cake.Powershell/blob/master/appveyor.yml#L5
 build_script:
-  - cmd: dotnet test /v:m
-  - cmd: dotnet pack /v:m --configuration Release
-  - cmd: '%COVERALLS% --opencover -i testresults\FluentAssertions.Autofac.Tests.Coverage.xml'
-  - cmd: 'if "%APPVEYOR_REPO_TAG%" == "true" dotnet nuget push *.nupkg -k %NUGET_API_KEY% -s %NUGET_SOURCE%'
+  - cmd: powershell -NoProfile -ExecutionPolicy unrestricted -Command .\build.ps1 -Target "CiBuild"
