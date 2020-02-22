@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyDescription("FluentAssertions.Autofac")]
@@ -10,8 +10,8 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("Release")]
 #endif
 
-[assembly: AssemblyCompany("Awesome Incremented")]
-[assembly: AssemblyCopyright("Copyright © Awesome Inc. and Contributors 2017")]
-[assembly: AssemblyTrademark("Awesome Incremented")]
+[assembly: AssemblyCompany("FluentAssertions")]
+[assembly: AssemblyCopyright("Copyright © FluentAssertions and Contributors 2020")]
+[assembly: AssemblyTrademark("FluentAssertions")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
