@@ -1,6 +1,10 @@
-﻿<SolutionConfiguration>
+<SolutionConfiguration>
   <Settings>
     <AllowParallelTestExecution>True</AllowParallelTestExecution>
+    <CustomBuildProperties>
+      <Value>TargetFramework = netcoreapp3.1</Value>
+      <Value>DisableGitVersionTask = true</Value>
+    </CustomBuildProperties>
     <SolutionConfigured>True</SolutionConfigured>
   </Settings>
 </SolutionConfiguration>
