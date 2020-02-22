@@ -1,10 +1,8 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
 using Autofac.Builder;
-using Autofac.Core;
 using Module = Autofac.Module;
 
 namespace FluentAssertions.Autofac
@@ -18,22 +16,17 @@ namespace FluentAssertions.Autofac
     public class MockContainerBuilder : ContainerBuilder
     {
         /// <summary>
-        /// Register a callback that will be invoked when the container is configured.
-        /// </summary>
-        /// <remarks>
-        /// This is primarily for extending the builder syntax.
-        /// </remarks>
-        /// <param name="configurationCallback">Callback to execute.</param>
-        public override DeferredCallback RegisterCallback(Action<IComponentRegistry> configurationCallback)
-        {
-            Callbacks.Add(configurationCallback);
-            return base.RegisterCallback(configurationCallback);
-        }
-
-        /// <summary>
         ///   The callbacks that have been registered on the builder.
         /// </summary>
-        public List<Action<IComponentRegistry>> Callbacks { get; } = new List<Action<IComponentRegistry>>();
+        public IList<DeferredCallback> Callbacks { get; }
+
+        /// <inheritdoc />
+        public MockContainerBuilder()
+        {
+            var field = typeof(ContainerBuilder).GetField("_configurationCallbacks",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            Callbacks = (IList<DeferredCallback>)field.GetValue(this);
+        }
 
         /// <summary>
         /// Returns the modules registered to this <see cref="MockContainerBuilder"/>.
@@ -41,8 +34,9 @@ namespace FluentAssertions.Autofac
         public IEnumerable<Module> GetModules()
         {
             return Callbacks
+                .Select(c => c.Callback)
                 .Where(callback => callback.Target is Module
-                    && callback.GetMethodInfo().Name == nameof(Module.Configure))
+                                   && callback.GetMethodInfo().Name == nameof(Module.Configure))
                 .Select(callback => (Module)callback.Target);
         }
 
