@@ -29,6 +29,22 @@ namespace FluentAssertions.Autofac
         }
 
         [Fact]
+        public void Provide_generic_module_builder()
+        {
+            var builder = Module<SampleModule>.GetTestBuilder(b =>
+            {
+                // register module dependency substitutes here!
+                b.RegisterInstance(Substitute.For<IComparable>());
+            });
+            builder.Should().RegisterModule<SampleModule>();
+
+            var container = builder.Build();
+
+            container.Resolve<IDisposable>().Should().NotBeNull();
+            container.Resolve<IComparable>().Should().NotBeNull();
+        }
+
+        [Fact]
         public void Provide_container()
         {
             var module = new SampleModule();
