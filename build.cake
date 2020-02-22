@@ -146,8 +146,7 @@ Task("SonarBegin")
         Name = "FluentAssertions.Autofac",
         Version = gitVersion.FullSemVer,
         VsTestReportsPath = "**/*.trx",
-        OpenCoverReportsPath = "**/coverage.opencover.xml",
-        Exclusions = "**/*.css" // Exclude imported CSS
+        OpenCoverReportsPath = "**/coverage.opencover.xml"
     };
     if (!string.IsNullOrEmpty(sonarLogin)) {
         settings.Url = "https://sonarcloud.io";
