@@ -145,7 +145,7 @@ Task("SonarBegin")
         settings.Url = "https://sonarcloud.io";
         settings.Login = sonarLogin;
         settings.Organization = "awesome-inc";
-        settings.Branch = gitVersion.BranchName;
+        if (gitVersion.BranchName != "master") settings.Branch = gitVersion.BranchName;
     }
     SonarBegin(settings);
 });
