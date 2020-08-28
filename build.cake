@@ -47,7 +47,7 @@ Task("Restore")
 
 //-------------------------------------------------------------
 // https://www.nuget.org/packages/GitVersion.CommandLine
-#tool nuget:?package=GitVersion.CommandLine&version=5.1.3
+#tool nuget:?package=GitVersion.CommandLine&version=5.3.7
 Task("Version")
     .Does(() =>
 {
@@ -103,7 +103,7 @@ Task("Test")
 
 //-------------------------------------------------------------
 // cf.: https://medium.com/@pavel.sulimau/dotnetcore-xunit-coverlet-reportgenerator-cake-codecoveragereport-1ed4adf408d2
-#tool nuget:?package=ReportGenerator&version=4.2.2
+#tool nuget:?package=ReportGenerator&version=4.6.4
 Task("CoverageReport")
     .IsDependentOn("Test")
     .Does(() =>
@@ -127,8 +127,8 @@ Task("CoverageReport")
 
 //-------------------------------------------------------------
 // cf.: https://github.com/AgileArchitect/Cake.Sonar
-#addin nuget:?package=Cake.Sonar&version=1.1.22
-#tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.6.0 //4.3.1 //4.6.0 breaks ImportBefore.targets
+#addin nuget:?package=Cake.Sonar&version=1.1.25
+#tool nuget:?package=MSBuild.SonarQube.Runner.Tool&version=4.8.0 //4.3.1 //4.6.0 breaks ImportBefore.targets
 var sonarLogin = EnvironmentVariable("SONAR_LOGIN") ?? "-unset-";
 
 Task("Sonar")
