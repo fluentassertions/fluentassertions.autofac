@@ -142,7 +142,7 @@ Task("SonarBegin")
 {
     var settings = new SonarBeginSettings
     {
-        Key = "awesome-inc_FluentAssertions.Autofac",
+        Key = "fluentassertions.FluentAssertions.Autofac",
         Name = "FluentAssertions.Autofac",
         Version = gitVersion.FullSemVer,
         VsTestReportsPath = "**/*.trx",
