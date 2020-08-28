@@ -6,7 +6,7 @@
 
     <PropertyGroup>
         <!-- https://docs.microsoft.com/en-us/dotnet/standard/frameworks#latest-target-framework-versions -->
-        <TargetFrameworks>net48;netstandard2.1;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
+        <TargetFrameworks>net472;net48;netstandard2.0;netstandard2.1;netcoreapp2.1;netcoreapp3.1</TargetFrameworks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
     <ItemGroup>
