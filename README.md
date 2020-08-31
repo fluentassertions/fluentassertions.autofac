@@ -43,12 +43,12 @@ Find more examples in the [documentation](http://fluentassertionsautofac.readthe
 
 ### How to build
 
-Clone and build using Visual Studio or the command line using [OneClickBuild](https://github.com/awesome-inc/OneClickBuild)
+Clone and build using Visual Studio or the command line using [nuke.build](https://nuke.build/)
 
 ```console
 git clone https://github.com/fluentassertions/fluentassertions.autofac.git
 cd fluentassertions.autofac
-build
+nuke
 ```
 
 ### Links
@@ -56,4 +56,4 @@ build
 -   [Why?](http://fluentassertionsautofac.readthedocs.org/en/latest/why)
 -   [Usage](http://fluentassertionsautofac.readthedocs.org/en/latest/usage/)
 -   [Documentation](http://fluentassertionsautofac.readthedocs.io/en/latest)
--   [Contributing](https://github.com/fluentassertions/fluentAssertions.autofac/blob/develop/CONTRIBUTING.md)
+-   [Contributing](https://github.com/fluentassertions/fluentAssertions.autofac/blob/master/CONTRIBUTING.md)
