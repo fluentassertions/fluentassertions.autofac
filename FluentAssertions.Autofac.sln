@@ -8,10 +8,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		.nuke = .nuke
+		.whitesource = .whitesource
 		appveyor.yml = appveyor.yml
-		build.cake = build.cake
+		azure-pipelines.yml = azure-pipelines.yml
+		build.cmd = build.cmd
 		build.ps1 = build.ps1
-		cake.config = cake.config
+		build.sh = build.sh
 		CONTRIBUTING.md = CONTRIBUTING.md
 		coverage.runsettings = coverage.runsettings
 		FluentAssertions.Autofac.v3.ncrunchsolution = FluentAssertions.Autofac.v3.ncrunchsolution
@@ -36,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{19E4231F-F
 		docs\why.md = docs\why.md
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "build\_build.csproj", "{8C1612F0-6C37-4673-892B-95299B8099A2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +59,8 @@ Global
 		{0AC7EB5C-948C-4636-A853-8E6FBC39E862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AC7EB5C-948C-4636-A853-8E6FBC39E862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AC7EB5C-948C-4636-A853-8E6FBC39E862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C1612F0-6C37-4673-892B-95299B8099A2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C1612F0-6C37-4673-892B-95299B8099A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
