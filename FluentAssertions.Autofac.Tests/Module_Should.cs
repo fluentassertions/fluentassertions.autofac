@@ -20,7 +20,7 @@ namespace FluentAssertions.Autofac
         [Fact]
         public void Provide_test_builder()
         {
-            var builder = Module<SampleModule>.GetTestBuilder((b,m) =>
+            var builder = Module<SampleModule>.GetTestBuilderWrapper((b,m) =>
             {
                 Trace.WriteLine($"Customizing '{b}' and '{m}'.");
             });

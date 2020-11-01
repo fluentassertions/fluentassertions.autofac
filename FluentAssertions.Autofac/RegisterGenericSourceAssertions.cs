@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
 using Autofac.Core;
+using Autofac.Core.Resolving.Pipeline;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac
@@ -77,7 +79,7 @@ namespace FluentAssertions.Autofac
             foreach (var registrationSource in Subject.ComponentRegistry.Sources)
             {
                 var registration = registrationSource
-                    .RegistrationsFor(typedService, Subject.ComponentRegistry.RegistrationsFor)
+                    .RegistrationsFor(typedService, Accessor)
                     .FirstOrDefault();
 
                 if (registration != null)
@@ -87,6 +89,12 @@ namespace FluentAssertions.Autofac
             }
 
             return null;
+        }
+
+        private IEnumerable<ServiceRegistration> Accessor(Service service)
+        {
+            return Subject.ComponentRegistry.RegistrationsFor(service)
+                .Select(c => new ServiceRegistration(ServicePipelines.DefaultServicePipeline, c));
         }
 
         private static void AssertGenericType(Type genericTypeDefinition)

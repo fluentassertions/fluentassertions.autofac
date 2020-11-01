@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Autofac;
 
 namespace FluentAssertions.Autofac
@@ -31,21 +31,21 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///    Returns a test <see cref="MockContainerBuilder"/> that can be used to assert the specified <see typeparamref="TModule"/>.
+        ///    Returns a test <see cref="BuilderWrapper"/> that can be used to assert the specified <see typeparamref="TModule"/>.
         /// </summary>
         /// <param name="arrange">optional builder arrangement for the module</param>
-        public static MockContainerBuilder GetTestBuilder(Action<ContainerBuilder> arrange = null)
+        public static BuilderWrapper GetTestBuilderWrapper(Action<ContainerBuilder> arrange = null)
         {
-            return new TModule().Builder(arrange);
+            return new TModule().WrapperFor(arrange);
         }
 
         /// <summary>
-        ///    Returns a test <see cref="MockContainerBuilder"/> that can be used to assert the specified <see typeparamref="TModule"/>.
+        ///    Returns a test <see cref="BuilderWrapper"/> that can be used to assert the specified <see typeparamref="TModule"/>.
         /// </summary>
         /// <param name="arrange">optional builder arrangement for the module</param>
-        public static MockContainerBuilder GetTestBuilder(Action<ContainerBuilder, TModule> arrange)
+        public static BuilderWrapper GetTestBuilderWrapper(Action<ContainerBuilder, TModule> arrange)
         {
-            return new TModule().Builder(arrange);
+            return new TModule().WrapperFor(arrange);
         }
     }
 }

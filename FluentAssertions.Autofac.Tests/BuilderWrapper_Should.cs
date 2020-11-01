@@ -7,28 +7,28 @@ using Xunit;
 namespace FluentAssertions.Autofac
 {
     // ReSharper disable once InconsistentNaming
-    public class MockContainerBuilder_Should
+    public class BuilderWrapper_Should
     {
         [Fact]
         public void Be_Empty_At_Start()
         {
-            var sut = new MockContainerBuilder();
-            sut.Callbacks.Should().BeEmpty();
+            var wrapper = new BuilderWrapper();
+            wrapper.Callbacks.Should().BeEmpty();
         }
 
         [Fact]
         [SuppressMessage("ReSharper", "ConvertToLocalFunction")]
         public void Register_And_Return_Callbacks()
         {
-            var sut = new MockContainerBuilder();
+            var wrapper = new BuilderWrapper();
 
             Action<IComponentRegistryBuilder> cb1 = registry => { };
-            sut.RegisterCallback(cb1);
-            sut.Callbacks.Single().Callback.Should().Be(cb1);
+            wrapper.Builder.RegisterCallback(cb1);
+            wrapper.Callbacks.Single().Callback.Should().Be(cb1);
 
             Action<IComponentRegistryBuilder> cb2 = registry => { };
-            sut.RegisterCallback(cb2);
-            sut.Callbacks.Last().Callback.Should().Be(cb2);
+            wrapper.Builder.RegisterCallback(cb2);
+            wrapper.Callbacks.Last().Callback.Should().Be(cb2);
         }
     }
 }

@@ -19,23 +19,23 @@ namespace FluentAssertions.Autofac
             where TModule : Module
         {
             if (module == null) throw new ArgumentNullException(nameof(module));
-            var builder = Builder(module, arrange);
-            return builder.Build();
+            var wrapper = WrapperFor(module, arrange);
+            return wrapper.Builder.Build();
         }
 
         /// <summary>
-        ///   Returns an <see cref="MockContainerBuilder"/> suitable for testing the specified module.
+        ///   Returns an <see cref="BuilderWrapper"/> suitable for testing the specified module.
         /// </summary>
         /// <param name="module">The module</param>
         /// <param name="arrange">optional builder arrangement for the module</param>
-        public static MockContainerBuilder Builder<TModule>(this TModule module, Action<ContainerBuilder> arrange = null)
+        public static BuilderWrapper WrapperFor<TModule>(this TModule module, Action<ContainerBuilder> arrange = null)
             where TModule : Module
         {
             if (module == null) throw new ArgumentNullException(nameof(module));
-            var builder = new MockContainerBuilder();
-            arrange?.Invoke(builder);
-            builder.RegisterModule(module);
-            return builder;
+            var wrapper = new BuilderWrapper();
+            arrange?.Invoke(wrapper.Builder);
+            wrapper.Builder.RegisterModule(module);
+            return wrapper;
         }
 
         /// <summary>
@@ -48,8 +48,8 @@ namespace FluentAssertions.Autofac
         {
             if (module == null) throw new ArgumentNullException(nameof(module));
             if (arrange == null) throw new ArgumentNullException(nameof(arrange));
-            var builder = Builder(module, arrange);
-            return builder.Build();
+            var wrapper = WrapperFor(module, arrange);
+            return wrapper.Builder.Build();
         }
 
         /// <summary>
@@ -57,15 +57,15 @@ namespace FluentAssertions.Autofac
         /// </summary>
         /// <param name="module">The module</param>
         /// <param name="arrange">optional builder arrangement for the module</param>
-        public static MockContainerBuilder Builder<TModule>(this TModule module, Action<ContainerBuilder, TModule> arrange)
+        public static BuilderWrapper WrapperFor<TModule>(this TModule module, Action<ContainerBuilder, TModule> arrange)
             where TModule : Module
         {
             if (module == null) throw new ArgumentNullException(nameof(module));
             if (arrange == null) throw new ArgumentNullException(nameof(arrange));
-            var builder = new MockContainerBuilder();
-            arrange.Invoke(builder, module);
-            builder.RegisterModule(module);
-            return builder;
+            var wrapper = new BuilderWrapper();
+            arrange.Invoke(wrapper.Builder, module);
+            wrapper.Builder.RegisterModule(module);
+            return wrapper;
         }
     }
 }

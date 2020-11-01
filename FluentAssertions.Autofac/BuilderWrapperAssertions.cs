@@ -15,28 +15,28 @@ namespace FluentAssertions.Autofac
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
 #endif
-    public class MockContainerBuilderAssertions : ReferenceTypeAssertions<MockContainerBuilder, MockContainerBuilderAssertions>
+    public class BuilderWrapperAssertions : ReferenceTypeAssertions<BuilderWrapper, BuilderWrapperAssertions>
     {
         /// <inheritdoc />
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        protected override string Identifier => nameof(MockContainerBuilder);
+        protected override string Identifier => nameof(BuilderWrapper);
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref="MockContainerBuilderAssertions" /> class.
+        ///    Initializes a new instance of the <see cref="BuilderWrapperAssertions" /> class.
         /// </summary>
         /// <param name="subject"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public MockContainerBuilderAssertions(MockContainerBuilder subject)
+        public BuilderWrapperAssertions(BuilderWrapper subject)
         {
             Subject = subject ?? throw new ArgumentNullException(nameof(subject));
             _modules = Subject.GetModules().ToList();
         }
 
         /// <summary>
-        ///    Asserts that the specified module type has been registered on the current <see cref="MockContainerBuilder"/>.
+        ///    Asserts that the specified module type has been registered on the current <see cref="BuilderWrapper"/>.
         /// </summary>
         /// <typeparam name="TModule">The module type</typeparam>
         public void RegisterModule<TModule>() where TModule : Module, new()
@@ -45,7 +45,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///    Asserts that the specified module type has been registered on the current <see cref="MockContainerBuilder"/>.
+        ///    Asserts that the specified module type has been registered on the current <see cref="BuilderWrapper"/>.
         /// </summary>
         /// <param name="moduleType">The module type</param>
         public void RegisterModule(Type moduleType)
@@ -58,7 +58,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///    Asserts that the modules contained in the specified assembly have been registered on the current <see cref="MockContainerBuilder"/>.
+        ///    Asserts that the modules contained in the specified assembly have been registered on the current <see cref="BuilderWrapper"/>.
         /// </summary>
         /// <param name="assembly">The module assembly</param>
         [Obsolete("Use 'RegisterAssemblyModules'")]
@@ -68,7 +68,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///    Asserts that the modules contained in the specified assembly have been registered on the current <see cref="MockContainerBuilder"/>.
+        ///    Asserts that the modules contained in the specified assembly have been registered on the current <see cref="BuilderWrapper"/>.
         /// </summary>
         /// <param name="assembly">The module assembly</param>
         /// <param name="assemblies">More assemblies to assert</param>
@@ -94,9 +94,9 @@ namespace FluentAssertions.Autofac
         {
             if (_traversed) return;
 
-            var builder = new MockContainerBuilder();
-            _modules.ForEach(module => builder.Load(module));
-            var traversedModules = builder.GetModules();
+            var wrapper = new BuilderWrapper();
+            _modules.ForEach(module => wrapper.Load(module));
+            var traversedModules = wrapper.GetModules();
             _modules.AddRange(traversedModules);
 
             _traversed = true;

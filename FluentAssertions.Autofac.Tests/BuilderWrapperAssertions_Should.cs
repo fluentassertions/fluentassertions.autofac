@@ -5,33 +5,33 @@ using Module = Autofac.Module;
 namespace FluentAssertions.Autofac
 {
     // ReSharper disable InconsistentNaming
-    public class MockContainerBuilderAssertions_Should
+    public class BuilderWrapperAssertions_Should
     {
         [Fact]
         public void Support_testing_assembly_modules_registrations()
         {
-            var sut = new MockContainerBuilder();
+            var wrapper = new BuilderWrapper();
 
-            var assembly = typeof(MockContainerBuilderAssertions_Should)
+            var assembly = typeof(BuilderWrapperAssertions_Should)
                 .Assembly;
-            sut.RegisterAssemblyModules(assembly);
+            wrapper.Builder.RegisterAssemblyModules(assembly);
 
-            sut.Should().RegisterAssemblyModules(assembly);
-            sut.Should().RegisterModule<SampleModule>();
-            sut.Should().RegisterModule<SampleModule2>();
+            wrapper.Should().RegisterAssemblyModules(assembly);
+            wrapper.Should().RegisterModule<SampleModule>();
+            wrapper.Should().RegisterModule<SampleModule2>();
 
 #pragma warning disable 618
-            sut.Should().RegisterModulesIn(assembly);
+            wrapper.Should().RegisterModulesIn(assembly);
 #pragma warning restore 618
         }
 
         [Fact]
         public void Support_testing_module_registration()
         {
-            var builder = new MockContainerBuilder();
-            builder.RegisterModule<SampleModule>();
+            var wrapper = new BuilderWrapper();
+            wrapper.Builder.RegisterModule<SampleModule>();
 
-            var builderShould = builder.Should();
+            var builderShould = wrapper.Should();
             builderShould.RegisterModule<SampleModule>();
             builderShould.RegisterModule(typeof(SampleModule));
 

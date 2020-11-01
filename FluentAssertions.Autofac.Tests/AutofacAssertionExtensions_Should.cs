@@ -11,8 +11,8 @@ namespace FluentAssertions.Autofac
         [Fact]
         public void Provide_builder_extension()
         {
-            var builder = new MockContainerBuilder();
-            builder.Should().Should().BeOfType<MockContainerBuilderAssertions>();
+            var wrapper = new BuilderWrapper();
+            wrapper.Should().Should().BeOfType<BuilderWrapperAssertions>();
         }
 
         [Fact]

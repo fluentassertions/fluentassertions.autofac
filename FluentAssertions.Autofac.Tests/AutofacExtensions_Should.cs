@@ -17,8 +17,11 @@ namespace FluentAssertions.Autofac
             var container = builder.Build();
 
             var registration = container.ComponentRegistry.GetRegistration<string>();
-            var actual = registration.Activator.ActivateInstance(container, Enumerable.Empty<Parameter>());
+            registration.Activator.LimitType.Should().Be<string>();
+            var service = (TypedService)registration.Services.Single();
+            service.ServiceType.Should().Be<string>();
 
+            var actual = container.Resolve<string>();
             actual.Should().Be(expected);
         }
     }

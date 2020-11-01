@@ -74,7 +74,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="TypeScanningAssertions"/> object that can be used to assert registered types on the current <see cref="MockContainerBuilder"/>.
+        ///     Returns an <see cref="TypeScanningAssertions"/> object that can be used to assert registered types on the current <see cref="ContainerBuilder"/>.
         /// </summary>
         /// <param name="assemblies"></param>
         public TypeScanningAssertions RegisterAssemblyTypes(params Assembly[] assemblies)
@@ -84,7 +84,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="TypeScanningAssertions"/> object that can be used to assert registered types on the current <see cref="MockContainerBuilder"/>.
+        ///     Returns an <see cref="TypeScanningAssertions"/> object that can be used to assert registered types on the current <see cref="ContainerBuilder"/>.
         /// </summary>
         /// <param name="types"></param>
         public TypeScanningAssertions RegisterTypes(IEnumerable<Type> types)

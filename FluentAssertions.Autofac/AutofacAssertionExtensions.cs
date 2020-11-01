@@ -1,4 +1,4 @@
-﻿using Autofac;
+using Autofac;
 
 namespace FluentAssertions.Autofac
 {
@@ -19,11 +19,11 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="MockContainerBuilderAssertions"/> object that can be used to assert the current <see cref="MockContainerBuilder"/>.
+        ///     Returns an <see cref="BuilderWrapperAssertions"/> object that can be used to assert the current <see cref="BuilderWrapper"/>.
         /// </summary>
-        public static MockContainerBuilderAssertions Should(this MockContainerBuilder builder)
+        public static BuilderWrapperAssertions Should(this BuilderWrapper wrapper)
         {
-            return new MockContainerBuilderAssertions(builder);
+            return new BuilderWrapperAssertions(wrapper);
         }
     }
 }
