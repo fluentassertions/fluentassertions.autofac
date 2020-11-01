@@ -28,9 +28,8 @@ namespace FluentAssertions.Autofac
         ///     Initializes a new instance of the <see cref="ContainerAssertions" /> class.
         /// </summary>
         /// <param name="container">The subject</param>
-        public ContainerAssertions(IContainer container)
+        public ContainerAssertions(IContainer container) : base(container)
         {
-            Subject = container;
         }
 
         /// <summary>

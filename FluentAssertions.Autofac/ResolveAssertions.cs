@@ -31,11 +31,9 @@ namespace FluentAssertions.Autofac
         /// </summary>
         /// <param name="container">The container</param>
         /// <param name="serviceType">The service type</param>
-        public ResolveAssertions(IContainer container, Type serviceType)
+        public ResolveAssertions(IContainer container, Type serviceType) : base(container)
         {
             _serviceType = serviceType;
-            Subject = container ?? throw new ArgumentNullException(nameof(container));
-
             var typeToResolve = typeof(IEnumerable<>).MakeGenericType(serviceType);
             if (Subject.Resolve(typeToResolve) is Array array)
                 _instances.AddRange(array.OfType<object>());

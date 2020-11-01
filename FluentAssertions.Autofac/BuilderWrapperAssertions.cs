@@ -29,9 +29,8 @@ namespace FluentAssertions.Autofac
         /// </summary>
         /// <param name="subject"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public BuilderWrapperAssertions(BuilderWrapper subject)
+        public BuilderWrapperAssertions(BuilderWrapper subject) : base(subject)
         {
-            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
             _modules = Subject.GetModules().ToList();
         }
 

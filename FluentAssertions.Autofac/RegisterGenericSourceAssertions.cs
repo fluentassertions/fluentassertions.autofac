@@ -32,9 +32,8 @@ namespace FluentAssertions.Autofac
         /// </summary>
         /// <param name="subject">The container</param>
         /// <param name="genericComponentTypeDefinition">The type that should be registered on the container</param>
-        public RegisterGenericSourceAssertions(IContainer subject, Type genericComponentTypeDefinition)
+        public RegisterGenericSourceAssertions(IContainer subject, Type genericComponentTypeDefinition) : base(subject)
         {
-            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
             AssertGenericType(genericComponentTypeDefinition);
             _genericComponentTypeDefinition = genericComponentTypeDefinition;
         }

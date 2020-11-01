@@ -24,9 +24,8 @@ namespace FluentAssertions.Autofac
         ///     Initializes a new instance of the <see cref="ContainerRegistrationAssertions" /> class.
         /// </summary>
         /// <param name="subject">The subject</param>
-        public ContainerRegistrationAssertions(IContainer subject)
+        public ContainerRegistrationAssertions(IContainer subject) : base(subject)
         {
-            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
         }
 
         /// <summary>

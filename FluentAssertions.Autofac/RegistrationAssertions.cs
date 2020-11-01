@@ -38,9 +38,8 @@ namespace FluentAssertions.Autofac
         /// </summary>
         /// <param name="subject">The container</param>
         /// <param name="type">The type that should be registered on the container</param>
-        public RegistrationAssertions(IContainer subject, Type type)
+        public RegistrationAssertions(IContainer subject, Type type) : base(subject)
         {
-            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
             Type = type ?? throw new ArgumentNullException(nameof(type));
             _registration = Subject.ComponentRegistry.GetRegistration(Type);
             _parameters = GetParameters(_registration);
@@ -51,9 +50,8 @@ namespace FluentAssertions.Autofac
         /// </summary>
         /// <param name="subject">The container</param>
         /// <param name="registration"></param>
-        public RegistrationAssertions(IContainer subject, IComponentRegistration registration)
+        public RegistrationAssertions(IContainer subject, IComponentRegistration registration) : base(subject)
         {
-            Subject = subject ?? throw new ArgumentNullException(nameof(subject));
             _registration = registration ?? throw new ArgumentNullException(nameof(registration));
             Type = registration.Activator.LimitType;
             _parameters = GetParameters(_registration);
