@@ -53,7 +53,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Returns an <see cref="MockContainerBuilder"/> suitable for testing the specified module.
+        ///   Returns an <see cref="BuilderWrapper"/> suitable for testing the specified module.
         /// </summary>
         /// <param name="module">The module</param>
         /// <param name="arrange">optional builder arrangement for the module</param>
