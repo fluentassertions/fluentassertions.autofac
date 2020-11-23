@@ -23,10 +23,13 @@ Issues are also welcome, [failing tests](#writing-tests) are even more welcome.
 It is easy to write tests in `FluentAssertions.Autofac`. Test fixtures are located directly beside the code in classes ending with `_Should.cs`.
 
 ### 1. Find appropriate fixture
+
 Find where your issue would logically sit, i.e. find the class closest to your issue.
 
 ### 2. Create a test method
+
 We are currently using xUnit, so just create a descriptive test method and attribute it with `[Fact]`.
 
 ### 3. Submit a pull request with the failing test
+
 Even better include the fix, but a failing test is a great start .
