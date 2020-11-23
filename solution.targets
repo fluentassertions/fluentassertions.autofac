@@ -21,5 +21,8 @@
         <RepositoryUrl>https://github.com/fluentassertions/fluentassertions.autofac</RepositoryUrl>
         <!-- Workaround GitVersionTask failing to load Newtonsoft.Json=12, cf. https://gitter.im/GitTools/GitVersion# -->
         <WriteVersionInfoToBuildLog>false</WriteVersionInfoToBuildLog>
+
+        <SignAssembly>true</SignAssembly>
+        <AssemblyOriginatorKeyFile>$(SolutionDir)\key.snk</AssemblyOriginatorKeyFile>
     </PropertyGroup>
 </Project>
