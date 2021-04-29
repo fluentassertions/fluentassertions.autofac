@@ -22,11 +22,11 @@ namespace FluentAssertions.Autofac
         {
             var wrapper = new BuilderWrapper();
 
-            Action<IComponentRegistryBuilder> cb1 = registry => { };
+            Action<IComponentRegistryBuilder> cb1 = _ => { };
             wrapper.Builder.RegisterCallback(cb1);
             wrapper.Callbacks.Single().Callback.Should().Be(cb1);
 
-            Action<IComponentRegistryBuilder> cb2 = registry => { };
+            Action<IComponentRegistryBuilder> cb2 = _ => { };
             wrapper.Builder.RegisterCallback(cb2);
             wrapper.Callbacks.Last().Callback.Should().Be(cb2);
         }

@@ -108,12 +108,12 @@ namespace FluentAssertions.Autofac
                 .WithParameter(new TypedParameter(typeof(string), "stringValue"))
                 .WithParameter(new TypedParameter(typeof(int), "intValue"));
 
-            bool IsString(Parameter p) => p is TypedParameter tp
+            static bool IsString(Parameter p) => p is TypedParameter tp
 #pragma warning disable CS0252 // Possible unintended reference comparison; left hand side needs cast
-                && tp.Type == typeof(string) && tp.Value == "stringValue";
+                                                 && tp.Type == typeof(string) && tp.Value == "stringValue";
 #pragma warning restore CS0252 // Possible unintended reference comparison; left hand side needs cast
 
-            bool IsTyped(Parameter p) => p is TypedParameter;
+            static bool IsTyped(Parameter p) => p is TypedParameter;
 
             var container = builder.Build();
             container.Should().Have()
@@ -142,6 +142,7 @@ namespace FluentAssertions.Autofac
 
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
         // ReSharper disable once UnusedMember.Local
+        // ReSharper disable once UnusedType.Local
         private class ParameterizedDummy : Dummy
         {
             // ReSharper disable once MemberCanBePrivate.Local

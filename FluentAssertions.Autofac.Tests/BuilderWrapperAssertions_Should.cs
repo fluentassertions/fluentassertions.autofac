@@ -38,6 +38,7 @@ namespace FluentAssertions.Autofac
             builderShould.RegisterModule<SampleModule2>();
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public class SampleModule : Module
         {
             protected override void Load(ContainerBuilder builder)
@@ -46,6 +47,7 @@ namespace FluentAssertions.Autofac
             }
         }
 
+        // ReSharper disable once MemberCanBePrivate.Global
         public class SampleModule2 : Module { }
     }
 }
