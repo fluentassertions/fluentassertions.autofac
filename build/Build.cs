@@ -37,18 +37,18 @@ class Build : NukeBuild
     ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
     ///   - Microsoft VSCode           https://nuke.build/vscode
 
-    public static int Main() => Execute<Build>(x => x.Compile);
+    public static int Main() => Execute<Build>(x => x.Test);
 
     #region Parameters
 
-    const string Framework = "netcoreapp3.1";
 
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly string Configuration = IsLocalBuild ? "Debug" : "Release";
 
     [Solution] readonly Solution Solution;
 
-    [GitVersion(Framework = Framework)] readonly GitVersion GitVersion;
+    const string Framework = "net5.0";
+    [GitVersion(Framework = Framework, NoFetch = true)] readonly GitVersion GitVersion;
 
     [Parameter("The SonarQube login token")]
     readonly string SonarLogin = Environment.GetEnvironmentVariable("SONAR_LOGIN");
