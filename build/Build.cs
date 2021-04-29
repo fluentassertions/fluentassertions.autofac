@@ -61,7 +61,7 @@ class Build : NukeBuild
 
     [Parameter("Enable coverlet diagnostics (log.*.txt)")] readonly bool CoverletDiag;
 
-    [Parameter("Is CI Build (AppVeyor)")] readonly bool IsCiBuild = Host == HostType.AppVeyor;
+    [Parameter("Is CI Build (AppVeyor)")] readonly bool IsCiBuild = Host is AppVeyor;
 
     [Parameter("Push built NuGet package")]
     readonly bool IsPushTag = (Environment.GetEnvironmentVariable("APPVEYOR_REPO_TAG") ?? "-unset-") == "true";
@@ -75,6 +75,7 @@ class Build : NukeBuild
     #endregion
 
     //-------------------------------------------------------------
+    // ReSharper disable once UnusedMember.Local
     Target Clean => _ => _
         .Before(Restore)
         .Executes(() =>
