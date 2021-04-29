@@ -27,7 +27,7 @@ environment:
   SONAR_LOGIN:
     secure: BNJM0k+NLqZbdMn08BK3wsjO8Hy7kbpRjsQr8VAhl98bmbLs75+BW457TVIJi5d3
   NUGET_API_KEY:
-    secure: 1gZfYXDnZKFT1JddFudQ6YWtaY3b5dd9TRyGgMWAvDcaemYinhdGIzRa21VKSGx5
+    secure: +g3nI05zuZ/hNuLtGc057QXU7wIfjMdiU41RJUZ34ZDUQ+MAlMxxEdR4mVU5RoLh
 #-----
 
 build_script:
