@@ -14,7 +14,7 @@ namespace FluentAssertions.Autofac
             var module = new SampleModule();
 
             var wrapper = module.WrapperFor();
-            ((object) wrapper).Should().BeOfType<BuilderWrapper>();
+            ((object)wrapper).Should().BeOfType<BuilderWrapper>();
 
             var builder = wrapper.Builder;
             builder.RegisterInstance(Substitute.For<IComparable>());

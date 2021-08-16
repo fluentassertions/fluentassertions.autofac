@@ -8,11 +8,11 @@ using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.Coverlet;
-using Nuke.Common.Tools.GitVersion;
-using Nuke.Common.Utilities.Collections;
 using Nuke.Common.Tools.DotNet;
+using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Tools.ReportGenerator;
 using Nuke.Common.Tools.SonarScanner;
+using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -21,63 +21,19 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 // NUKE CI Integration: http://www.nuke.build/docs/authoring-builds/ci-integration.html
 [GitHubActions("build", GitHubActionsImage.WindowsLatest,
     AutoGenerate = false,
-    InvokedTargets = new[] {nameof(CiBuild)})]
+    InvokedTargets = new[] { nameof(CiBuild) })]
 
 // cf.: https://github.com/nuke-build/nuke/blob/develop/azure-pipelines.yml
 [AzurePipelines(AzurePipelinesImage.WindowsLatest,
     AutoGenerate = false,
-    InvokedTargets = new[] {nameof(CiBuild)})]
+    InvokedTargets = new[] { nameof(CiBuild) })]
 // cf.: https://github.com/nuke-build/nuke/blob/develop/appveyor.yml
 [AppVeyor(AppVeyorImage.VisualStudioLatest,
     AutoGenerate = false,
-    InvokedTargets = new[] {nameof(CiBuild)})]
+    InvokedTargets = new[] { nameof(CiBuild) })]
 // ReSharper disable once CheckNamespace
-
 class Build : NukeBuild
 {
-    /// Support plugins are available for:
-    ///   - JetBrains ReSharper        https://nuke.build/resharper
-    ///   - JetBrains Rider            https://nuke.build/rider
-    ///   - Microsoft VisualStudio     https://nuke.build/visualstudio
-    ///   - Microsoft VSCode           https://nuke.build/vscode
-
-    public static int Main() => Execute<Build>(x => x.Test);
-
-    #region Parameters
-
-
-    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly string Configuration = IsLocalBuild ? "Debug" : "Release";
-
-    [Solution] readonly Solution Solution;
-
-    const string Framework = "net5.0";
-    [GitVersion(Framework = Framework, NoFetch = true)] readonly GitVersion GitVersion;
-
-    [Parameter("The SonarQube login token")]
-    readonly string SonarLogin = Environment.GetEnvironmentVariable("SONAR_LOGIN");
-
-    [Parameter("The SonarQube server")]
-    readonly string SonarServer = IsLocalBuild ? "http://localhost:9000" : "https://sonarcloud.io";
-
-    [Parameter("The SonarQube organization")] readonly string SonarOrganization = "awesome-inc";
-
-
-    [Parameter("Enable coverlet diagnostics (log.*.txt)")] readonly bool CoverletDiag;
-
-    [Parameter("Is CI Build (AppVeyor)")] readonly bool IsCiBuild = Host is GitHubActions;
-
-    [Parameter("Push built NuGet package")]
-    readonly bool IsPushTag = (Environment.GetEnvironmentVariable("GITHUB_REF") ?? "-unset-").StartsWith("refs/tags/");
-
-    [Parameter("NuGet API Key")] readonly string NuGetApiKey = Environment.GetEnvironmentVariable("NUGET_API_KEY");
-    [Parameter("NuGet Source")] readonly string NuGetSource = "https://www.nuget.org";
-
-    static readonly AbsolutePath TestsDirectory = RootDirectory / "tests";
-    static readonly AbsolutePath ArtifactsDir = RootDirectory / ".artifacts";
-
-    #endregion
-
     //-------------------------------------------------------------
     // ReSharper disable once UnusedMember.Local
     Target Clean => _ => _
@@ -139,7 +95,6 @@ class Build : NukeBuild
                 .SetReportTypes(ReportTypes.Cobertura, ReportTypes.SonarQube, ReportTypes.Html)
                 .SetTargetDirectory(".coverage/")
             );
-
         });
 
     //-------------------------------------------------------------
@@ -166,12 +121,12 @@ class Build : NukeBuild
                 .SetLogin(SonarLogin) // TODO: should be secret -> SetArgument
                 .SetServer(SonarServer)
                 .SetProcessArgumentConfigurator(args =>
-                //.SetArgumentConfigurator(args =>
+                    //.SetArgumentConfigurator(args =>
                 {
                     // monorepo hack: tell Sonar to scan sub-project only
                     args.Add($"/d:sonar.projectBaseDir={RootDirectory}");
                     // generic coverage data, cf.: https://docs.sonarqube.org/latest/analysis/generic-test/
-                    args.Add($"/d:sonar.coverageReportPaths=.coverage/SonarQube.xml");
+                    args.Add("/d:sonar.coverageReportPaths=.coverage/SonarQube.xml");
                     if (!string.IsNullOrWhiteSpace(SonarLogin))
                     {
                         // set organization & branch name, cf.:
@@ -242,4 +197,44 @@ class Build : NukeBuild
         {
         });
 
+    /// Support plugins are available for:
+    /// - JetBrains ReSharper        https://nuke.build/resharper
+    /// - JetBrains Rider            https://nuke.build/rider
+    /// - Microsoft VisualStudio     https://nuke.build/visualstudio
+    /// - Microsoft VSCode           https://nuke.build/vscode
+    public static int Main() => Execute<Build>(x => x.Test);
+
+    #region Parameters
+
+    [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
+    readonly string Configuration = IsLocalBuild ? "Debug" : "Release";
+
+    [Solution] readonly Solution Solution;
+
+    const string Framework = "net5.0";
+    [GitVersion(Framework = Framework, NoFetch = true)] readonly GitVersion GitVersion;
+
+    [Parameter("The SonarQube login token")]
+    readonly string SonarLogin = Environment.GetEnvironmentVariable("SONAR_LOGIN");
+
+    [Parameter("The SonarQube server")]
+    readonly string SonarServer = IsLocalBuild ? "http://localhost:9000" : "https://sonarcloud.io";
+
+    [Parameter("The SonarQube organization")] readonly string SonarOrganization = "awesome-inc";
+
+
+    [Parameter("Enable coverlet diagnostics (log.*.txt)")] readonly bool CoverletDiag;
+
+    [Parameter("Is CI Build (AppVeyor)")] readonly bool IsCiBuild = Host is GitHubActions;
+
+    [Parameter("Push built NuGet package")]
+    readonly bool IsPushTag = (Environment.GetEnvironmentVariable("GITHUB_REF") ?? "-unset-").StartsWith("refs/tags/");
+
+    [Parameter("NuGet API Key")] readonly string NuGetApiKey = Environment.GetEnvironmentVariable("NUGET_API_KEY");
+    [Parameter("NuGet Source")] readonly string NuGetSource = "https://www.nuget.org";
+
+    static readonly AbsolutePath TestsDirectory = RootDirectory / "tests";
+    static readonly AbsolutePath ArtifactsDir = RootDirectory / ".artifacts";
+
+    #endregion
 }

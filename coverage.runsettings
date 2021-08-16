@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Settings files, cf.:
  - https://docs.microsoft.com/en-us/visualstudio/test/configure-unit-tests-by-using-a-dot-runsettings-file?view=vs-2019#elements-of-a-runsettings-file
- - https://github.com/tonerdo/coverlet/blob/master/Documentation/VSTestIntegration.md#advanced-options-supported-via-runsettings 
+ - https://github.com/tonerdo/coverlet/blob/master/Documentation/VSTestIntegration.md#advanced-options-supported-via-runsettings
 -->
 <RunSettings>
     <!-- Disable parallelization (WPF!) -->
@@ -14,10 +14,9 @@
                 <Configuration>
                     <Format>opencover</Format>
                     <!-- [Assembly-Filter]Type-Filter -->
-                    <!--
                     <Include>[FluentAssertions.Autofac.*]FluentAssertions.Autofac.*</Include>
                     <Exclude>[*.Tests]*</Exclude>
-                    <SingleHit>true</SingleHit> -->
+                    <SingleHit>true</SingleHit>
                 </Configuration>
             </DataCollector>
         </DataCollectors>
@@ -32,5 +31,5 @@
                         enabled="True"
                         codebase="coverlet.collector.dll" />
         </InProcDataCollectors>
-  </InProcDataCollectionRunSettings>    
+  </InProcDataCollectionRunSettings>
 </RunSettings>

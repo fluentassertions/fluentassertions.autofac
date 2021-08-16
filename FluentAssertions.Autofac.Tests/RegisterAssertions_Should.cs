@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using Xunit;
 
@@ -15,7 +16,7 @@ namespace FluentAssertions.Autofac
                     .AsSelf()
                     .As<IDisposable>()
                     .AsImplementedInterfaces()
-                );
+            );
 
             AssertAsRegistrations(containerShouldHave.Registered<Dummy>());
         }
@@ -48,10 +49,13 @@ namespace FluentAssertions.Autofac
                 .As<IDisposable>()
                 .As(typeof(IDisposable))
                 .As(typeof(IDisposable), typeof(Dummy))
-                .AsImplementedInterfaces(); 
+                .AsImplementedInterfaces();
         }
 
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private class Dummy : IDisposable { public void Dispose() { } }
+        [ExcludeFromCodeCoverage]
+        private class Dummy : IDisposable
+        {
+            public void Dispose() { }
+        }
     }
 }

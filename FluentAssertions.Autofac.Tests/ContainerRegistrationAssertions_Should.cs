@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using Xunit;
 
@@ -42,7 +43,7 @@ namespace FluentAssertions.Autofac
             return builder.Build();
         }
 
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [ExcludeFromCodeCoverage]
         // ReSharper disable ClassNeverInstantiated.Local
         private class Dummy : IDisposable
         {

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -21,7 +22,7 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [ExcludeFromCodeCoverage]
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
@@ -33,7 +34,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="ContainerRegistrationAssertions"/> object that can be used to assert the current <see cref="IContainer"/>.
+        ///     Returns an <see cref="ContainerRegistrationAssertions" /> object that can be used to assert the current
+        ///     <see cref="IContainer" />.
         /// </summary>
         public ContainerRegistrationAssertions Have()
         {
@@ -41,7 +43,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="ResolveAssertions"/> object that can be used to assert the current <see paramref="serviceType"/>.
+        ///     Returns an <see cref="ResolveAssertions" /> object that can be used to assert the current
+        ///     <see paramref="serviceType" />.
         /// </summary>
         public ResolveAssertions Resolve(Type serviceType)
         {
@@ -49,7 +52,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="ResolveAssertions"/> object that can be used to assert the current <see typeparamref="TService"/>.
+        ///     Returns an <see cref="ResolveAssertions" /> object that can be used to assert the current
+        ///     <see typeparamref="TService" />.
         /// </summary>
         public ResolveAssertions Resolve<TService>()
         {
@@ -57,7 +61,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts the specified type has been registered with auto activation on the current <see cref="IContainer"/>.
+        ///     Asserts the specified type has been registered with auto activation on the current <see cref="IContainer" />.
         /// </summary>
         public void AutoActivate(Type type)
         {
@@ -65,7 +69,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts the specified type has been registered with auto activation on the current <see cref="IContainer"/>.
+        ///     Asserts the specified type has been registered with auto activation on the current <see cref="IContainer" />.
         /// </summary>
         public void AutoActivate<TService>()
         {
@@ -73,7 +77,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="TypeScanningAssertions"/> object that can be used to assert registered types on the current <see cref="ContainerBuilder"/>.
+        ///     Returns an <see cref="TypeScanningAssertions" /> object that can be used to assert registered types on the current
+        ///     <see cref="ContainerBuilder" />.
         /// </summary>
         /// <param name="assemblies"></param>
         public TypeScanningAssertions RegisterAssemblyTypes(params Assembly[] assemblies)
@@ -83,7 +88,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="TypeScanningAssertions"/> object that can be used to assert registered types on the current <see cref="ContainerBuilder"/>.
+        ///     Returns an <see cref="TypeScanningAssertions" /> object that can be used to assert registered types on the current
+        ///     <see cref="ContainerBuilder" />.
         /// </summary>
         /// <param name="types"></param>
         public TypeScanningAssertions RegisterTypes(IEnumerable<Type> types)

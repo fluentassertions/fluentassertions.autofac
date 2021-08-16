@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -18,7 +19,7 @@ namespace FluentAssertions.Autofac
     public class TypeScanningAssertions : ReferenceTypeAssertions<IContainer, TypeScanningAssertions>
     {
         /// <summary>
-        /// The types.
+        ///     The types.
         /// </summary>
         public readonly IEnumerable<Type> Types;
 
@@ -30,11 +31,11 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [ExcludeFromCodeCoverage]
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
-        ///    Initializes a new instance of the <see cref="TypeScanningAssertions" /> class.
+        ///     Initializes a new instance of the <see cref="TypeScanningAssertions" /> class.
         /// </summary>
         /// <param name="subject"></param>
         /// <param name="types">The types to assert</param>
@@ -47,8 +48,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        /// Specifies a subset of types to register from a scanned assembly using 
-        /// the specified <paramref name="predicate"/>.
+        ///     Specifies a subset of types to register from a scanned assembly using
+        ///     the specified <paramref name="predicate" />.
         /// </summary>
         public TypeScanningAssertions Where(Func<Type, bool> predicate)
         {
@@ -56,7 +57,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        /// Specifies a subset of types to register from a scanned assembly.
+        ///     Specifies a subset of types to register from a scanned assembly.
         /// </summary>
         public TypeScanningAssertions Except<T>()
         {
@@ -64,8 +65,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        /// Asserts that the scanned types can be resolved from the current <see cref="IContainer"/> 
-        /// as the specified <typeparamref name="T"/>.
+        ///     Asserts that the scanned types can be resolved from the current <see cref="IContainer" />
+        ///     as the specified <typeparamref name="T" />.
         /// </summary>
         public TypeScanningAssertions As<T>()
         {
@@ -73,8 +74,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        /// Asserts that the scanned types can be resolved from the current <see cref="IContainer"/> 
-        /// as the specified <paramref name="type"/>.
+        ///     Asserts that the scanned types can be resolved from the current <see cref="IContainer" />
+        ///     as the specified <paramref name="type" />.
         /// </summary>
         public TypeScanningAssertions As(Type type)
         {
@@ -83,7 +84,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        /// Asserts that the scanned types can be resolved from the current <see cref="IContainer"/> as self.
+        ///     Asserts that the scanned types can be resolved from the current <see cref="IContainer" /> as self.
         /// </summary>
         public TypeScanningAssertions AsSelf()
         {
@@ -92,8 +93,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        /// Asserts that the scanned types can be resolved from the current <see cref="IContainer"/> 
-        /// as their implemented interfaces.
+        ///     Asserts that the scanned types can be resolved from the current <see cref="IContainer" />
+        ///     as their implemented interfaces.
         /// </summary>
         public TypeScanningAssertions AsImplementedInterfaces()
         {
@@ -102,10 +103,10 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        /// Asserts that the scanned types can be resolved from the current <see cref="IContainer"/> 
-        /// as the type returned using the specified lambda.
+        ///     Asserts that the scanned types can be resolved from the current <see cref="IContainer" />
+        ///     as the type returned using the specified lambda.
         /// </summary>
-        public TypeScanningAssertions As(Func<Type,Type> lambda)
+        public TypeScanningAssertions As(Func<Type, Type> lambda)
         {
             Register.ForEach(r => r.As(lambda(r.Type)));
             return this;

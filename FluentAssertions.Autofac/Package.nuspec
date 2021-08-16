@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package >
+<package>
   <metadata>
     <id>FluentAssertions.Autofac</id>
     <version>$Version$</version>
@@ -13,14 +13,15 @@
     <copyright/>
     <releaseNotes>Revision: $Revision$</releaseNotes>
     <projectUrl>https://github.com/awesome-inc/FluentAssertions.Autofac</projectUrl>
-    <repository type="git" url="https://github.com/awesome-inc/FluentAssertions.Autofac" />
+    <repository type="git" url="https://github.com/awesome-inc/FluentAssertions.Autofac"/>
     <developmentDependency>true</developmentDependency>
     <dependencies>
-      <dependency id="Autofac" version="[4.6.2,5.0.0)" />
-      <dependency id="FluentAssertions" version="[5.1.2,6.0.0)" />
+      <dependency id="Autofac" version="[6.2.0,7.0.0)"/>
+      <dependency id="FluentAssertions" version="[6.0.0,7.0.0)"/>
     </dependencies>
   </metadata>
   <files>
-    <file src="..\FluentAssertions.Autofac\bin\Release\**\FluentAssertions.Autofac.*" exclude="**\*.pdb;**\*.deps.json" target="lib"/>
+    <file src="..\FluentAssertions.Autofac\bin\Release\**\FluentAssertions.Autofac.*"
+          exclude="**\*.pdb;**\*.deps.json" target="lib"/>
   </files>
 </package>

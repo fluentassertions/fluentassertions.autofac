@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using NSubstitute;
 using Xunit;
@@ -14,7 +15,7 @@ namespace FluentAssertions.Autofac
             var container = Configure();
             container.Invoking(x => x.Should().Resolve<IDisposable>())
                 .Should().Throw<Exception>()
-                .WithMessage($"Expected container to resolve '{typeof (IDisposable)}' but it did not.");
+                .WithMessage($"Expected container to resolve '{typeof(IDisposable)}' but it did not.");
 
             var disposable = Substitute.For<IDisposable>();
             container = Configure(builder => builder.RegisterInstance(disposable));
@@ -28,7 +29,7 @@ namespace FluentAssertions.Autofac
                 builder.RegisterType<Dummy>()
                     .AsSelf()
                     .As<IDisposable>()
-                ).Should();
+            ).Should();
 
             containerShould.Resolve<Dummy>();
             containerShould.Resolve<Dummy>().AsSelf();
@@ -44,7 +45,8 @@ namespace FluentAssertions.Autofac
 
             container = Configure(builder => builder.RegisterType<Dummy>().AutoActivate());
             container.Should().AutoActivate<Dummy>();
-            container.Should().Invoking(x => x.Resolve<Dummy>()).Should().Throw<Exception>("type not registered AS something");
+            container.Should().Invoking(x => x.Resolve<Dummy>()).Should()
+                .Throw<Exception>("type not registered AS something");
         }
 
         private static IContainer Configure(Action<ContainerBuilder> arrange = null)
@@ -54,7 +56,10 @@ namespace FluentAssertions.Autofac
             return builder.Build();
         }
 
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private class Dummy : IDisposable { public void Dispose() { } }
+        [ExcludeFromCodeCoverage]
+        private class Dummy : IDisposable
+        {
+            public void Dispose() { }
+        }
     }
 }

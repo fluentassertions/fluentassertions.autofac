@@ -1,4 +1,6 @@
 ﻿namespace SampleLib
 {
-    internal class SampleStarter { }
+    internal class SampleStarter
+    {
+    }
 }

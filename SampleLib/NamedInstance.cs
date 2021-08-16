@@ -1,4 +1,6 @@
 namespace SampleLib
 {
-    public class NamedInstance : INamedInstance { }
+    public class NamedInstance : INamedInstance
+    {
+    }
 }

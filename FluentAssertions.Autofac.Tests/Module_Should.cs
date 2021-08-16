@@ -10,7 +10,7 @@ namespace FluentAssertions.Autofac
         [Fact]
         public void Provide_test_container()
         {
-            var container = Module<SampleModule>.GetTestContainer((builder,module) =>
+            var container = Module<SampleModule>.GetTestContainer((builder, module) =>
             {
                 Trace.WriteLine($"Customizing '{builder}' and '{module}'.");
             });
@@ -20,13 +20,15 @@ namespace FluentAssertions.Autofac
         [Fact]
         public void Provide_test_builder()
         {
-            var builder = Module<SampleModule>.GetTestBuilderWrapper((b,m) =>
+            var builder = Module<SampleModule>.GetTestBuilderWrapper((b, m) =>
             {
                 Trace.WriteLine($"Customizing '{b}' and '{m}'.");
             });
             builder.Should().RegisterModule<SampleModule>();
         }
 
-        private class SampleModule : Module { }
+        private class SampleModule : Module
+        {
+        }
     }
 }

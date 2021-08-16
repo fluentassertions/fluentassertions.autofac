@@ -24,19 +24,19 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the specified implementation type can be resolved from the current <see cref="IContainer"/>.
+        ///     Asserts that the specified implementation type can be resolved from the current <see cref="IContainer" />.
         /// </summary>
         /// <typeparam name="TResolve">The type to resolve</typeparam>
         public RegisterAssertions As<TResolve>()
         {
             var instances = Subject.Resolve<IEnumerable<TResolve>>().ToArray();
             var resolved = instances.FirstOrDefault(instance => instance.GetType() == Type);
-            resolved.Should().NotBeNull($"Type '{Type}' should be registered as '{typeof (TResolve)}'");
+            resolved.Should().NotBeNull($"Type '{Type}' should be registered as '{typeof(TResolve)}'");
             return this;
         }
 
         /// <summary>
-        ///   Asserts that the specified implementation type can be resolved from the current <see cref="IContainer"/>.
+        ///     Asserts that the specified implementation type can be resolved from the current <see cref="IContainer" />.
         /// </summary>
         /// <param name="type">The type to resolve</param>
         /// <param name="types">Optional types to resolve</param>
@@ -48,7 +48,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the registered service type can be resolved from the current <see cref="IContainer"/>.
+        ///     Asserts that the registered service type can be resolved from the current <see cref="IContainer" />.
         /// </summary>
         public RegisterAssertions AsSelf()
         {
@@ -56,7 +56,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that all implemented interfaces of the registered service type can be resolved from the current <see cref="IContainer"/>.
+        ///     Asserts that all implemented interfaces of the registered service type can be resolved from the current
+        ///     <see cref="IContainer" />.
         /// </summary>
         public RegisterAssertions AsImplementedInterfaces()
         {
@@ -73,7 +74,11 @@ namespace FluentAssertions.Autofac
         {
             var interfaces = type.GetTypeInfo().ImplementedInterfaces.Where(i => i != typeof(IDisposable))
                 .ToList();
-            if (type.GetTypeInfo().IsInterface) interfaces.Add(type);
+            if (type.GetTypeInfo().IsInterface)
+            {
+                interfaces.Add(type);
+            }
+
             return interfaces;
         }
     }

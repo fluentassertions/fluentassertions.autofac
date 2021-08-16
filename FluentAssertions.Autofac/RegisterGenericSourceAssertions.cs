@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
 using Autofac;
 using Autofac.Core;
 using Autofac.Core.Resolving.Pipeline;
@@ -24,7 +24,7 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [ExcludeFromCodeCoverage]
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
@@ -39,13 +39,14 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the specified service type can be resolved from the current <see cref="IContainer"/>.
+        ///     Asserts that the specified service type can be resolved from the current <see cref="IContainer" />.
         /// </summary>
         /// <param name="genericServiceTypeDefinition">The type to resolve</param>
         public RegistrationAssertions As(Type genericServiceTypeDefinition)
         {
             AssertGenericType(genericServiceTypeDefinition);
-            var componentServicePairText = $"Component={_genericComponentTypeDefinition.FullName} Service={genericServiceTypeDefinition.FullName}";
+            var componentServicePairText =
+                $"Component={_genericComponentTypeDefinition.FullName} Service={genericServiceTypeDefinition.FullName}";
 
             _genericComponentTypeDefinition.GetGenericArguments().Length.Should()
                 .Be(genericServiceTypeDefinition.GetGenericArguments().Length,
@@ -66,7 +67,8 @@ namespace FluentAssertions.Autofac
                     $"it must be a registration source providing registrations for service {genericServiceTypeDefinition.FullName}");
 
             registration.Activator.LimitType.Should()
-                .Be(componentType, $"the generic component type definition in the registration must be {_genericComponentTypeDefinition.FullName}.");
+                .Be(componentType,
+                    $"the generic component type definition in the registration must be {_genericComponentTypeDefinition.FullName}.");
 
             return new RegistrationAssertions(Subject, registration);
         }
@@ -98,10 +100,16 @@ namespace FluentAssertions.Autofac
 
         private static void AssertGenericType(Type genericTypeDefinition)
         {
-            if (genericTypeDefinition == null) throw new ArgumentNullException(nameof(genericTypeDefinition));
+            if (genericTypeDefinition == null)
+            {
+                throw new ArgumentNullException(nameof(genericTypeDefinition));
+            }
+
             if (!genericTypeDefinition.IsGenericTypeDefinition)
+            {
                 throw new ArgumentException("Type must be a generic type definition.",
                     nameof(genericTypeDefinition));
+            }
         }
     }
 }

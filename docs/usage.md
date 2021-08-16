@@ -1,9 +1,9 @@
 # Usage
- 
- Available on [Nuget](https://www.nuget.org) under [FluentAssertions.Autofac](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 
- ```powershell
-    Install-Package FluentAssertions.Autofac
+Available on [Nuget](https://www.nuget.org) under [FluentAssertions.Autofac](https://www.nuget.org/packages/FluentAssertions.Autofac/)
+
+```powershell
+Install-Package FluentAssertions.Autofac
 ```
 
 ## Test Registration
@@ -26,7 +26,7 @@ container.Should().Have().NotRegistered<UncoolService>("uncool");
 ```
 
 ## Test Resolving
-    
+
 You can also test actually resolving an instance which verifies your registration is complete:
 
 ```csharp
@@ -36,7 +36,10 @@ container.Should().Resolve<ICoolService>().As<SuperCoolService>()
 
 ## Testing Autofac Modules
 
-With an application growing in complexity you want to modularize your configuration logic with [Autofac Modules](http://autofac.readthedocs.org/en/latest/configuration/modules.html). Testing your modules is then achieved using the `Module<TModule>` helper class which supports creating isolated & testable builder and containers.
+With an application growing in complexity you want to modularize your configuration logic
+with [Autofac Modules](http://autofac.readthedocs.org/en/latest/configuration/modules.html). Testing your modules is
+then achieved using the `Module<TModule>` helper class which supports creating isolated & testable builder and
+containers.
 
 Here is a simple example verifying that the module `MyCoolModule` registers the `SuperCoolService` implementation
 
@@ -54,10 +57,11 @@ Module<MyCoolModule>.GetTestBuilder()
     ...
 ```
 
-In general, when implementing modules you will typically be subclassing Autofac's module base class `Module` which requires a parameterless constructor. And this is fine in most cases. 
+In general, when implementing modules you will typically be subclassing Autofac's module base class `Module` which
+requires a parameterless constructor. And this is fine in most cases.
 
-However, we have had some more special use cases where we definitely 
-wanted some module to take constructor parameters. In this case you cannot use the generic idiom
+However, we have had some more special use cases where we definitely wanted some module to take constructor parameters.
+In this case you cannot use the generic idiom
 
 ```csharp
 builder.RegisterModule<TModule>();
@@ -66,7 +70,7 @@ builder.RegisterModule<TModule>();
 Instead you will use the instance variant
 
 ```csharp
-builder.RegisterModule(module); 
+builder.RegisterModule(module);
 ```
 
 The way to test this is then by using the `Container(...)` and `Builder(...)` extension methods
@@ -81,7 +85,8 @@ sut.Builder(arrange: ..., types: ...)
 
 ### Mocking module dependencies
 
-In case your module depends on some cross cutting dependencies you need some extra arrangement for the testing container to work with your module. 
+In case your module depends on some cross cutting dependencies you need some extra arrangement for the testing container
+to work with your module.
 
 You can inject an action to arrange substitutes like this
 
@@ -93,7 +98,7 @@ var container = Module<MyCoolModule>.GetTestContainer(builder =>
 });
 ```
 
-### Testing a module register some other modules 
+### Testing a module register some other modules
 
 Say one thing your module does is registering some other modules like this
 

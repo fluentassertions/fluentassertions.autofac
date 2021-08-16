@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Autofac;
@@ -20,9 +21,10 @@ namespace FluentAssertions.Autofac
     public class RegistrationAssertions : ReferenceTypeAssertions<IContainer, RegistrationAssertions>
     {
         /// <summary>
-        ///    The type that should be registered on the container
+        ///     The type that should be registered on the container
         /// </summary>
         internal readonly Type Type;
+
         private readonly IComponentRegistration _registration;
         private readonly IList<Parameter> _parameters;
 
@@ -30,7 +32,7 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [ExcludeFromCodeCoverage]
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
@@ -58,17 +60,19 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the specified <see typeparamref="TService"/> has been registered on the current <see cref="IContainer"/> with the specified name.
+        ///     Asserts that the specified <see typeparamref="TService" /> has been registered on the current
+        ///     <see cref="IContainer" /> with the specified name.
         /// </summary>
         /// <param name="name">The service name</param>
         /// <typeparam name="TService">The service type</typeparam>
         public RegistrationAssertions Named<TService>(string name)
         {
-            return Named(name, typeof (TService));
+            return Named(name, typeof(TService));
         }
 
         /// <summary>
-        ///   Asserts that the specified <see paramref="type"/> has been registered on the current <see cref="IContainer"/> with the specified name.
+        ///     Asserts that the specified <see paramref="type" /> has been registered on the current <see cref="IContainer" />
+        ///     with the specified name.
         /// </summary>
         /// <param name="name">The service name</param>
         /// <param name="type">The service type</param>
@@ -80,17 +84,19 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the specified <see typeparamref="TService"/> has been registered on the current <see cref="IContainer"/> with the specified key.
+        ///     Asserts that the specified <see typeparamref="TService" /> has been registered on the current
+        ///     <see cref="IContainer" /> with the specified key.
         /// </summary>
         /// <param name="key">The service key</param>
         /// <typeparam name="TService">The service type</typeparam>
         public RegistrationAssertions Keyed<TService>(object key)
         {
-            return Keyed(key, typeof (TService));
+            return Keyed(key, typeof(TService));
         }
 
         /// <summary>
-        ///   Asserts that the specified <see typeparamref="TService"/> has been registered on the current <see cref="IContainer"/> with the specified key.
+        ///     Asserts that the specified <see typeparamref="TService" /> has been registered on the current
+        ///     <see cref="IContainer" /> with the specified key.
         /// </summary>
         /// <param name="key">The service key</param>
         /// <param name="type">The service type</param>
@@ -102,7 +108,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the current service type has been registered as singleton on the current <see cref="IContainer"/>.
+        ///     Asserts that the current service type has been registered as singleton on the current <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions SingleInstance()
         {
@@ -111,7 +117,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the current service type has been registered as 'instance per dependency' on the current <see cref="IContainer"/>.
+        ///     Asserts that the current service type has been registered as 'instance per dependency' on the current
+        ///     <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions InstancePerDependency()
         {
@@ -120,7 +127,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the current service type has been registered as 'instance per lifetime scope' on the current <see cref="IContainer"/>.
+        ///     Asserts that the current service type has been registered as 'instance per lifetime scope' on the current
+        ///     <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions InstancePerLifetimeScope()
         {
@@ -129,7 +137,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the current service type has been registered as 'instance per matching lifetime scope' on the current <see cref="IContainer"/>.
+        ///     Asserts that the current service type has been registered as 'instance per matching lifetime scope' on the current
+        ///     <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions InstancePerMatchingLifetimeScope()
         {
@@ -138,7 +147,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the current service type has been registered as 'instance per request' on the current <see cref="IContainer"/>.
+        ///     Asserts that the current service type has been registered as 'instance per request' on the current
+        ///     <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions InstancePerRequest()
         {
@@ -147,15 +157,17 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the current service type has been registered as 'instance per owned' of the specified <see typeparamref="TService"/> on the current <see cref="IContainer"/>.
+        ///     Asserts that the current service type has been registered as 'instance per owned' of the specified
+        ///     <see typeparamref="TService" /> on the current <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions InstancePerOwned<TService>()
         {
-            return InstancePerOwned(typeof (TService));
+            return InstancePerOwned(typeof(TService));
         }
 
         /// <summary>
-        ///   Asserts that the current service type has been registered as 'instance per owned' of the specified <see paramref="type"/> on the current <see cref="IContainer"/>.
+        ///     Asserts that the current service type has been registered as 'instance per owned' of the specified
+        ///     <see paramref="type" /> on the current <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions InstancePerOwned(Type serviceType)
         {
@@ -164,7 +176,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the current service type has been registered as 'externally owned' on the current <see cref="IContainer"/>.
+        ///     Asserts that the current service type has been registered as 'externally owned' on the current
+        ///     <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions ExternallyOwned()
         {
@@ -172,7 +185,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the current service type has been registered as 'owned by lifetime scope' on the current <see cref="IContainer"/>.
+        ///     Asserts that the current service type has been registered as 'owned by lifetime scope' on the current
+        ///     <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions OwnedByLifetimeScope()
         {
@@ -180,21 +194,23 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts the current service type has been registered using the specified <see typeparamref="TLifetime"/> on the current <see cref="IContainer"/>.
+        ///     Asserts the current service type has been registered using the specified <see typeparamref="TLifetime" /> on the
+        ///     current <see cref="IContainer" />.
         /// </summary>
-        /// <param name="assert">An optional custom assertion action to execute on the <typeparamref name="TLifetime"/></param>
+        /// <param name="assert">An optional custom assertion action to execute on the <typeparamref name="TLifetime" /></param>
         /// <typeparam name="TLifetime"></typeparam>
         public RegistrationAssertions Lifetime<TLifetime>(Action<TLifetime> assert = null)
             where TLifetime : IComponentLifetime
         {
             _registration.Lifetime.Should()
-                .BeOfType<TLifetime>($"Type '{Type}' should be registered with lifetime '{typeof (TLifetime)}'");
-            assert?.Invoke((TLifetime) _registration.Lifetime);
+                .BeOfType<TLifetime>($"Type '{Type}' should be registered with lifetime '{typeof(TLifetime)}'");
+            assert?.Invoke((TLifetime)_registration.Lifetime);
             return this;
         }
 
         /// <summary>
-        ///   Asserts the current service type has been registered using the specified <see cref="InstanceSharing"/> on the current <see cref="IContainer"/>.
+        ///     Asserts the current service type has been registered using the specified <see cref="InstanceSharing" /> on the
+        ///     current <see cref="IContainer" />.
         /// </summary>
         /// <param name="sharing">The instance sharing mode</param>
         public RegistrationAssertions Shared(InstanceSharing sharing)
@@ -204,7 +220,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts the current service type has been registered using the specified <see cref="InstanceOwnership"/> on the current <see cref="IContainer"/>.
+        ///     Asserts the current service type has been registered using the specified <see cref="InstanceOwnership" /> on the
+        ///     current <see cref="IContainer" />.
         /// </summary>
         /// <param name="ownership">The instance ownership mode</param>
         public RegistrationAssertions Owned(InstanceOwnership ownership)
@@ -214,7 +231,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts the current service type has been registered with auto activation on the current <see cref="IContainer"/>.
+        ///     Asserts the current service type has been registered with auto activation on the current <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions AutoActivate()
         {
@@ -223,7 +240,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts the current service type has been registered with the specified constructor parameter.
+        ///     Asserts the current service type has been registered with the specified constructor parameter.
         /// </summary>
         /// <param name="name">The parameter name</param>
         /// <param name="value">The parameter value</param>
@@ -233,22 +250,22 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts the current service type has been registered with the specified constructor parameter.
+        ///     Asserts the current service type has been registered with the specified constructor parameter.
         /// </summary>
         /// <param name="predicate">
         ///     Must evaluate to <c>true</c> for a parameter for the assertion to pass.
         /// </param>
         /// <param name="matchCount">
         ///     When <c>null</c>, assertion passes when one or more of the parameters matches the
-        ///     <paramref name="predicate"/>. When set to a value, exactly this number of parameters must match the
-        ///     <paramref name="predicate"/>.
+        ///     <paramref name="predicate" />. When set to a value, exactly this number of parameters must match the
+        ///     <paramref name="predicate" />.
         /// </param>
         /// <returns></returns>
         public RegistrationAssertions WithParameter(
             Func<Parameter, bool> predicate,
             int? matchCount = null)
         {
-            IEnumerable<Parameter> matchingParams = _parameters.Where(predicate);
+            var matchingParams = _parameters.Where(predicate);
 
             if (matchCount.HasValue)
             {
@@ -271,7 +288,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts the current service type has been registered with the specified constructor parameter.
+        ///     Asserts the current service type has been registered with the specified constructor parameter.
         /// </summary>
         /// <param name="param">The parameter</param>
         public RegistrationAssertions WithParameter(NamedParameter param)
@@ -281,13 +298,14 @@ namespace FluentAssertions.Autofac
                 .FirstOrDefault(np => np.Name == param.Name);
 
             p.Should().NotBeNull($"Parameter '{param.Name}' should have been registered.");
-            p?.Value.Should().BeEquivalentTo(param.Value, $"Parameter '{param.Name}' should have been registered with value '{param.Value}'.");
+            p?.Value.Should().BeEquivalentTo(param.Value,
+                $"Parameter '{param.Name}' should have been registered with value '{param.Value}'.");
 
             return this;
         }
 
         /// <summary>
-        ///   Asserts the current service type has been registered with the specified constructor parameter.
+        ///     Asserts the current service type has been registered with the specified constructor parameter.
         /// </summary>
         /// <param name="param">The parameter</param>
         public RegistrationAssertions WithParameter(PositionalParameter param)
@@ -297,7 +315,8 @@ namespace FluentAssertions.Autofac
                 .FirstOrDefault(pp => pp.Position == param.Position);
 
             p.Should().NotBeNull($"Parameter should have been registered at position '{param.Position}'.");
-            p?.Value.Should().BeEquivalentTo(param.Value, $"Parameter at position '{param.Position}' should have been registered with value '{param.Value}'.");
+            p?.Value.Should().BeEquivalentTo(param.Value,
+                $"Parameter at position '{param.Position}' should have been registered with value '{param.Value}'.");
 
             return this;
         }
@@ -306,14 +325,24 @@ namespace FluentAssertions.Autofac
         {
             var parameters = new List<Parameter>();
 
-            if (!(registration.Activator is ReflectionActivator activator)) return parameters;
+            if (!(registration.Activator is ReflectionActivator activator))
+            {
+                return parameters;
+            }
+
             const string fieldName = "_defaultParameters";
             const BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
                                            BindingFlags.Static;
             var field = activator.GetType().GetField(fieldName, bindFlags);
-            if (field == null) return parameters;
+            if (field == null)
+            {
+                return parameters;
+            }
+
             if (field.GetValue(activator) is Parameter[] p)
+            {
                 parameters.AddRange(p);
+            }
 
             return parameters;
         }

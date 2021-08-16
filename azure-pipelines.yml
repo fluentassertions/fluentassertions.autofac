@@ -17,20 +17,20 @@
 stages:
   - stage: windows_latest
     displayName: 'windows-latest'
-    dependsOn: [  ]
+    dependsOn: [ ]
     pool:
       vmImage: 'windows-latest'
     jobs:
       - job: SonarBegin
         displayName: 'SonarBegin'
-        dependsOn: [  ]
+        dependsOn: [ ]
         steps:
           - task: CmdLine@2
             inputs:
               script: './build.cmd SonarBegin --skip'
       - job: Restore
         displayName: 'Restore'
-        dependsOn: [  ]
+        dependsOn: [ ]
         steps:
           - task: CmdLine@2
             inputs:
@@ -76,7 +76,7 @@ stages:
               script: './build.cmd Coverage --skip'
       - job: SonarEnd
         displayName: 'SonarEnd'
-        dependsOn: [  ]
+        dependsOn: [ ]
         steps:
           - task: CmdLine@2
             inputs:

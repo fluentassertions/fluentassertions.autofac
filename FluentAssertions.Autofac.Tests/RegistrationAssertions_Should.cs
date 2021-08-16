@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using Autofac.Core;
 using Xunit;
@@ -13,7 +14,7 @@ namespace FluentAssertions.Autofac
         {
             var containerShouldHave = GetSut(builder =>
                 builder.RegisterType<NamedDummy>().Named<IDisposable>("Dummy")
-                );
+            );
 
             containerShouldHave.Registered<NamedDummy>()
                 .Named<IDisposable>("Dummy")
@@ -25,7 +26,7 @@ namespace FluentAssertions.Autofac
         {
             var containerShouldHave = GetSut(builder =>
                 builder.RegisterType<KeyedDummy>().Keyed<IComparable>(42)
-                );
+            );
 
             containerShouldHave.Registered<KeyedDummy>()
                 .Keyed<IComparable>(42);
@@ -113,7 +114,10 @@ namespace FluentAssertions.Autofac
                                                  && tp.Type == typeof(string) && tp.Value == "stringValue";
 #pragma warning restore CS0252 // Possible unintended reference comparison; left hand side needs cast
 
-            static bool IsTyped(Parameter p) => p is TypedParameter;
+            static bool IsTyped(Parameter p)
+            {
+                return p is TypedParameter;
+            }
 
             var container = builder.Build();
             container.Should().Have()
@@ -130,25 +134,35 @@ namespace FluentAssertions.Autofac
             return builder.Build().Should().Have();
         }
 
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [ExcludeFromCodeCoverage]
         // ReSharper disable ClassNeverInstantiated.Local
-        private class Dummy : IDisposable { public void Dispose() { } }
+        private class Dummy : IDisposable
+        {
+            public void Dispose() { }
+        }
 
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private class NamedDummy : IDisposable { public void Dispose() { } }
+        [ExcludeFromCodeCoverage]
+        private class NamedDummy : IDisposable
+        {
+            public void Dispose() { }
+        }
 
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private class KeyedDummy : IComparable { public int CompareTo(object obj) { return 42; } }
+        [ExcludeFromCodeCoverage]
+        private class KeyedDummy : IComparable
+        {
+            public int CompareTo(object obj) { return 42; }
+        }
 
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [ExcludeFromCodeCoverage]
         // ReSharper disable once UnusedMember.Local
         // ReSharper disable once UnusedType.Local
         private class ParameterizedDummy : Dummy
         {
+            public ParameterizedDummy(string name) { Name = name; }
+
             // ReSharper disable once MemberCanBePrivate.Local
             // ReSharper disable once UnusedAutoPropertyAccessor.Local
             public string Name { get; }
-            public ParameterizedDummy(string name) { Name = name; }
         }
     }
 }

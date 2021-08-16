@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using FluentAssertions.Primitives;
 
@@ -6,7 +7,8 @@ namespace FluentAssertions.Autofac
 {
     /// <inheritdoc />
     /// <summary>
-    ///     Contains a number of methods to assert that an <see cref="T:Autofac.IContainer" /> has registered expected services.
+    ///     Contains a number of methods to assert that an <see cref="T:Autofac.IContainer" /> has registered expected
+    ///     services.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
@@ -17,7 +19,7 @@ namespace FluentAssertions.Autofac
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [ExcludeFromCodeCoverage]
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
@@ -29,7 +31,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="RegisterAssertions"/> object that can be used to assert the current <see cref="IContainer"/> and <see typeparamref="TService"/>.
+        ///     Returns an <see cref="RegisterAssertions" /> object that can be used to assert the current
+        ///     <see cref="IContainer" /> and <see typeparamref="TService" />.
         /// </summary>
         public RegisterAssertions Registered<TService>()
         {
@@ -37,7 +40,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="RegisterAssertions"/> object that can be used to assert the current <see cref="IContainer"/> and the specified type.
+        ///     Returns an <see cref="RegisterAssertions" /> object that can be used to assert the current
+        ///     <see cref="IContainer" /> and the specified type.
         /// </summary>
         public RegisterAssertions Registered(Type type)
         {
@@ -45,16 +49,22 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="RegisterAssertions"/> object that can be used to assert the current <see cref="IContainer"/> and the specified instance.
+        ///     Returns an <see cref="RegisterAssertions" /> object that can be used to assert the current
+        ///     <see cref="IContainer" /> and the specified instance.
         /// </summary>
         public RegisterAssertions Registered(object instance)
         {
-            if (instance == null) throw new ArgumentNullException(nameof(instance));
+            if (instance == null)
+            {
+                throw new ArgumentNullException(nameof(instance));
+            }
+
             return new RegisterAssertions(Subject, instance.GetType());
         }
 
         /// <summary>
-        ///     Asserts that the specified <see typeparamref="TService" /> has not been registered on the current <see cref="IContainer"/>.
+        ///     Asserts that the specified <see typeparamref="TService" /> has not been registered on the current
+        ///     <see cref="IContainer" />.
         /// </summary>
         /// <typeparam name="TService">The service type</typeparam>
         public void NotRegistered<TService>()
@@ -63,7 +73,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the specified service type has not been registered on the current <see cref="IContainer"/>.
+        ///     Asserts that the specified service type has not been registered on the current <see cref="IContainer" />.
         /// </summary>
         /// <param name="type">The service type</param>
         public void NotRegistered(Type type)
@@ -72,7 +82,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the specified <see typeparamref="TService" /> has not been registered on the current <see cref="IContainer"/> with the specified name.
+        ///     Asserts that the specified <see typeparamref="TService" /> has not been registered on the current
+        ///     <see cref="IContainer" /> with the specified name.
         /// </summary>
         /// <param name="serviceName">The service name</param>
         /// <typeparam name="TService">The service type</typeparam>
@@ -82,7 +93,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the specified service type has not been registered on the current <see cref="IContainer"/> with the specified name.
+        ///     Asserts that the specified service type has not been registered on the current <see cref="IContainer" /> with the
+        ///     specified name.
         /// </summary>
         /// <param name="serviceName">The service name</param>
         /// <param name="type">The service type</param>
@@ -93,7 +105,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the specified service type has not been registered on the current <see cref="IContainer"/> with the specified key.
+        ///     Asserts that the specified service type has not been registered on the current <see cref="IContainer" /> with the
+        ///     specified key.
         /// </summary>
         /// <param name="serviceKey">The service key</param>
         /// <typeparam name="TService">The service type</typeparam>
@@ -103,7 +116,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the specified service type has not been registered on the current <see cref="IContainer"/> with the specified key.
+        ///     Asserts that the specified service type has not been registered on the current <see cref="IContainer" /> with the
+        ///     specified key.
         /// </summary>
         /// <param name="serviceKey">The service key</param>
         /// <param name="type">The service type</param>
@@ -114,7 +128,8 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="RegisterGenericSourceAssertions"/> object that can be used to assert the current <see cref="IContainer"/> and the specified generic type.
+        ///     Returns an <see cref="RegisterGenericSourceAssertions" /> object that can be used to assert the current
+        ///     <see cref="IContainer" /> and the specified generic type.
         /// </summary>
         public RegisterGenericSourceAssertions RegisteredGeneric(Type genericComponentTypeDefinition)
         {

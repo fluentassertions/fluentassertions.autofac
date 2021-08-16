@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Autofac;
 using FluentAssertions.Execution;
@@ -9,7 +10,8 @@ namespace FluentAssertions.Autofac
 {
     /// <inheritdoc />
     /// <summary>
-    ///     Contains a number of methods to assert that expected services can actually be resolved from an <see cref="T:Autofac.IContainer" />.
+    ///     Contains a number of methods to assert that expected services can actually be resolved from an
+    ///     <see cref="T:Autofac.IContainer" />.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
@@ -17,13 +19,13 @@ namespace FluentAssertions.Autofac
     public class ResolveAssertions : ReferenceTypeAssertions<IContainer, ResolveAssertions>
     {
         private readonly Type _serviceType;
-        private readonly List<object> _instances = new List<object>();
+        private readonly List<object> _instances = new();
 
         /// <inheritdoc />
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+        [ExcludeFromCodeCoverage]
         protected override string Identifier => nameof(IContainer);
 
         /// <summary>
@@ -36,16 +38,17 @@ namespace FluentAssertions.Autofac
             _serviceType = serviceType;
             var typeToResolve = typeof(IEnumerable<>).MakeGenericType(serviceType);
             if (Subject.Resolve(typeToResolve) is Array array)
+            {
                 _instances.AddRange(array.OfType<object>());
+            }
 
             Execute.Assertion
                 .ForCondition(_instances.Any())
                 .FailWith($"Expected container to resolve '{_serviceType}' but it did not.");
-
         }
 
         /// <summary>
-        ///   Asserts that the specified implementation type can be resolved from the current <see cref="IContainer"/>.
+        ///     Asserts that the specified implementation type can be resolved from the current <see cref="IContainer" />.
         /// </summary>
         /// <typeparam name="TImplementation">The type to resolve</typeparam>
         public RegistrationAssertions As<TImplementation>()
@@ -54,7 +57,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the registered service type can be resolved from the current <see cref="IContainer"/>.
+        ///     Asserts that the registered service type can be resolved from the current <see cref="IContainer" />.
         /// </summary>
         public RegistrationAssertions AsSelf()
         {
@@ -63,7 +66,7 @@ namespace FluentAssertions.Autofac
 
 
         /// <summary>
-        ///   Asserts that the service type has been registered with auto activation on the current <see cref="IContainer"/>.
+        ///     Asserts that the service type has been registered with auto activation on the current <see cref="IContainer" />.
         /// </summary>
         public void AutoActivate()
         {
@@ -71,7 +74,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///   Asserts that the specified implementation type(s) can be resolved from the current <see cref="IContainer"/>.
+        ///     Asserts that the specified implementation type(s) can be resolved from the current <see cref="IContainer" />.
         /// </summary>
         /// <param name="type">The type to resolve</param>
         /// <param name="types">Optional types to resolve</param>

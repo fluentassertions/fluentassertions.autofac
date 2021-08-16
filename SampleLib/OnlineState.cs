@@ -1,4 +1,6 @@
 namespace SampleLib
 {
-    internal class OnlineState : IDeviceState { }
+    internal class OnlineState : IDeviceState
+    {
+    }
 }

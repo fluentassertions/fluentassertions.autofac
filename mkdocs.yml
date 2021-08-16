@@ -3,6 +3,6 @@ theme: readthedocs
 repo_url: https://github.com/awesome-inc/FluentAssertions.Autofac
 
 pages:
-- Home: index.md
-- Usage: usage.md
-- Why?: why.md
+  - Home: index.md
+  - Usage: usage.md
+  - Why?: why.md

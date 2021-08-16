@@ -11,10 +11,10 @@ With an application growing in complexity, there is also growing need to organiz
 
 For example, say you're designing the coolest recommendation view on the planet. While your buddy is on the recommendation service on the backend, you will register a mock, i.e.
 
-    ...
-    builder.RegisterType<MockRecommendations>().As<IGetRecommendations>();
-    // builder.RegisterType<RecommendationService>().As<IGetRecommendations>();
-    ...
+```csharp
+builder.RegisterType<MockRecommendations>().As<IGetRecommendations>();
+// builder.RegisterType<RecommendationService>().As<IGetRecommendations>();
+```
 
 Once your buddy gives thumbs up for integration testing you switch to the real thing. Finally, you finish and move on to the next feature.
 

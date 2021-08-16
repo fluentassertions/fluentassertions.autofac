@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using Autofac;
 using Xunit;
 
@@ -50,7 +51,8 @@ namespace FluentAssertions.Autofac
         }
 
         [Fact]
-        public void Register_Generic_ShouldThrow_ArgumentException_WhenGenericComponentTypeDefinition_IsNotGenericTypeDefinition()
+        public void
+            Register_Generic_ShouldThrow_ArgumentException_WhenGenericComponentTypeDefinition_IsNotGenericTypeDefinition()
         {
             AssertRegisterGenericThrows(typeof(IRepository<object>), typeof(IRepository<>));
         }
@@ -68,7 +70,8 @@ namespace FluentAssertions.Autofac
         }
 
         [Fact]
-        public void Register_Generic_ShouldThrow_ArgumentException_WhenGenericServiceTypeDefinition_IsNotGenericTypeDefinition()
+        public void
+            Register_Generic_ShouldThrow_ArgumentException_WhenGenericServiceTypeDefinition_IsNotGenericTypeDefinition()
         {
             AssertRegisterGenericThrows(typeof(IRepository<>), typeof(IRepository<object>));
         }
@@ -101,19 +104,33 @@ namespace FluentAssertions.Autofac
             return builder.Build().Should().Have();
         }
 
-        private interface IRepository { }
+        private interface IRepository
+        {
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class Repository<TEntity> : IRepository<TEntity>
+        {
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class MultipleRepository<TEntity1, TEntity2> : IMultipleRepository<TEntity1, TEntity2>
+        {
+        }
+
+        [ExcludeFromCodeCoverage]
+        private class NotGenericRepository : IRepository<object>
+        {
+        }
+
         // ReSharper disable UnusedTypeParameter
-        private interface IRepository<TEntity> : IRepository { }
-        private interface IMultipleRepository<TEntity1, TEntity2> : IRepository { }
+        private interface IRepository<TEntity> : IRepository
+        {
+        }
+
+        private interface IMultipleRepository<TEntity1, TEntity2> : IRepository
+        {
+        }
         // ReSharper restore UnusedTypeParameter
-
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private class Repository<TEntity> : IRepository<TEntity> { }
-
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private class MultipleRepository<TEntity1, TEntity2> : IMultipleRepository<TEntity1, TEntity2> { }
-
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-        private class NotGenericRepository : IRepository<object> { }
     }
 }

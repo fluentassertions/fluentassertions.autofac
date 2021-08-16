@@ -1,4 +1,6 @@
 namespace SampleLib
 {
-    internal interface IDeviceState { }
+    internal interface IDeviceState
+    {
+    }
 }

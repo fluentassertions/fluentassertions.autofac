@@ -1,6 +1,5 @@
 using Autofac;
 using Xunit;
-using Module = Autofac.Module;
 
 namespace FluentAssertions.Autofac
 {
@@ -48,6 +47,8 @@ namespace FluentAssertions.Autofac
         }
 
         // ReSharper disable once MemberCanBePrivate.Global
-        public class SampleModule2 : Module { }
+        public class SampleModule2 : Module
+        {
+        }
     }
 }

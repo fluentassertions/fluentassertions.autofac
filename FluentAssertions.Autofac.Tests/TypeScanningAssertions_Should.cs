@@ -34,14 +34,23 @@ namespace FluentAssertions.Autofac
                 .AsImplementedInterfaces()
                 .As<IDummy>()
                 .As(t => t.GetInterfaces()[0]);
+        } // ReSharper disable ClassNeverInstantiated.Local
+        private interface IDummy
+        {
         }
 
-        // ReSharper disable ClassNeverInstantiated.Local
-        private interface IDummy { }
         // ReSharper disable UnusedType.Local
-        private class Dummy1 : IDummy { }
-        private class Dummy2 : IDummy { }
+        private class Dummy1 : IDummy
+        {
+        }
+
+        private class Dummy2 : IDummy
+        {
+        }
         // ReSharper restore UnusedType.Local
-        private class Dummy3 : IDummy { }
+
+        private class Dummy3 : IDummy
+        {
+        }
     }
 }
