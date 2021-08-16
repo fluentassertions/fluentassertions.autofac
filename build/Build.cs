@@ -1,8 +1,8 @@
 using System;
 using Nuke.Common;
-using Nuke.Common.CI;
 using Nuke.Common.CI.AppVeyor;
 using Nuke.Common.CI.AzurePipelines;
+using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Execution;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
@@ -19,6 +19,10 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 [CheckBuildProjectConfigurations]
 [UnsetVisualStudioEnvironmentVariables]
 // NUKE CI Integration: http://www.nuke.build/docs/authoring-builds/ci-integration.html
+[GitHubActions("build", GitHubActionsImage.WindowsLatest,
+    AutoGenerate = false,
+    InvokedTargets = new[] {nameof(CiBuild)})]
+
 // cf.: https://github.com/nuke-build/nuke/blob/develop/azure-pipelines.yml
 [AzurePipelines(AzurePipelinesImage.WindowsLatest,
     AutoGenerate = false,
@@ -61,10 +65,10 @@ class Build : NukeBuild
 
     [Parameter("Enable coverlet diagnostics (log.*.txt)")] readonly bool CoverletDiag;
 
-    [Parameter("Is CI Build (AppVeyor)")] readonly bool IsCiBuild = Host is AppVeyor;
+    [Parameter("Is CI Build (AppVeyor)")] readonly bool IsCiBuild = Host is GitHubActions;
 
     [Parameter("Push built NuGet package")]
-    readonly bool IsPushTag = (Environment.GetEnvironmentVariable("APPVEYOR_REPO_TAG") ?? "-unset-") == "true";
+    readonly bool IsPushTag = (Environment.GetEnvironmentVariable("GITHUB_REF") ?? "-unset-").StartsWith("refs/tags/");
 
     [Parameter("NuGet API Key")] readonly string NuGetApiKey = Environment.GetEnvironmentVariable("NUGET_API_KEY");
     [Parameter("NuGet Source")] readonly string NuGetSource = "https://www.nuget.org";
@@ -116,7 +120,7 @@ class Build : NukeBuild
                 .SetConfiguration(Configuration)
                 .EnableNoBuild()
                 .EnableBlameMode()
-                .SetLogger("trx")
+                .AddLoggers("trx")
                 .EnableCollectCoverage()
                 .SetDataCollector("XPlat Code Coverage")
                 .SetSettingsFile("coverage.runsettings")
