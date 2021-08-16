@@ -1,6 +1,5 @@
 # FluentAssertions.Autofac
 
-[![Build status](https://ci.appveyor.com/api/projects/status/u42b929walkd6086?svg=true)](https://ci.appveyor.com/project/awesome-inc-build/fluentassertions-autofac)
 [![Build status](https://github.com/fluentassertions/fluentassertions.autofac/actions/workflows/build.yml/badge.svg)](https://github.com/fluentassertions/fluentassertions.autofac/actions/workflows/build.yml)
 
 [![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
@@ -11,7 +10,7 @@
 This repository contains the [Fluent Assertions](http://fluentassertions.com/) extensions
 for [Autofac](https://autofac.org/). It is maintained by [@mkoertgen](https://github.com/mkoertgen).
 
-- See [www.fluentassertions.com](http://www.fluentassertions.com/) for more information about the main library.
+-   See [www.fluentassertions.com](http://www.fluentassertions.com/) for more information about the main library.
 
 ## Why?
 
@@ -58,7 +57,7 @@ nuke
 
 ### Links
 
-- [Why?](http://fluentassertionsautofac.readthedocs.org/en/latest/why)
-- [Usage](http://fluentassertionsautofac.readthedocs.org/en/latest/usage/)
-- [Documentation](http://fluentassertionsautofac.readthedocs.io/en/latest)
-- [Contributing](https://github.com/fluentassertions/fluentAssertions.autofac/blob/master/CONTRIBUTING.md)
+-   [Why?](http://fluentassertionsautofac.readthedocs.org/en/latest/why)
+-   [Usage](http://fluentassertionsautofac.readthedocs.org/en/latest/usage/)
+-   [Documentation](http://fluentassertionsautofac.readthedocs.io/en/latest)
+-   [Contributing](https://github.com/fluentassertions/fluentAssertions.autofac/blob/master/CONTRIBUTING.md)
