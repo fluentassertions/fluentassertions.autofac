@@ -1,6 +1,8 @@
 # FluentAssertions.Autofac
 
 [![Build status](https://ci.appveyor.com/api/projects/status/u42b929walkd6086?svg=true)](https://ci.appveyor.com/project/awesome-inc-build/fluentassertions-autofac)
+[![Build status](https://github.com/fluentassertions/fluentassertions.autofac/actions/workflows/build.yml/badge.svg)](https://github.com/fluentassertions/fluentassertions.autofac/actions/workflows/build.yml)
+
 [![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 [![NuGet](https://img.shields.io/nuget/dt/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fluentassertions.FluentAssertions.Autofac&metric=alert_status)](https://sonarcloud.io/dashboard?id=fluentassertions.FluentAssertions.Autofac)
