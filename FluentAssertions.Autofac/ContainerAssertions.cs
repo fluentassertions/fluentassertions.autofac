@@ -11,31 +11,31 @@ namespace FluentAssertions.Autofac
 {
     /// <inheritdoc />
     /// <summary>
-    ///     Contains a number of methods to assert that an <see cref="T:Autofac.IContainer" /> is in the expected state.
+    ///     Contains a number of methods to assert that an <see cref="T:Autofac.IComponentContext" /> is in the expected state.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
 #endif
-    public class ContainerAssertions : ReferenceTypeAssertions<IContainer, ContainerAssertions>
+    public class ContainerAssertions : ReferenceTypeAssertions<IComponentContext, ContainerAssertions>
     {
         /// <inheritdoc />
         /// <summary>
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
         [ExcludeFromCodeCoverage]
-        protected override string Identifier => nameof(IContainer);
+        protected override string Identifier => nameof(IComponentContext);
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ContainerAssertions" /> class.
         /// </summary>
         /// <param name="container">The subject</param>
-        public ContainerAssertions(IContainer container) : base(container)
+        public ContainerAssertions(IComponentContext container) : base(container)
         {
         }
 
         /// <summary>
         ///     Returns an <see cref="ContainerRegistrationAssertions" /> object that can be used to assert the current
-        ///     <see cref="IContainer" />.
+        ///     <see cref="IComponentContext" />.
         /// </summary>
         public ContainerRegistrationAssertions Have()
         {
@@ -61,7 +61,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts the specified type has been registered with auto activation on the current <see cref="IContainer" />.
+        ///     Asserts the specified type has been registered with auto activation on the current <see cref="IComponentContext" />.
         /// </summary>
         public void AutoActivate(Type type)
         {
@@ -69,7 +69,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts the specified type has been registered with auto activation on the current <see cref="IContainer" />.
+        ///     Asserts the specified type has been registered with auto activation on the current <see cref="IComponentContext" />.
         /// </summary>
         public void AutoActivate<TService>()
         {

@@ -12,9 +12,9 @@ namespace FluentAssertions.Autofac
     {
         /// <summary>
         ///     Returns an <see cref="ContainerAssertions" /> object that can be used to assert the current
-        ///     <see cref="IContainer" />.
+        ///     <see cref="IComponentContext" /> (e.g. <see cref="IContainer"/> or <see cref="ILifetimeScope"/>).
         /// </summary>
-        public static ContainerAssertions Should(this IContainer container)
+        public static ContainerAssertions Should(this IComponentContext container)
         {
             return new ContainerAssertions(container);
         }

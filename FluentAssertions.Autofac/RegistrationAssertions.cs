@@ -13,12 +13,12 @@ namespace FluentAssertions.Autofac
 {
     /// <inheritdoc />
     /// <summary>
-    ///     Contains a number of methods to assert that an <see cref="T:Autofac.IContainer" /> registers value services.
+    ///     Contains a number of methods to assert that an <see cref="T:Autofac.IComponentContext" /> registers value services.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
 #endif
-    public class RegistrationAssertions : ReferenceTypeAssertions<IContainer, RegistrationAssertions>
+    public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext, RegistrationAssertions>
     {
         /// <summary>
         ///     The type that should be registered on the container
@@ -33,14 +33,14 @@ namespace FluentAssertions.Autofac
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
         [ExcludeFromCodeCoverage]
-        protected override string Identifier => nameof(IContainer);
+        protected override string Identifier => nameof(IComponentContext);
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="RegistrationAssertions" /> class.
         /// </summary>
         /// <param name="subject">The container</param>
         /// <param name="type">The type that should be registered on the container</param>
-        public RegistrationAssertions(IContainer subject, Type type) : base(subject)
+        public RegistrationAssertions(IComponentContext subject, Type type) : base(subject)
         {
             Type = type ?? throw new ArgumentNullException(nameof(type));
             _registration = Subject.ComponentRegistry.GetRegistration(Type);
@@ -52,7 +52,7 @@ namespace FluentAssertions.Autofac
         /// </summary>
         /// <param name="subject">The container</param>
         /// <param name="registration"></param>
-        public RegistrationAssertions(IContainer subject, IComponentRegistration registration) : base(subject)
+        public RegistrationAssertions(IComponentContext subject, IComponentRegistration registration) : base(subject)
         {
             _registration = registration ?? throw new ArgumentNullException(nameof(registration));
             Type = registration.Activator.LimitType;
@@ -61,7 +61,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the specified <see typeparamref="TService" /> has been registered on the current
-        ///     <see cref="IContainer" /> with the specified name.
+        ///     <see cref="IComponentContext" /> with the specified name.
         /// </summary>
         /// <param name="name">The service name</param>
         /// <typeparam name="TService">The service type</typeparam>
@@ -71,7 +71,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the specified <see paramref="type" /> has been registered on the current <see cref="IContainer" />
+        ///     Asserts that the specified <see paramref="type" /> has been registered on the current <see cref="IComponentContext" />
         ///     with the specified name.
         /// </summary>
         /// <param name="name">The service name</param>
@@ -85,7 +85,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the specified <see typeparamref="TService" /> has been registered on the current
-        ///     <see cref="IContainer" /> with the specified key.
+        ///     <see cref="IComponentContext" /> with the specified key.
         /// </summary>
         /// <param name="key">The service key</param>
         /// <typeparam name="TService">The service type</typeparam>
@@ -96,7 +96,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the specified <see typeparamref="TService" /> has been registered on the current
-        ///     <see cref="IContainer" /> with the specified key.
+        ///     <see cref="IComponentContext" /> with the specified key.
         /// </summary>
         /// <param name="key">The service key</param>
         /// <param name="type">The service type</param>
@@ -108,7 +108,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the current service type has been registered as singleton on the current <see cref="IContainer" />.
+        ///     Asserts that the current service type has been registered as singleton on the current <see cref="IComponentContext" />.
         /// </summary>
         public RegistrationAssertions SingleInstance()
         {
@@ -118,7 +118,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the current service type has been registered as 'instance per dependency' on the current
-        ///     <see cref="IContainer" />.
+        ///     <see cref="IComponentContext" />.
         /// </summary>
         public RegistrationAssertions InstancePerDependency()
         {
@@ -128,7 +128,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the current service type has been registered as 'instance per lifetime scope' on the current
-        ///     <see cref="IContainer" />.
+        ///     <see cref="IComponentContext" />.
         /// </summary>
         public RegistrationAssertions InstancePerLifetimeScope()
         {
@@ -138,7 +138,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the current service type has been registered as 'instance per matching lifetime scope' on the current
-        ///     <see cref="IContainer" />.
+        ///     <see cref="IComponentContext" />.
         /// </summary>
         public RegistrationAssertions InstancePerMatchingLifetimeScope()
         {
@@ -148,7 +148,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the current service type has been registered as 'instance per request' on the current
-        ///     <see cref="IContainer" />.
+        ///     <see cref="IComponentContext" />.
         /// </summary>
         public RegistrationAssertions InstancePerRequest()
         {
@@ -158,7 +158,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the current service type has been registered as 'instance per owned' of the specified
-        ///     <see typeparamref="TService" /> on the current <see cref="IContainer" />.
+        ///     <see typeparamref="TService" /> on the current <see cref="IComponentContext" />.
         /// </summary>
         public RegistrationAssertions InstancePerOwned<TService>()
         {
@@ -167,7 +167,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the current service type has been registered as 'instance per owned' of the specified
-        ///     <see paramref="type" /> on the current <see cref="IContainer" />.
+        ///     <see paramref="type" /> on the current <see cref="IComponentContext" />.
         /// </summary>
         public RegistrationAssertions InstancePerOwned(Type serviceType)
         {
@@ -177,7 +177,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the current service type has been registered as 'externally owned' on the current
-        ///     <see cref="IContainer" />.
+        ///     <see cref="IComponentContext" />.
         /// </summary>
         public RegistrationAssertions ExternallyOwned()
         {
@@ -186,7 +186,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that the current service type has been registered as 'owned by lifetime scope' on the current
-        ///     <see cref="IContainer" />.
+        ///     <see cref="IComponentContext" />.
         /// </summary>
         public RegistrationAssertions OwnedByLifetimeScope()
         {
@@ -195,7 +195,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts the current service type has been registered using the specified <see typeparamref="TLifetime" /> on the
-        ///     current <see cref="IContainer" />.
+        ///     current <see cref="IComponentContext" />.
         /// </summary>
         /// <param name="assert">An optional custom assertion action to execute on the <typeparamref name="TLifetime" /></param>
         /// <typeparam name="TLifetime"></typeparam>
@@ -210,7 +210,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts the current service type has been registered using the specified <see cref="InstanceSharing" /> on the
-        ///     current <see cref="IContainer" />.
+        ///     current <see cref="IComponentContext" />.
         /// </summary>
         /// <param name="sharing">The instance sharing mode</param>
         public RegistrationAssertions Shared(InstanceSharing sharing)
@@ -221,7 +221,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts the current service type has been registered using the specified <see cref="InstanceOwnership" /> on the
-        ///     current <see cref="IContainer" />.
+        ///     current <see cref="IComponentContext" />.
         /// </summary>
         /// <param name="ownership">The instance ownership mode</param>
         public RegistrationAssertions Owned(InstanceOwnership ownership)
@@ -231,7 +231,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts the current service type has been registered with auto activation on the current <see cref="IContainer" />.
+        ///     Asserts the current service type has been registered with auto activation on the current <see cref="IComponentContext" />.
         /// </summary>
         public RegistrationAssertions AutoActivate()
         {

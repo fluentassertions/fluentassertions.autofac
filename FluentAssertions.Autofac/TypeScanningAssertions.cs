@@ -11,12 +11,12 @@ namespace FluentAssertions.Autofac
 {
     /// <inheritdoc />
     /// <summary>
-    ///     Contains a number of methods to assert registered types on an <see cref="T:Autofac.IContainer" />.
+    ///     Contains a number of methods to assert registered types on an <see cref="T:Autofac.IComponentContext" />.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
 #endif
-    public class TypeScanningAssertions : ReferenceTypeAssertions<IContainer, TypeScanningAssertions>
+    public class TypeScanningAssertions : ReferenceTypeAssertions<IComponentContext, TypeScanningAssertions>
     {
         /// <summary>
         ///     The types.
@@ -32,7 +32,7 @@ namespace FluentAssertions.Autofac
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
         [ExcludeFromCodeCoverage]
-        protected override string Identifier => nameof(IContainer);
+        protected override string Identifier => nameof(IComponentContext);
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="TypeScanningAssertions" /> class.
@@ -40,7 +40,7 @@ namespace FluentAssertions.Autofac
         /// <param name="subject"></param>
         /// <param name="types">The types to assert</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public TypeScanningAssertions(IContainer subject, IEnumerable<Type> types) : base(subject)
+        public TypeScanningAssertions(IComponentContext subject, IEnumerable<Type> types) : base(subject)
         {
             Types = FilterTypes(types);
             _registerAssertions = new Lazy<List<RegisterAssertions>>(
@@ -65,7 +65,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the scanned types can be resolved from the current <see cref="IContainer" />
+        ///     Asserts that the scanned types can be resolved from the current <see cref="IComponentContext" />
         ///     as the specified <typeparamref name="T" />.
         /// </summary>
         public TypeScanningAssertions As<T>()
@@ -74,7 +74,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the scanned types can be resolved from the current <see cref="IContainer" />
+        ///     Asserts that the scanned types can be resolved from the current <see cref="IComponentContext" />
         ///     as the specified <paramref name="type" />.
         /// </summary>
         public TypeScanningAssertions As(Type type)
@@ -84,7 +84,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the scanned types can be resolved from the current <see cref="IContainer" /> as self.
+        ///     Asserts that the scanned types can be resolved from the current <see cref="IComponentContext" /> as self.
         /// </summary>
         public TypeScanningAssertions AsSelf()
         {
@@ -93,7 +93,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the scanned types can be resolved from the current <see cref="IContainer" />
+        ///     Asserts that the scanned types can be resolved from the current <see cref="IComponentContext" />
         ///     as their implemented interfaces.
         /// </summary>
         public TypeScanningAssertions AsImplementedInterfaces()
@@ -103,7 +103,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the scanned types can be resolved from the current <see cref="IContainer" />
+        ///     Asserts that the scanned types can be resolved from the current <see cref="IComponentContext" />
         ///     as the type returned using the specified lambda.
         /// </summary>
         public TypeScanningAssertions As(Func<Type, Type> lambda)
