@@ -33,7 +33,7 @@ namespace FluentAssertions.Autofac
                     $"Type '{type}' should be auto activated");
         }
 
-        public static void AssertAutoActivates(this IContainer container, Type type)
+        public static void AssertAutoActivates(this IComponentContext container, Type type)
         {
             var registration = container.ComponentRegistry.GetRegistration(type);
             AssertAutoActivates(registration, type);

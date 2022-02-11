@@ -11,12 +11,12 @@ namespace FluentAssertions.Autofac
 {
     /// <inheritdoc />
     /// <summary>
-    ///     Contains a number of methods to assert that an <see cref="T:Autofac.IContainer" /> is in the expected state.
+    ///     Contains a number of methods to assert that an <see cref="T:Autofac.IComponentContext" /> is in the expected state.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
 #endif
-    public class RegisterGenericSourceAssertions : ReferenceTypeAssertions<IContainer, RegisterGenericSourceAssertions>
+    public class RegisterGenericSourceAssertions : ReferenceTypeAssertions<IComponentContext, RegisterGenericSourceAssertions>
     {
         private readonly Type _genericComponentTypeDefinition;
 
@@ -25,21 +25,21 @@ namespace FluentAssertions.Autofac
         ///     Returns the type of the subject the assertion applies on.
         /// </summary>
         [ExcludeFromCodeCoverage]
-        protected override string Identifier => nameof(IContainer);
+        protected override string Identifier => nameof(IComponentContext);
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="RegisterGenericSourceAssertions" /> class.
         /// </summary>
         /// <param name="subject">The container</param>
         /// <param name="genericComponentTypeDefinition">The type that should be registered on the container</param>
-        public RegisterGenericSourceAssertions(IContainer subject, Type genericComponentTypeDefinition) : base(subject)
+        public RegisterGenericSourceAssertions(IComponentContext subject, Type genericComponentTypeDefinition) : base(subject)
         {
             AssertGenericType(genericComponentTypeDefinition);
             _genericComponentTypeDefinition = genericComponentTypeDefinition;
         }
 
         /// <summary>
-        ///     Asserts that the specified service type can be resolved from the current <see cref="IContainer" />.
+        ///     Asserts that the specified service type can be resolved from the current <see cref="IComponentContext" />.
         /// </summary>
         /// <param name="genericServiceTypeDefinition">The type to resolve</param>
         public RegistrationAssertions As(Type genericServiceTypeDefinition)

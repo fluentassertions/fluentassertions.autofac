@@ -23,6 +23,13 @@ namespace FluentAssertions.Autofac
         }
 
         [Fact]
+        public void Provide_register_extension_on_lifetime_scope()
+        {
+            var scope = new ContainerBuilder().Build().BeginLifetimeScope();
+            scope.Should().Have().Should().BeOfType<ContainerRegistrationAssertions>();
+        }
+
+        [Fact]
         public void Provide_resolve_extension()
         {
             var builder = new ContainerBuilder();

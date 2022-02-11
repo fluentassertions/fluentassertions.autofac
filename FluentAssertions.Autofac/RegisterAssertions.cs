@@ -7,7 +7,7 @@ using Autofac;
 namespace FluentAssertions.Autofac
 {
     /// <summary>
-    ///     Contains a number of methods to assert that an <see cref="IContainer" /> is in the expected state.
+    ///     Contains a number of methods to assert that an <see cref="IComponentContext" /> is in the expected state.
     /// </summary>
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
@@ -19,12 +19,12 @@ namespace FluentAssertions.Autofac
         /// </summary>
         /// <param name="subject">The container</param>
         /// <param name="type">The type that should be registered on the container</param>
-        public RegisterAssertions(IContainer subject, Type type) : base(subject, type)
+        public RegisterAssertions(IComponentContext subject, Type type) : base(subject, type)
         {
         }
 
         /// <summary>
-        ///     Asserts that the specified implementation type can be resolved from the current <see cref="IContainer" />.
+        ///     Asserts that the specified implementation type can be resolved from the current <see cref="IComponentContext" />.
         /// </summary>
         /// <typeparam name="TResolve">The type to resolve</typeparam>
         public RegisterAssertions As<TResolve>()
@@ -36,7 +36,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the specified implementation type can be resolved from the current <see cref="IContainer" />.
+        ///     Asserts that the specified implementation type can be resolved from the current <see cref="IComponentContext" />.
         /// </summary>
         /// <param name="type">The type to resolve</param>
         /// <param name="types">Optional types to resolve</param>
@@ -48,7 +48,7 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Asserts that the registered service type can be resolved from the current <see cref="IContainer" />.
+        ///     Asserts that the registered service type can be resolved from the current <see cref="IComponentContext" />.
         /// </summary>
         public RegisterAssertions AsSelf()
         {
@@ -57,7 +57,7 @@ namespace FluentAssertions.Autofac
 
         /// <summary>
         ///     Asserts that all implemented interfaces of the registered service type can be resolved from the current
-        ///     <see cref="IContainer" />.
+        ///     <see cref="IComponentContext" />.
         /// </summary>
         public RegisterAssertions AsImplementedInterfaces()
         {
