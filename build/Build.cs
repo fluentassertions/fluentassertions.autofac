@@ -225,7 +225,7 @@ class Build : NukeBuild
 
     [Parameter("Enable coverlet diagnostics (log.*.txt)")] readonly bool CoverletDiag;
 
-    [Parameter("Is CI Build (AppVeyor)")] readonly bool IsCiBuild = Host is GitHubActions;
+    [Parameter("Is CI Build")] readonly bool IsCiBuild = Host is GitHubActions;
 
     [Parameter("Push built NuGet package")]
     readonly bool IsPushTag = (Environment.GetEnvironmentVariable("GITHUB_REF") ?? "-unset-").StartsWith("refs/tags/");
