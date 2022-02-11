@@ -19,10 +19,10 @@ namespace FluentAssertions.Autofac
 
             var containerShould = container.Should();
 
-            containerShould.BeOfType<ContainerAssertions>();
-            containerShould.Have().BeOfType<ContainerRegistrationAssertions>();
-            containerShould.Resolve<IDisposable>().BeOfType<ResolveAssertions>();
-            containerShould.Resolve(typeof(IDisposable)).BeOfType<ResolveAssertions>();
+            containerShould.ShouldBeOfType<ContainerAssertions>();
+            containerShould.Have().ShouldBeOfType<ContainerRegistrationAssertions>();
+            containerShould.Resolve<IDisposable>().ShouldBeOfType<ResolveAssertions>();
+            containerShould.Resolve(typeof(IDisposable)).ShouldBeOfType<ResolveAssertions>();
 
             containerShould.AutoActivate<AutoActivateService>();
             //containerShould.AutoActivate<AutoActivateService2>();
