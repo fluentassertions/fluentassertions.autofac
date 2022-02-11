@@ -175,7 +175,7 @@ class Build : NukeBuild
         {
             if (IsCiBuild && !IsPushTag)
             {
-                Logger.Info("Skipping (no tag)");
+                Serilog.Log.Information("Skipping (no tag)");
                 return;
             }
 

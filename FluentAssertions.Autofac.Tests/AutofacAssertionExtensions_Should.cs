@@ -12,21 +12,21 @@ namespace FluentAssertions.Autofac
         public void Provide_builder_extension()
         {
             var wrapper = new BuilderWrapper();
-            wrapper.Should().Should().BeOfType<BuilderWrapperAssertions>();
+            wrapper.Should().BeOfType<BuilderWrapperAssertions>();
         }
 
         [Fact]
         public void Provide_register_extension()
         {
             var container = new ContainerBuilder().Build();
-            container.Should().Have().Should().BeOfType<ContainerRegistrationAssertions>();
+            container.Should().Have().BeOfType<ContainerRegistrationAssertions>();
         }
 
         [Fact]
         public void Provide_register_extension_on_lifetime_scope()
         {
             var scope = new ContainerBuilder().Build().BeginLifetimeScope();
-            scope.Should().Have().Should().BeOfType<ContainerRegistrationAssertions>();
+            scope.Should().Have().BeOfType<ContainerRegistrationAssertions>();
         }
 
         [Fact]
@@ -35,7 +35,7 @@ namespace FluentAssertions.Autofac
             var builder = new ContainerBuilder();
             builder.RegisterInstance(Substitute.For<IDisposable>());
             var container = builder.Build();
-            container.Should().Resolve<IDisposable>().Should().BeOfType<ResolveAssertions>();
+            container.Should().Resolve<IDisposable>().BeOfType<ResolveAssertions>();
         }
     }
 }

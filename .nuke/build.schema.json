@@ -44,7 +44,7 @@
         },
         "IsCiBuild": {
           "type": "boolean",
-          "description": "Is CI Build (AppVeyor)"
+          "description": "Is CI Build"
         },
         "IsPushTag": {
           "type": "boolean",

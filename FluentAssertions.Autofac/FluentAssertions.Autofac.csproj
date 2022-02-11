@@ -2,20 +2,20 @@
     <PropertyGroup>
         <SolutionDir Condition="'$(SolutionDir)' == ''">..\</SolutionDir>
     </PropertyGroup>
-    <Import Project="$(SolutionDir)\solution.targets"/>
+    <Import Project="$(SolutionDir)\solution.targets" />
 
     <PropertyGroup>
         <!-- https://docs.microsoft.com/en-us/dotnet/standard/frameworks#latest-target-framework-versions -->
-        <TargetFrameworks>net472;net48;netstandard2.0;netstandard2.1;netcoreapp2.1;netcoreapp3.1;net5.0</TargetFrameworks>
+        <TargetFrameworks>net6.0;net5.0;netcoreapp3.1;net472;net48;netstandard2.0;netstandard2.1</TargetFrameworks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <!-- Mark the project as being a test project -->
         <SonarQubeTestProject>false</SonarQubeTestProject>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="6.2.0"/>
-        <PackageReference Include="FluentAssertions" Version="6.0.0"/>
-        <PackageReference Include="GitVersion.MsBuild" Version="5.6.11">
+        <PackageReference Include="Autofac" Version="6.3.0" />
+        <PackageReference Include="FluentAssertions" Version="6.5.0" />
+        <PackageReference Include="GitVersion.MsBuild" Version="5.8.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
