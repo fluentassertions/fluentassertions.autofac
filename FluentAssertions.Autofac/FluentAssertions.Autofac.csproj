@@ -2,7 +2,7 @@
     <PropertyGroup>
         <SolutionDir Condition="'$(SolutionDir)' == ''">..\</SolutionDir>
     </PropertyGroup>
-    <Import Project="$(SolutionDir)\solution.targets" />
+    <Import Project="$(SolutionDir)\solution.targets"/>
 
     <PropertyGroup>
         <!-- https://docs.microsoft.com/en-us/dotnet/standard/frameworks#latest-target-framework-versions -->
@@ -13,8 +13,8 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Autofac" Version="6.3.0" />
-        <PackageReference Include="FluentAssertions" Version="6.5.0" />
+        <PackageReference Include="Autofac" Version="6.3.0"/>
+        <PackageReference Include="FluentAssertions" Version="6.5.0"/>
         <PackageReference Include="GitVersion.MsBuild" Version="5.8.1">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

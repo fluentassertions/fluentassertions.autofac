@@ -13,6 +13,7 @@ using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Tools.ReportGenerator;
 using Nuke.Common.Tools.SonarScanner;
 using Nuke.Common.Utilities.Collections;
+using Serilog;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -175,7 +176,7 @@ class Build : NukeBuild
         {
             if (IsCiBuild && !IsPushTag)
             {
-                Serilog.Log.Information("Skipping (no tag)");
+                Log.Information("Skipping (no tag)");
                 return;
             }
 

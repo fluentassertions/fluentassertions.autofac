@@ -1,6 +1,5 @@
-namespace SampleLib
+namespace SampleLib;
+
+internal interface INamedInstance
 {
-    internal interface INamedInstance
-    {
-    }
 }

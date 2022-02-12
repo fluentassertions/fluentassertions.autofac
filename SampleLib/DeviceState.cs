@@ -1,5 +1,4 @@
-namespace SampleLib
-{
-    // ReSharper disable once UnusedMember.Global
-    public enum DeviceState { Online, Offline }
-}
+namespace SampleLib;
+
+// ReSharper disable once UnusedMember.Global
+public enum DeviceState { Online, Offline }

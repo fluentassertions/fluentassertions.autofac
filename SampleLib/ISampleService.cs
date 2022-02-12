@@ -1,6 +1,5 @@
-﻿namespace SampleLib
+﻿namespace SampleLib;
+
+public interface ISampleService
 {
-    public interface ISampleService
-    {
-    }
 }

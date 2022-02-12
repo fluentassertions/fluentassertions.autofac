@@ -1,6 +1,7 @@
 # Usage
 
-Available on [Nuget](https://www.nuget.org) under [FluentAssertions.Autofac](https://www.nuget.org/packages/FluentAssertions.Autofac/)
+Available on [Nuget](https://www.nuget.org)
+under [FluentAssertions.Autofac](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 
 ```powershell
 Install-Package FluentAssertions.Autofac
@@ -107,7 +108,8 @@ builder.RegisterModule<ModuleA>();
 builder.RegisterAssemblyModules(typeof(MyType).Assembly);
 ```
 
-This is a use case where you verify that some callbacks have been registered not on the container but on the builder instead
+This is a use case where you verify that some callbacks have been registered not on the container but on the builder
+instead
 
 ```csharp
 Module<MyCoolModule>.GetTestBuilder().Should()

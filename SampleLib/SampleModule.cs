@@ -1,21 +1,20 @@
 ﻿using Autofac;
 using NSubstitute;
 
-namespace SampleLib
+namespace SampleLib;
+
+public class SampleModule : Module
 {
-    public class SampleModule : Module
+    internal static readonly ISampleInstance SampleInstance = Substitute.For<ISampleInstance>();
+
+    protected override void Load(ContainerBuilder builder)
     {
-        internal static readonly ISampleInstance SampleInstance = Substitute.For<ISampleInstance>();
+        builder.RegisterType<SampleService>().As<ISampleService>();
 
-        protected override void Load(ContainerBuilder builder)
-        {
-            builder.RegisterType<SampleService>().As<ISampleService>();
+        builder.RegisterInstance(SampleInstance).SingleInstance();
 
-            builder.RegisterInstance(SampleInstance).SingleInstance();
-
-            builder.RegisterType<NamedInstance>().Named<INamedInstance>("SampleName");
-            builder.RegisterType<OnlineState>().Keyed<IDeviceState>(DeviceState.Online);
-            builder.RegisterType<SampleStarter>().AutoActivate();
-        }
+        builder.RegisterType<NamedInstance>().Named<INamedInstance>("SampleName");
+        builder.RegisterType<OnlineState>().Keyed<IDeviceState>(DeviceState.Online);
+        builder.RegisterType<SampleStarter>().AutoActivate();
     }
 }

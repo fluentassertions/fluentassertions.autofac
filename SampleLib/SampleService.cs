@@ -1,6 +1,5 @@
-﻿namespace SampleLib
+﻿namespace SampleLib;
+
+internal class SampleService : ISampleService
 {
-    internal class SampleService : ISampleService
-    {
-    }
 }

@@ -3,42 +3,41 @@ using Autofac;
 using NSubstitute;
 using Xunit;
 
-namespace FluentAssertions.Autofac
+namespace FluentAssertions.Autofac;
+
+// ReSharper disable InconsistentNaming
+public class ContainerAssertions_Should
 {
-    // ReSharper disable InconsistentNaming
-    public class ContainerAssertions_Should
+    [Fact]
+    public void Provide_assertions()
     {
-        [Fact]
-        public void Provide_assertions()
-        {
-            var builder = new ContainerBuilder();
-            builder.RegisterInstance(Substitute.For<IDisposable>());
-            builder.RegisterType<AutoActivateService>().AutoActivate();
-            builder.RegisterType<AutoActivateService2>().AsImplementedInterfaces();
-            var container = builder.Build();
+        var builder = new ContainerBuilder();
+        builder.RegisterInstance(Substitute.For<IDisposable>());
+        builder.RegisterType<AutoActivateService>().AutoActivate();
+        builder.RegisterType<AutoActivateService2>().AsImplementedInterfaces();
+        var container = builder.Build();
 
-            var containerShould = container.Should();
+        var containerShould = container.Should();
 
-            containerShould.ShouldBeOfType<ContainerAssertions>();
-            containerShould.Have().ShouldBeOfType<ContainerRegistrationAssertions>();
-            containerShould.Resolve<IDisposable>().ShouldBeOfType<ResolveAssertions>();
-            containerShould.Resolve(typeof(IDisposable)).ShouldBeOfType<ResolveAssertions>();
+        containerShould.ShouldBeOfType<ContainerAssertions>();
+        containerShould.Have().ShouldBeOfType<ContainerRegistrationAssertions>();
+        containerShould.Resolve<IDisposable>().ShouldBeOfType<ResolveAssertions>();
+        containerShould.Resolve(typeof(IDisposable)).ShouldBeOfType<ResolveAssertions>();
 
-            containerShould.AutoActivate<AutoActivateService>();
-            //containerShould.AutoActivate<AutoActivateService2>();
-            containerShould.Resolve<IStartable>().As<AutoActivateService2>();
-            containerShould.Have().Registered<AutoActivateService2>().As<IStartable>();
-        }
+        containerShould.AutoActivate<AutoActivateService>();
+        //containerShould.AutoActivate<AutoActivateService2>();
+        containerShould.Resolve<IStartable>().As<AutoActivateService2>();
+        containerShould.Have().Registered<AutoActivateService2>().As<IStartable>();
+    }
 
-        // ReSharper disable ClassNeverInstantiated.Local
-        private class AutoActivateService
-        {
-        }
+    // ReSharper disable ClassNeverInstantiated.Local
+    private class AutoActivateService
+    {
+    }
 
-        private class AutoActivateService2 : IStartable
-        {
-            // ReSharper restore ClassNeverInstantiated.Local
-            public void Start() { }
-        }
+    private class AutoActivateService2 : IStartable
+    {
+        // ReSharper restore ClassNeverInstantiated.Local
+        public void Start() { }
     }
 }

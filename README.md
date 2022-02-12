@@ -10,7 +10,7 @@
 This repository contains the [Fluent Assertions](http://fluentassertions.com/) extensions
 for [Autofac](https://autofac.org/). It is maintained by [@mkoertgen](https://github.com/mkoertgen).
 
--   See [www.fluentassertions.com](http://www.fluentassertions.com/) for more information about the main library.
+- See [www.fluentassertions.com](http://www.fluentassertions.com/) for more information about the main library.
 
 ## Why?
 
@@ -57,7 +57,7 @@ nuke
 
 ### Links
 
--   [Why?](http://fluentassertionsautofac.readthedocs.org/en/latest/why)
--   [Usage](http://fluentassertionsautofac.readthedocs.org/en/latest/usage/)
--   [Documentation](http://fluentassertionsautofac.readthedocs.io/en/latest)
--   [Contributing](https://github.com/fluentassertions/fluentAssertions.autofac/blob/master/CONTRIBUTING.md)
+- [Why?](http://fluentassertionsautofac.readthedocs.org/en/latest/why)
+- [Usage](http://fluentassertionsautofac.readthedocs.org/en/latest/usage/)
+- [Documentation](http://fluentassertionsautofac.readthedocs.io/en/latest)
+- [Contributing](https://github.com/fluentassertions/fluentAssertions.autofac/blob/master/CONTRIBUTING.md)
