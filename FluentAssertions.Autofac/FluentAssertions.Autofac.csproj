@@ -6,7 +6,7 @@
 
     <PropertyGroup>
         <!-- https://docs.microsoft.com/en-us/dotnet/standard/frameworks#latest-target-framework-versions -->
-        <TargetFrameworks>net6.0;net5.0;netcoreapp3.1;net472;net48;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <TargetFrameworks>net6.0;net5.0;netcoreapp3.1;net48;net472;netstandard2.0;netstandard2.1</TargetFrameworks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <!-- Mark the project as being a test project -->
         <SonarQubeTestProject>false</SonarQubeTestProject>

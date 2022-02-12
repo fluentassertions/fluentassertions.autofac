@@ -91,7 +91,7 @@ class Build : NukeBuild
         .Executes(() =>
         {
             ReportGeneratorTasks.ReportGenerator(settings => settings
-                .SetFramework("netcoreapp3.0")
+                .SetFramework("netcoreapp3.1")
                 .SetReports("**/coverage.opencover.xml")
                 .SetReportTypes(ReportTypes.Cobertura, ReportTypes.SonarQube, ReportTypes.Html)
                 .SetTargetDirectory(".coverage/")
