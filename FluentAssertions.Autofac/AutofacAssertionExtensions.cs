@@ -20,12 +20,12 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns an <see cref="BuilderWrapperAssertions" /> object that can be used to assert the current
-        ///     <see cref="BuilderWrapper" />.
+        ///     Returns an <see cref="BuilderAssertions" /> object that can be used to assert the current
+        ///     <see cref="ContainerBuilder" />.
         /// </summary>
-        public static BuilderWrapperAssertions Should(this BuilderWrapper wrapper)
+        public static BuilderAssertions Should(this ContainerBuilder builder)
         {
-            return new BuilderWrapperAssertions(wrapper);
+            return new BuilderAssertions(builder);
         }
     }
 }

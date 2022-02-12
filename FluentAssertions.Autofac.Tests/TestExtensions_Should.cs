@@ -13,10 +13,9 @@ namespace FluentAssertions.Autofac
         {
             var module = new SampleModule();
 
-            var wrapper = module.WrapperFor();
-            ((object)wrapper).Should().BeOfType<BuilderWrapper>();
+            var builder = module.BuilderFor();
+            ((object)builder.Should()).Should().BeOfType<BuilderAssertions>();
 
-            var builder = wrapper.Builder;
             builder.RegisterInstance(Substitute.For<IComparable>());
             builder.RegisterInstance(Substitute.For<IConvertible>());
             builder.RegisterInstance(Substitute.For<ICustomFormatter>());
@@ -32,14 +31,14 @@ namespace FluentAssertions.Autofac
         [Fact]
         public void Provide_generic_module_builder()
         {
-            var wrapper = Module<SampleModule>.GetTestBuilderWrapper(b =>
+            var builder = Module<SampleModule>.GetTestBuilder(b =>
             {
                 // register module dependency substitutes here!
                 b.RegisterInstance(Substitute.For<IComparable>());
             });
-            wrapper.Should().RegisterModule<SampleModule>();
+            builder.Should().RegisterModule<SampleModule>();
 
-            var container = wrapper.Builder.Build();
+            var container = builder.Build();
 
             container.Resolve<IDisposable>().Should().NotBeNull();
             container.Resolve<IComparable>().Should().NotBeNull();

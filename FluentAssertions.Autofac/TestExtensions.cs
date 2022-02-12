@@ -23,16 +23,16 @@ namespace FluentAssertions.Autofac
                 throw new ArgumentNullException(nameof(module));
             }
 
-            var wrapper = WrapperFor(module, arrange);
-            return wrapper.Builder.Build();
+            var builder = BuilderFor(module, arrange);
+            return builder.Build();
         }
 
         /// <summary>
-        ///     Returns an <see cref="BuilderWrapper" /> suitable for testing the specified module.
+        ///     Returns an <see cref="ContainerBuilder" /> suitable for testing the specified module.
         /// </summary>
         /// <param name="module">The module</param>
         /// <param name="arrange">optional builder arrangement for the module</param>
-        public static BuilderWrapper WrapperFor<TModule>(this TModule module, Action<ContainerBuilder> arrange = null)
+        public static ContainerBuilder BuilderFor<TModule>(this TModule module, Action<ContainerBuilder> arrange = null)
             where TModule : Module
         {
             if (module == null)
@@ -40,10 +40,10 @@ namespace FluentAssertions.Autofac
                 throw new ArgumentNullException(nameof(module));
             }
 
-            var wrapper = new BuilderWrapper();
-            arrange?.Invoke(wrapper.Builder);
-            wrapper.Builder.RegisterModule(module);
-            return wrapper;
+            var builder = new ContainerBuilder();
+            arrange?.Invoke(builder);
+            builder.RegisterModule(module);
+            return builder;
         }
 
         /// <summary>
@@ -64,16 +64,16 @@ namespace FluentAssertions.Autofac
                 throw new ArgumentNullException(nameof(arrange));
             }
 
-            var wrapper = WrapperFor(module, arrange);
-            return wrapper.Builder.Build();
+            var builder = BuilderFor(module, arrange);
+            return builder.Build();
         }
 
         /// <summary>
-        ///     Returns an <see cref="BuilderWrapper" /> suitable for testing the specified module.
+        ///     Returns an <see cref="ContainerBuilder" /> suitable for testing the specified module.
         /// </summary>
         /// <param name="module">The module</param>
         /// <param name="arrange">optional builder arrangement for the module</param>
-        public static BuilderWrapper WrapperFor<TModule>(this TModule module, Action<ContainerBuilder, TModule> arrange)
+        public static ContainerBuilder BuilderFor<TModule>(this TModule module, Action<ContainerBuilder, TModule> arrange)
             where TModule : Module
         {
             if (module == null)
@@ -86,10 +86,10 @@ namespace FluentAssertions.Autofac
                 throw new ArgumentNullException(nameof(arrange));
             }
 
-            var wrapper = new BuilderWrapper();
-            arrange.Invoke(wrapper.Builder, module);
-            wrapper.Builder.RegisterModule(module);
-            return wrapper;
+            var builder = new ContainerBuilder();
+            arrange.Invoke(builder, module);
+            builder.RegisterModule(module);
+            return builder;
         }
     }
 }

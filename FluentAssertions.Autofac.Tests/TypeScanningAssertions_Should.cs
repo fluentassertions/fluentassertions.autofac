@@ -9,7 +9,7 @@ namespace FluentAssertions.Autofac
         [Fact]
         public void Support_type_scanning()
         {
-            var builder = new BuilderWrapper().Builder;
+            var builder = new ContainerBuilder();
             builder.RegisterAssemblyTypes(typeof(IDummy).Assembly)
                 .Where(t => t.IsAssignableTo<IDummy>())
                 .Except<Dummy3>()

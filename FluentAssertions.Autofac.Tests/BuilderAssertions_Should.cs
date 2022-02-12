@@ -4,33 +4,33 @@ using Xunit;
 namespace FluentAssertions.Autofac
 {
     // ReSharper disable InconsistentNaming
-    public class BuilderWrapperAssertions_Should
+    public class BuilderAssertions_Should
     {
         [Fact]
         public void Support_testing_assembly_modules_registrations()
         {
-            var wrapper = new BuilderWrapper();
+            var builder = new ContainerBuilder();
 
-            var assembly = typeof(BuilderWrapperAssertions_Should)
+            var assembly = typeof(BuilderAssertions_Should)
                 .Assembly;
-            wrapper.Builder.RegisterAssemblyModules(assembly);
+            builder.RegisterAssemblyModules(assembly);
 
-            wrapper.Should().RegisterAssemblyModules(assembly);
-            wrapper.Should().RegisterModule<SampleModule>();
-            wrapper.Should().RegisterModule<SampleModule2>();
+            builder.Should().RegisterAssemblyModules(assembly);
+            builder.Should().RegisterModule<SampleModule>();
+            builder.Should().RegisterModule<SampleModule2>();
 
 #pragma warning disable 618
-            wrapper.Should().RegisterModulesIn(assembly);
+            builder.Should().RegisterModulesIn(assembly);
 #pragma warning restore 618
         }
 
         [Fact]
         public void Support_testing_module_registration()
         {
-            var wrapper = new BuilderWrapper();
-            wrapper.Builder.RegisterModule<SampleModule>();
+            var builder = new ContainerBuilder();
+            builder.RegisterModule<SampleModule>();
 
-            var builderShould = wrapper.Should();
+            var builderShould = builder.Should();
             builderShould.RegisterModule<SampleModule>();
             builderShould.RegisterModule(typeof(SampleModule));
 

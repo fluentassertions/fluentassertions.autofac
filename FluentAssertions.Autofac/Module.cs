@@ -31,23 +31,23 @@ namespace FluentAssertions.Autofac
         }
 
         /// <summary>
-        ///     Returns a test <see cref="BuilderWrapper" /> that can be used to assert the specified
+        ///     Returns a test <see cref="ContainerBuilder" /> that can be used to assert the specified
         ///     <see typeparamref="TModule" />.
         /// </summary>
         /// <param name="arrange">optional builder arrangement for the module</param>
-        public static BuilderWrapper GetTestBuilderWrapper(Action<ContainerBuilder> arrange = null)
+        public static ContainerBuilder GetTestBuilder(Action<ContainerBuilder> arrange = null)
         {
-            return new TModule().WrapperFor(arrange);
+            return new TModule().BuilderFor(arrange);
         }
 
         /// <summary>
-        ///     Returns a test <see cref="BuilderWrapper" /> that can be used to assert the specified
+        ///     Returns a test <see cref="ContainerBuilder" /> that can be used to assert the specified
         ///     <see typeparamref="TModule" />.
         /// </summary>
         /// <param name="arrange">optional builder arrangement for the module</param>
-        public static BuilderWrapper GetTestBuilderWrapper(Action<ContainerBuilder, TModule> arrange)
+        public static ContainerBuilder GetTestBuilder(Action<ContainerBuilder, TModule> arrange)
         {
-            return new TModule().WrapperFor(arrange);
+            return new TModule().BuilderFor(arrange);
         }
     }
 }
