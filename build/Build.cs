@@ -7,7 +7,6 @@ using Nuke.Common.Execution;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
-using Nuke.Common.Tools.Coverlet;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Tools.ReportGenerator;
@@ -75,14 +74,7 @@ class Build : NukeBuild
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
                 .SetFramework(Framework)
-                .EnableNoBuild()
-                .EnableBlameMode()
-                .AddLoggers("trx")
-                .EnableCollectCoverage()
                 .SetDataCollector("XPlat Code Coverage")
-                .SetSettingsFile("coverage.runsettings")
-                .SetProperty("CopyLocalLockFileAssemblies", true)
-                .SetDiagnosticsFile(CoverletDiag ? "log.txt" : null)
             );
         });
 
@@ -92,7 +84,7 @@ class Build : NukeBuild
         {
             ReportGeneratorTasks.ReportGenerator(settings => settings
                 .SetFramework(Framework)
-                .SetReports("**/coverage.opencover.xml")
+                .SetReports("**/coverage.cobertura.xml")
                 .SetReportTypes(ReportTypes.Cobertura, ReportTypes.SonarQube, ReportTypes.Html)
                 .SetTargetDirectory(".coverage/")
             );

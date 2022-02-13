@@ -12,6 +12,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <IsPackable>false</IsPackable>
         <RootNamespace>FluentAssertions.Autofac</RootNamespace>
+
+        <CollectCoverage>true</CollectCoverage>
     </PropertyGroup>
 
     <ItemGroup>
