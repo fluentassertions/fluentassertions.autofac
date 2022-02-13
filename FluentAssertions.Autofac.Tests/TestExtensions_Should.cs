@@ -14,7 +14,7 @@ public class TestExtensions_Should
         var module = new SampleModule();
 
         var builder = module.BuilderFor();
-        builder.ShouldBeOfType<BuilderAssertions>();
+        builder.Should().ShouldBeOfType<BuilderAssertions>();
 
         builder.RegisterInstance(Substitute.For<IComparable>());
         builder.RegisterInstance(Substitute.For<IConvertible>());
