@@ -19,9 +19,7 @@ public static class TestExtensions
         where TModule : Module
     {
         if (module == null)
-        {
             throw new ArgumentNullException(nameof(module));
-        }
 
         var builder = BuilderFor(module, arrange);
         return builder.Build();
@@ -36,9 +34,7 @@ public static class TestExtensions
         where TModule : Module
     {
         if (module == null)
-        {
             throw new ArgumentNullException(nameof(module));
-        }
 
         var builder = new ContainerBuilder();
         arrange?.Invoke(builder);
@@ -55,14 +51,10 @@ public static class TestExtensions
         where TModule : Module
     {
         if (module == null)
-        {
             throw new ArgumentNullException(nameof(module));
-        }
 
         if (arrange == null)
-        {
             throw new ArgumentNullException(nameof(arrange));
-        }
 
         var builder = BuilderFor(module, arrange);
         return builder.Build();
@@ -77,14 +69,10 @@ public static class TestExtensions
         where TModule : Module
     {
         if (module == null)
-        {
             throw new ArgumentNullException(nameof(module));
-        }
 
         if (arrange == null)
-        {
             throw new ArgumentNullException(nameof(arrange));
-        }
 
         var builder = new ContainerBuilder();
         arrange.Invoke(builder, module);

@@ -18,10 +18,6 @@ public class BuilderAssertions_Should
         builder.Should().RegisterAssemblyModules(assembly);
         builder.Should().RegisterModule<SampleModule>();
         builder.Should().RegisterModule<SampleModule2>();
-
-#pragma warning disable 618
-        builder.Should().RegisterModulesIn(assembly);
-#pragma warning restore 618
     }
 
     [Fact]

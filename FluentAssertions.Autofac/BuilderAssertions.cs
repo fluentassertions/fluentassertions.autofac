@@ -54,22 +54,11 @@ public class BuilderAssertions : ReferenceTypeAssertions<ContainerBuilder, Build
     /// <param name="moduleType">The module type</param>
     public void RegisterModule(Type moduleType)
     {
-        EnsureTraversed();
+        EnsureVisited();
         var module = _modules.FirstOrDefault(m => m.GetType() == moduleType);
         Execute.Assertion
             .ForCondition(module != null)
             .FailWith($"Module '{moduleType}' should be registered but it was not.");
-    }
-
-    /// <summary>
-    ///     Asserts that the modules contained in the specified assembly have been registered on the current
-    ///     <see cref="ContainerBuilder" />.
-    /// </summary>
-    /// <param name="assembly">The module assembly</param>
-    [Obsolete("Use 'RegisterAssemblyModules'")]
-    public void RegisterModulesIn(Assembly assembly)
-    {
-        RegisterModulesOf(assembly);
     }
 
     /// <summary>
@@ -95,25 +84,31 @@ public class BuilderAssertions : ReferenceTypeAssertions<ContainerBuilder, Build
     }
 
     private readonly List<IModule> _modules = new();
-    private bool _traversed;
+    private bool _visited;
 
-    private void EnsureTraversed()
+    private void EnsureVisited()
     {
-        if (_traversed)
-        {
+        if (_visited)
             return;
-        }
 
         // we will catch all directly registered modules here
-        Traverse(Subject);
-        // modules loaded indirectly will be registered by the module-builder
-        Traverse(_moduleBuilder);
-        _traversed = true;
+        Visit(Subject);
+
+        // modules loaded indirectly will be registered on the module-builder,
+        // loop until no new modules discovered
+        var modulesVisited = 0;
+        while (_modules.Count > modulesVisited)
+        {
+            Visit(_moduleBuilder);
+            modulesVisited = _modules.Count;
+        }
+
+        _visited = true;
     }
 
-    private void Traverse(ContainerBuilder builder)
+    private void Visit(ContainerBuilder builder)
     {
-        CallbacksOf(builder).ToList().ForEach(Traverse);
+        CallbacksOf(builder).ToList().ForEach(Visit);
     }
 
     private static IEnumerable<DeferredCallback> CallbacksOf(ContainerBuilder builder)
@@ -123,27 +118,30 @@ public class BuilderAssertions : ReferenceTypeAssertions<ContainerBuilder, Build
             .ToList();
     }
 
-    private void Traverse(DeferredCallback callback)
+    private void Visit(DeferredCallback callback)
     {
-        Traverse(callback.Callback);
+        Visit(callback.Callback);
     }
 
-    private void Traverse(Action<IComponentRegistryBuilder> callback)
+    private void Visit(Action<IComponentRegistryBuilder> callback)
     {
         switch (callback.Target)
         {
             case Module module:
-                _modules.Add(module);
-                // load module to our module builder
-                Load(module, _moduleBuilder);
+                if (!_modules.Contains(module))
+                {
+                    _modules.Add(module);
+                    Load(module, _moduleBuilder);
+                }
+
                 return;
             case IModuleRegistrar registrar:
-                CallbacksOf(registrar).ForEach(Traverse);
+                CallbacksOf(registrar).ForEach(Visit);
                 return;
         }
 
         _modules.AddRange(FieldsOf<IModule>(callback.Target));
-        CallbacksOf(callback.Target).ForEach(Traverse);
+        CallbacksOf(callback.Target).ForEach(Visit);
     }
 
 

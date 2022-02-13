@@ -72,13 +72,11 @@ public class RegisterAssertions : RegistrationAssertions
 
     private static List<Type> GetImplementedInterfaces(Type type)
     {
-        var interfaces = type.GetTypeInfo().ImplementedInterfaces.Where(i => i != typeof(IDisposable))
+        var interfaces = type.GetTypeInfo().ImplementedInterfaces
+            .Where(i => i != typeof(IDisposable))
             .ToList();
         if (type.GetTypeInfo().IsInterface)
-        {
             interfaces.Add(type);
-        }
-
         return interfaces;
     }
 }

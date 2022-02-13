@@ -103,9 +103,7 @@ public class
     private static void AssertGenericType(Type genericTypeDefinition)
     {
         if (genericTypeDefinition == null)
-        {
             throw new ArgumentNullException(nameof(genericTypeDefinition));
-        }
 
         if (!genericTypeDefinition.IsGenericTypeDefinition)
         {

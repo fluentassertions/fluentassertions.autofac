@@ -56,9 +56,7 @@ public class
     public RegisterAssertions Registered(object instance)
     {
         if (instance == null)
-        {
             throw new ArgumentNullException(nameof(instance));
-        }
 
         return new RegisterAssertions(Subject, instance.GetType());
     }
