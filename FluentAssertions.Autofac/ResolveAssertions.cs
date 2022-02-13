@@ -51,9 +51,22 @@ public class ResolveAssertions : ReferenceTypeAssertions<IComponentContext, Reso
     ///     Asserts that the specified implementation type can be resolved from the current <see cref="IComponentContext" />.
     /// </summary>
     /// <typeparam name="TImplementation">The type to resolve</typeparam>
+    // ReSharper disable once UnusedMember.Global
     public RegistrationAssertions As<TImplementation>()
     {
         return As(typeof(TImplementation));
+    }
+
+    /// <summary>
+    ///     Asserts that the specified implementation type(s) can be resolved from the current <see cref="IComponentContext" />.
+    /// </summary>
+    /// <param name="type">The type to resolve</param>
+    /// <param name="types">Optional types to resolve</param>
+    public RegistrationAssertions As(Type type, params Type[] types)
+    {
+        AssertTypeResolved(type);
+        types.ToList().ForEach(AssertTypeResolved);
+        return new RegistrationAssertions(Subject, type);
     }
 
     /// <summary>
@@ -72,18 +85,6 @@ public class ResolveAssertions : ReferenceTypeAssertions<IComponentContext, Reso
     public void AutoActivate()
     {
         Subject.AssertAutoActivates(_serviceType);
-    }
-
-    /// <summary>
-    ///     Asserts that the specified implementation type(s) can be resolved from the current <see cref="IComponentContext" />.
-    /// </summary>
-    /// <param name="type">The type to resolve</param>
-    /// <param name="types">Optional types to resolve</param>
-    public RegistrationAssertions As(Type type, params Type[] types)
-    {
-        AssertTypeResolved(type);
-        types.ToList().ForEach(AssertTypeResolved);
-        return new RegistrationAssertions(Subject, type);
     }
 
     private void AssertTypeResolved(Type type)

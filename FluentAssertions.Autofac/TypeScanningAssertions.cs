@@ -84,6 +84,16 @@ public class TypeScanningAssertions : ReferenceTypeAssertions<IComponentContext,
     }
 
     /// <summary>
+    ///     Asserts that the scanned types can be resolved from the current <see cref="IComponentContext" />
+    ///     as the type returned using the specified lambda.
+    /// </summary>
+    public TypeScanningAssertions As(Func<Type, Type> lambda)
+    {
+        Register.ForEach(r => r.As(lambda(r.Type)));
+        return this;
+    }
+
+    /// <summary>
     ///     Asserts that the scanned types can be resolved from the current <see cref="IComponentContext" /> as self.
     /// </summary>
     public TypeScanningAssertions AsSelf()
@@ -99,16 +109,6 @@ public class TypeScanningAssertions : ReferenceTypeAssertions<IComponentContext,
     public TypeScanningAssertions AsImplementedInterfaces()
     {
         Register.ForEach(r => r.AsImplementedInterfaces());
-        return this;
-    }
-
-    /// <summary>
-    ///     Asserts that the scanned types can be resolved from the current <see cref="IComponentContext" />
-    ///     as the type returned using the specified lambda.
-    /// </summary>
-    public TypeScanningAssertions As(Func<Type, Type> lambda)
-    {
-        Register.ForEach(r => r.As(lambda(r.Type)));
         return this;
     }
 

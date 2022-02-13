@@ -13,7 +13,6 @@ using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Tools.ReportGenerator;
 using Nuke.Common.Tools.SonarScanner;
 using Nuke.Common.Utilities.Collections;
-using Serilog;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -75,6 +74,7 @@ class Build : NukeBuild
             DotNetTest(settings => settings
                 .SetProjectFile(Solution)
                 .SetConfiguration(Configuration)
+                .SetFramework(Framework)
                 .EnableNoBuild()
                 .EnableBlameMode()
                 .AddLoggers("trx")
@@ -91,7 +91,7 @@ class Build : NukeBuild
         .Executes(() =>
         {
             ReportGeneratorTasks.ReportGenerator(settings => settings
-                .SetFramework("netcoreapp3.1")
+                .SetFramework(Framework)
                 .SetReports("**/coverage.opencover.xml")
                 .SetReportTypes(ReportTypes.Cobertura, ReportTypes.SonarQube, ReportTypes.Html)
                 .SetTargetDirectory(".coverage/")
@@ -118,7 +118,7 @@ class Build : NukeBuild
                 .SetVersion(GitVersion.FullSemVer)
                 .SetVSTestReports("**/*.trx")
                 // cf.: https://github.com/nuke-build/nuke/issues/377#issuecomment-595276623
-                .SetFramework("netcoreapp3.0")
+                .SetFramework(Framework)
                 .SetLogin(SonarLogin) // TODO: should be secret -> SetArgument
                 .SetServer(SonarServer)
                 .SetProcessArgumentConfigurator(args =>
@@ -133,8 +133,9 @@ class Build : NukeBuild
                         // set organization & branch name, cf.:
                         // - https://github.com/nuke-build/nuke/issues/304#issuecomment-522250591
                         // - http://www.nuke.build/docs/authoring-builds/cli-tools.html#custom-arguments
-                        args.Add($"/o:{SonarOrganization}")
-                            .Add($"/d:sonar.branch.name={GitVersion.BranchName}");
+                        args.Add($"/o:{SonarOrganization}");
+                            if (GitVersion.BranchName != "main")
+                                args.Add($"/d:sonar.branch.name={GitVersion.BranchName}");
                     }
 
                     return args;
@@ -149,7 +150,7 @@ class Build : NukeBuild
             SonarScannerTasks.SonarScannerEnd(settings => settings
                 .SetLogin(SonarLogin) // TODO: should be secret -> SetArgument
                 // cf.: https://github.com/nuke-build/nuke/issues/377#issuecomment-595276623
-                .SetFramework("netcoreapp3.0")
+                .SetFramework(Framework)
             );
         });
 
@@ -204,7 +205,7 @@ class Build : NukeBuild
 
     [Solution] readonly Solution Solution;
 
-    const string Framework = "net5.0";
+    const string Framework = "net6.0";
     [GitVersion(Framework = Framework, NoFetch = true)] readonly GitVersion GitVersion;
 
     [Parameter("The SonarQube login token")]

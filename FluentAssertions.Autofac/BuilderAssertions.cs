@@ -111,13 +111,6 @@ public class BuilderAssertions : ReferenceTypeAssertions<ContainerBuilder, Build
         CallbacksOf(builder).ToList().ForEach(Visit);
     }
 
-    private static IEnumerable<DeferredCallback> CallbacksOf(ContainerBuilder builder)
-    {
-        return FieldsOf<IEnumerable<DeferredCallback>>(builder)
-            .SelectMany(list => list)
-            .ToList();
-    }
-
     private void Visit(DeferredCallback callback)
     {
         Visit(callback.Callback);
@@ -144,6 +137,17 @@ public class BuilderAssertions : ReferenceTypeAssertions<ContainerBuilder, Build
         CallbacksOf(callback.Target).ForEach(Visit);
     }
 
+    private static IEnumerable<DeferredCallback> CallbacksOf(ContainerBuilder builder)
+    {
+        return FieldsOf<IEnumerable<DeferredCallback>>(builder)
+            .SelectMany(list => list)
+            .ToList();
+    }
+
+    private static List<Action<IComponentRegistryBuilder>> CallbacksOf(object value)
+    {
+        return FieldsOf<Action<IComponentRegistryBuilder>>(value).ToList();
+    }
 
     private readonly ContainerBuilder _moduleBuilder = new();
 
@@ -153,11 +157,6 @@ public class BuilderAssertions : ReferenceTypeAssertions<ContainerBuilder, Build
     private static void Load(Module module, ContainerBuilder builder)
     {
         LoadModule.Invoke(module, new object[] { builder });
-    }
-
-    private static List<Action<IComponentRegistryBuilder>> CallbacksOf(object value)
-    {
-        return FieldsOf<Action<IComponentRegistryBuilder>>(value).ToList();
     }
 
     private static IEnumerable<T> FieldsOf<T>(object value)
