@@ -4,8 +4,10 @@
 
 [![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 [![NuGet](https://img.shields.io/nuget/dt/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
+
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fluentassertions.FluentAssertions.Autofac&metric=alert_status)](https://sonarcloud.io/dashboard?id=fluentassertions.FluentAssertions.Autofac)
-[![Documentation Status](https://readthedocs.org/projects/fluentassertionsautofac/badge/?version=latest)](http://fluentassertionsautofac.rtfd.io/en/latest/)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=fluentassertions.FluentAssertions.Autofac&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=fluentassertions.FluentAssertions.Autofac)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=fluentassertions.FluentAssertions.Autofac&metric=coverage)](https://sonarcloud.io/summary/new_code?id=fluentassertions.FluentAssertions.Autofac)
 
 This repository contains the [Fluent Assertions](http://fluentassertions.com/) extensions
 for [Autofac](https://autofac.org/). It is maintained by [@mkoertgen](https://github.com/mkoertgen).
@@ -28,13 +30,7 @@ With an application growing in complexity, there is also growing need to organiz
 
 ### Usage
 
-Install the NuGet package
-
-```powershell
-PM> Install-Package FluentAssertions.Autofac
-```
-
-and start writing tests for your Autofac configuration.
+Install the NuGet package [FluentAssertions.Autofac](https://www.nuget.org/packages/FluentAssertions.Autofac/) and start writing tests for your Autofac configuration.
 
 ```csharp
 container.Should().Have().Registered<SuperCoolService>()
@@ -43,21 +39,14 @@ container.Should().Have().Registered<SuperCoolService>()
     .Singleton();
 ```
 
-Find more examples in the [documentation](http://fluentassertionsautofac.readthedocs.io/en/latest) or the [tests]().
+Find more examples in the [documentation](_docs/index.md) or the [tests](./FluentAssertions.Autofac.Tests/).
 
 ### How to build
 
-Clone and build using Visual Studio or the command line using [nuke.build](https://nuke.build/)
-
-```console
-git clone https://github.com/fluentassertions/fluentassertions.autofac.git
-cd fluentassertions.autofac
-nuke
-```
+Clone and build using Rider, Code, Visual Studio, ... or the command line using [nuke.build](https://nuke.build/).
 
 ### Links
 
-- [Why?](http://fluentassertionsautofac.readthedocs.org/en/latest/why)
-- [Usage](http://fluentassertionsautofac.readthedocs.org/en/latest/usage/)
-- [Documentation](http://fluentassertionsautofac.readthedocs.io/en/latest)
+- [Why?](_docs/why.md)
+- [Usage](_docs/usage.md)
 - [Contributing](https://github.com/fluentassertions/fluentAssertions.autofac/blob/master/CONTRIBUTING.md)
