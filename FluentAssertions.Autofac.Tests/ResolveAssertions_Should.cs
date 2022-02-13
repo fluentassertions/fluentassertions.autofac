@@ -38,6 +38,21 @@ public class ResolveAssertions_Should
     }
 
     [Fact]
+    public void Resolve_Named()
+    {
+        var containerShould = Configure(builder =>
+            builder.RegisterType<Dummy>()
+                .Named<IDisposable>("dummy")
+                .AsSelf()
+        ).Should();
+
+        containerShould.Resolve<Dummy>()
+            .AsSelf()
+            .Named<IDisposable>("dummy")
+            .Named("dummy", typeof(IDisposable));
+    }
+
+    [Fact]
     public void Assert_AutoActivation()
     {
         var container = Configure(builder => builder.RegisterType<Dummy>().AsSelf().AutoActivate());

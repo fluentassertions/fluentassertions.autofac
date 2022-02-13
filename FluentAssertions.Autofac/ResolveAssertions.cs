@@ -75,8 +75,7 @@ public class ResolveAssertions : ReferenceTypeAssertions<IComponentContext, Reso
     }
 
     /// <summary>
-    ///     Asserts that the specified implementation type(s) can be resolved from the current <see cref="IComponentContext" />
-    ///     .
+    ///     Asserts that the specified implementation type(s) can be resolved from the current <see cref="IComponentContext" />.
     /// </summary>
     /// <param name="type">The type to resolve</param>
     /// <param name="types">Optional types to resolve</param>
