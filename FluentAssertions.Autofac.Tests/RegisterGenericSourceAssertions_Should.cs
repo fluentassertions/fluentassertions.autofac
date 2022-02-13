@@ -24,6 +24,21 @@ public class RegisterGenericSourceAssertions_Should
     }
 
     [Fact]
+    public void Register_Named_Generic()
+    {
+        var containerShouldHave = GetSut(builder =>
+            builder.RegisterGeneric(typeof(Repository<>))
+                .Named("awesomeRepo", typeof(IRepository<>))
+                .SingleInstance()
+        );
+
+        containerShouldHave
+            .RegisteredGeneric(typeof(Repository<>))
+            .Named("awesomeRepo", typeof(IRepository<>))
+            .SingleInstance();
+    }
+
+    [Fact]
     public void Register_Generic_WithMultiple_GenericArgumentTypes()
     {
         var containerShouldHave = GetSut(builder =>

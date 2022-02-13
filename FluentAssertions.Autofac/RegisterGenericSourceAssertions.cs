@@ -19,7 +19,7 @@ namespace FluentAssertions.Autofac;
 public class
     RegisterGenericSourceAssertions : ReferenceTypeAssertions<IComponentContext, RegisterGenericSourceAssertions>
 {
-    private readonly Type _genericComponentTypeDefinition;
+    private readonly Type _type;
 
     /// <inheritdoc />
     /// <summary>
@@ -31,67 +31,74 @@ public class
     /// <summary>
     ///     Initializes a new instance of the <see cref="RegisterGenericSourceAssertions" /> class.
     /// </summary>
-    /// <param name="subject">The container</param>
-    /// <param name="genericComponentTypeDefinition">The type that should be registered on the container</param>
-    public RegisterGenericSourceAssertions(IComponentContext subject, Type genericComponentTypeDefinition) :
+    /// <param name="subject">The component context</param>
+    /// <param name="type">The type that should be registered on the container</param>
+    public RegisterGenericSourceAssertions(IComponentContext subject, Type type) :
         base(subject)
     {
-        AssertGenericType(genericComponentTypeDefinition);
-        _genericComponentTypeDefinition = genericComponentTypeDefinition;
+        AssertGenericType(type);
+        _type = type;
     }
 
     /// <summary>
     ///     Asserts that the specified service type can be resolved from the current <see cref="IComponentContext" />.
     /// </summary>
-    /// <param name="genericServiceTypeDefinition">The type to resolve</param>
-    public RegistrationAssertions As(Type genericServiceTypeDefinition)
+    /// <param name="type">The type to resolve</param>
+    public RegistrationAssertions As(Type type)
     {
-        AssertGenericType(genericServiceTypeDefinition);
-        var componentServicePairText =
-            $"Component={_genericComponentTypeDefinition.FullName} Service={genericServiceTypeDefinition.FullName}";
-
-        _genericComponentTypeDefinition.GetGenericArguments().Length.Should()
-            .Be(genericServiceTypeDefinition.GetGenericArguments().Length,
-                $"the generic arguments count of both generic component and generic service must be equal. {componentServicePairText}.");
-
-        var argumentTypes = Enumerable.Repeat(typeof(object),
-            _genericComponentTypeDefinition.GetGenericArguments().Length).ToArray();
-        var componentType = _genericComponentTypeDefinition.MakeGenericType(argumentTypes);
-        var serviceType = genericServiceTypeDefinition.MakeGenericType(argumentTypes);
-
-        componentType.Should()
-            .Implement(serviceType,
-                $"component must implement specified service. {componentServicePairText}.");
-
-        var registration = GetRegistrationFromSources(serviceType);
-        registration.Should()
-            .NotBeNull(
-                $"it must be a registration source providing registrations for service {genericServiceTypeDefinition.FullName}");
-
-        registration.Activator.LimitType.Should()
-            .Be(componentType,
-                $"the generic component type definition in the registration must be {_genericComponentTypeDefinition.FullName}.");
-
+        var serviceType = GenericServiceTypeFor(type, out var componentType);
+        var service = new TypedService(serviceType);
+        var registration = RegistrationFor(type, service, componentType);
         return new RegistrationAssertions(Subject, registration);
     }
 
-    private IComponentRegistration GetRegistrationFromSources(Type serviceType)
+    /// <summary>
+    ///     Asserts that the specified service type can be resolved from the current <see cref="IComponentContext" />.
+    /// </summary>
+    /// <param name="serviceName">The service name</param>
+    /// <param name="type">The type to resolve</param>
+    public RegistrationAssertions Named(string serviceName, Type type)
     {
-        var typedService = new TypedService(serviceType);
+        var serviceType = GenericServiceTypeFor(type, out var componentType);
+        var service = new KeyedService(serviceName, serviceType);
+        var registration = RegistrationFor(type, service, componentType);
+        return new RegistrationAssertions(Subject, registration);
+    }
 
-        foreach (var registrationSource in Subject.ComponentRegistry.Sources)
-        {
-            var registration = registrationSource
-                .RegistrationsFor(typedService, Accessor)
-                .FirstOrDefault();
+    private IComponentRegistration RegistrationFor(Type type, Service service, Type componentType)
+    {
+        var registration = RegistrationsFor(service).FirstOrDefault();
+        registration.Should()
+            .NotBeNull($"there should be a registration source providing registrations for service {type.FullName}");
+        registration?.Activator.LimitType.Should()
+            .Be(componentType, $"the generic component type definition registered should be {_type.FullName}.");
+        return registration;
+    }
 
-            if (registration != null)
-            {
-                return registration;
-            }
-        }
+    private Type GenericServiceTypeFor(Type type, out Type componentType)
+    {
+        AssertGenericType(type);
+        var componentServicePairText =
+            $"Component={_type.FullName} Service={type.FullName}";
 
-        return null;
+        _type.GetGenericArguments().Should().HaveCount(type.GetGenericArguments().Length,
+            $"the generic arguments count of both generic component and generic service must be equal. {componentServicePairText}.");
+
+        var argumentTypes = Enumerable.Repeat(typeof(object),
+            _type.GetGenericArguments().Length).ToArray();
+        componentType = _type.MakeGenericType(argumentTypes);
+        var serviceType = type.MakeGenericType(argumentTypes);
+
+        componentType.Should().Implement(serviceType,
+                $"component must implement specified service. {componentServicePairText}.");
+        return serviceType;
+    }
+
+    private IEnumerable<IComponentRegistration> RegistrationsFor(Service service)
+    {
+        return Subject.ComponentRegistry.Sources
+            .SelectMany(sources => sources.RegistrationsFor(service, Accessor)
+                .ToList());
     }
 
     private IEnumerable<ServiceRegistration> Accessor(Service service)
@@ -100,15 +107,15 @@ public class
             .Select(c => new ServiceRegistration(ServicePipelines.DefaultServicePipeline, c));
     }
 
-    private static void AssertGenericType(Type genericTypeDefinition)
+    private static void AssertGenericType(Type type)
     {
-        if (genericTypeDefinition == null)
-            throw new ArgumentNullException(nameof(genericTypeDefinition));
+        if (type == null)
+            throw new ArgumentNullException(nameof(type));
 
-        if (!genericTypeDefinition.IsGenericTypeDefinition)
+        if (!type.IsGenericTypeDefinition)
         {
             throw new ArgumentException("Type must be a generic type definition.",
-                nameof(genericTypeDefinition));
+                nameof(type));
         }
     }
 }
