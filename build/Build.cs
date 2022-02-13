@@ -174,13 +174,6 @@ class Build : NukeBuild
         .DependsOn(Package)
         .Executes(() =>
         {
-            if (IsCiBuild && !IsPushTag)
-            {
-                Log.Information("Skipping (no tag)");
-                return;
-            }
-
-
             DotNetNuGetPush(settings => settings
                 .SetTargetPath(ArtifactsDir / "*.nupkg")
                 .SetApiKey(NuGetApiKey)
@@ -192,8 +185,7 @@ class Build : NukeBuild
     // ReSharper disable once UnusedMember.Local
     Target CiBuild => _ => _
         .Description("DevOps build target")
-        .DependsOn(Sonar)
-        .DependsOn(Push)
+        .DependsOn(IsPushTag ? new []{Sonar,Push}: new []{Test})
         .Executes(() =>
         {
         });
