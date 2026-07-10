@@ -194,7 +194,7 @@ class Build : NukeBuild
 
     [Solution] readonly Solution Solution;
 
-    const string Framework = "net6.0";
+    const string Framework = "net8.0";
     [GitVersion(Framework = Framework, NoFetch = true)] readonly GitVersion GitVersion;
 
     [Parameter("The SonarQube login token")]
