@@ -19,6 +19,8 @@
         <!-- See GitHub project tags -->
         <PackageTags>autofac;fluent-assertions;ioc;tdd;dotnet-core</PackageTags>
         <RepositoryUrl>https://github.com/fluentassertions/fluentassertions.autofac</RepositoryUrl>
+        <!-- Fallback version for local/sandbox builds where GitVersion cannot run; overridden by GitVersion in CI -->
+        <Version Condition="'$(Version)' == ''">8.0.0-pre.1</Version>
         <!-- Workaround GitVersionTask failing to load Newtonsoft.Json=12, cf. https://gitter.im/GitTools/GitVersion# -->
         <WriteVersionInfoToBuildLog>false</WriteVersionInfoToBuildLog>
 
