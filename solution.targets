@@ -13,7 +13,7 @@
         <Product>FluentAssertions.Autofac</Product>
         <Company>FluentAssertions</Company>
         <NeutralLanguage>en</NeutralLanguage>
-        <Copyright>Copyright © FluentAssertions 2017-2020</Copyright>
+        <Copyright>Copyright © FluentAssertions 2017-2026</Copyright>
         <Description>Fluent Assertions extensions for Autofac</Description>
         <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
         <!-- See GitHub project tags -->
