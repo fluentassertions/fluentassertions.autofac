@@ -15,7 +15,6 @@ using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-[CheckBuildProjectConfigurations]
 [UnsetVisualStudioEnvironmentVariables]
 // NUKE CI Integration: http://www.nuke.build/docs/authoring-builds/ci-integration.html
 [GitHubActions("build", GitHubActionsImage.WindowsLatest,
