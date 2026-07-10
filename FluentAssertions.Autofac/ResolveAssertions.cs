@@ -33,7 +33,9 @@ public class ResolveAssertions : ReferenceTypeAssertions<IComponentContext, Reso
     /// </summary>
     /// <param name="container">The container</param>
     /// <param name="serviceType">The service type</param>
-    public ResolveAssertions(IComponentContext container, Type serviceType) : base(container)
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
+    public ResolveAssertions(IComponentContext container, Type serviceType, AssertionChain assertionChain)
+        : base(container, assertionChain)
     {
         _serviceType = serviceType;
         var typeToResolve = typeof(IEnumerable<>).MakeGenericType(serviceType);
@@ -42,7 +44,7 @@ public class ResolveAssertions : ReferenceTypeAssertions<IComponentContext, Reso
             _instances.AddRange(array.OfType<object>());
         }
 
-        Execute.Assertion
+        CurrentAssertionChain
             .ForCondition(_instances.Any())
             .FailWith($"Expected container to resolve '{_serviceType}' but it did not.");
     }
@@ -52,10 +54,7 @@ public class ResolveAssertions : ReferenceTypeAssertions<IComponentContext, Reso
     /// </summary>
     /// <typeparam name="TImplementation">The type to resolve</typeparam>
     // ReSharper disable once UnusedMember.Global
-    public RegistrationAssertions As<TImplementation>()
-    {
-        return As(typeof(TImplementation));
-    }
+    public RegistrationAssertions As<TImplementation>() => As(typeof(TImplementation));
 
     /// <summary>
     ///     Asserts that the specified implementation type(s) can be resolved from the current <see cref="IComponentContext" />.
@@ -66,30 +65,21 @@ public class ResolveAssertions : ReferenceTypeAssertions<IComponentContext, Reso
     {
         AssertTypeResolved(type);
         types.ToList().ForEach(AssertTypeResolved);
-        return new RegistrationAssertions(Subject, type);
+        return new RegistrationAssertions(Subject, type, CurrentAssertionChain);
     }
 
     /// <summary>
     ///     Asserts that the registered service type can be resolved from the current <see cref="IComponentContext" />.
     /// </summary>
-    public RegistrationAssertions AsSelf()
-    {
-        return As(_serviceType);
-    }
-
+    public RegistrationAssertions AsSelf() => As(_serviceType);
 
     /// <summary>
     ///     Asserts that the service type has been registered with auto activation on the current
     ///     <see cref="IComponentContext" />.
     /// </summary>
-    public void AutoActivate()
-    {
-        Subject.AssertAutoActivates(_serviceType);
-    }
+    public void AutoActivate() => Subject.AssertAutoActivates(_serviceType);
 
     private void AssertTypeResolved(Type type)
-    {
-        _instances.Should().Contain(instance => instance.GetType() == type,
+        => _instances.Should().Contain(instance => instance.GetType() == type,
             $"Type '{_serviceType}' should be resolved as '{type}'");
-    }
 }

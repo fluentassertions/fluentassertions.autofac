@@ -5,6 +5,7 @@ using System.Linq;
 using Autofac;
 using Autofac.Core;
 using Autofac.Core.Resolving.Pipeline;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac;
@@ -16,8 +17,8 @@ namespace FluentAssertions.Autofac;
 #if !DEBUG
     [System.Diagnostics.DebuggerNonUserCode]
 #endif
-public class
-    RegisterGenericSourceAssertions : ReferenceTypeAssertions<IComponentContext, RegisterGenericSourceAssertions>
+public class RegisterGenericSourceAssertions
+    : ReferenceTypeAssertions<IComponentContext, RegisterGenericSourceAssertions>
 {
     private readonly Type _type;
 
@@ -33,8 +34,9 @@ public class
     /// </summary>
     /// <param name="subject">The component context</param>
     /// <param name="type">The type that should be registered on the container</param>
-    public RegisterGenericSourceAssertions(IComponentContext subject, Type type) :
-        base(subject)
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
+    public RegisterGenericSourceAssertions(IComponentContext subject, Type type, AssertionChain assertionChain)
+        : base(subject, assertionChain)
     {
         AssertGenericType(type);
         _type = type;
@@ -49,7 +51,7 @@ public class
         var serviceType = GenericServiceTypeFor(type, out var componentType);
         var service = new TypedService(serviceType);
         var registration = RegistrationFor(type, service, componentType);
-        return new RegistrationAssertions(Subject, registration);
+        return new RegistrationAssertions(Subject, registration, CurrentAssertionChain);
     }
 
     /// <summary>
@@ -62,7 +64,7 @@ public class
         var serviceType = GenericServiceTypeFor(type, out var componentType);
         var service = new KeyedService(serviceName, serviceType);
         var registration = RegistrationFor(type, service, componentType);
-        return new RegistrationAssertions(Subject, registration);
+        return new RegistrationAssertions(Subject, registration, CurrentAssertionChain);
     }
 
     private IComponentRegistration RegistrationFor(Type type, Service service, Type componentType)
@@ -78,8 +80,7 @@ public class
     private Type GenericServiceTypeFor(Type type, out Type componentType)
     {
         AssertGenericType(type);
-        var componentServicePairText =
-            $"Component={_type.FullName} Service={type.FullName}";
+        var componentServicePairText = $"Component={_type.FullName} Service={type.FullName}";
 
         _type.GetGenericArguments().Should().HaveCount(type.GetGenericArguments().Length,
             $"the generic arguments count of both generic component and generic service must be equal. {componentServicePairText}.");
@@ -90,7 +91,7 @@ public class
         var serviceType = type.MakeGenericType(argumentTypes);
 
         componentType.Should().Implement(serviceType,
-                $"component must implement specified service. {componentServicePairText}.");
+            $"component must implement specified service. {componentServicePairText}.");
         return serviceType;
     }
 
@@ -113,9 +114,6 @@ public class
             throw new ArgumentNullException(nameof(type));
 
         if (!type.IsGenericTypeDefinition)
-        {
-            throw new ArgumentException("Type must be a generic type definition.",
-                nameof(type));
-        }
+            throw new ArgumentException("Type must be a generic type definition.", nameof(type));
     }
 }

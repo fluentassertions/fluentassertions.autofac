@@ -6,7 +6,7 @@
     <Import Project="$(SolutionDir)\solution.targets"/>
 
     <PropertyGroup>
-        <TargetFramework>net8.0</TargetFramework>
+        <TargetFramework>net10.0</TargetFramework>
         <IsPackable>false</IsPackable>
         <RootNamespace>FluentAssertions.Autofac</RootNamespace>
 

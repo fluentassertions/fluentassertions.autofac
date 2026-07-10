@@ -7,6 +7,7 @@ using Autofac;
 using Autofac.Core;
 using Autofac.Core.Activators.Reflection;
 using Autofac.Core.Lifetime;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac;
@@ -40,7 +41,9 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     /// </summary>
     /// <param name="subject">The container</param>
     /// <param name="type">The type that should be registered on the container</param>
-    public RegistrationAssertions(IComponentContext subject, Type type) : base(subject)
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
+    public RegistrationAssertions(IComponentContext subject, Type type, AssertionChain assertionChain)
+        : base(subject, assertionChain)
     {
         Type = type ?? throw new ArgumentNullException(nameof(type));
         _registration = Subject.ComponentRegistry.GetRegistration(Type);
@@ -52,7 +55,9 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     /// </summary>
     /// <param name="subject">The container</param>
     /// <param name="registration"></param>
-    public RegistrationAssertions(IComponentContext subject, IComponentRegistration registration) : base(subject)
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
+    public RegistrationAssertions(IComponentContext subject, IComponentRegistration registration, AssertionChain assertionChain)
+        : base(subject, assertionChain)
     {
         _registration = registration ?? throw new ArgumentNullException(nameof(registration));
         Type = registration.Activator.LimitType;
@@ -65,10 +70,7 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     /// </summary>
     /// <param name="name">The service name</param>
     /// <typeparam name="TService">The service type</typeparam>
-    public RegistrationAssertions Named<TService>(string name)
-    {
-        return Named(name, typeof(TService));
-    }
+    public RegistrationAssertions Named<TService>(string name) => Named(name, typeof(TService));
 
     /// <summary>
     ///     Asserts that the specified <see paramref="type" /> has been registered on the current
@@ -90,10 +92,7 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     /// </summary>
     /// <param name="key">The service key</param>
     /// <typeparam name="TService">The service type</typeparam>
-    public RegistrationAssertions Keyed<TService>(object key)
-    {
-        return Keyed(key, typeof(TService));
-    }
+    public RegistrationAssertions Keyed<TService>(object key) => Keyed(key, typeof(TService));
 
     /// <summary>
     ///     Asserts that the specified <see typeparamref="TService" /> has been registered on the current
@@ -113,59 +112,41 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     ///     <see cref="IComponentContext" />.
     /// </summary>
     public RegistrationAssertions SingleInstance()
-    {
-        return Lifetime<RootScopeLifetime>()
-            .Shared(InstanceSharing.Shared);
-    }
+        => Lifetime<RootScopeLifetime>().Shared(InstanceSharing.Shared);
 
     /// <summary>
     ///     Asserts that the current service type has been registered as 'instance per dependency' on the current
     ///     <see cref="IComponentContext" />.
     /// </summary>
     public RegistrationAssertions InstancePerDependency()
-    {
-        return Lifetime<CurrentScopeLifetime>()
-            .Shared(InstanceSharing.None);
-    }
+        => Lifetime<CurrentScopeLifetime>().Shared(InstanceSharing.None);
 
     /// <summary>
     ///     Asserts that the current service type has been registered as 'instance per lifetime scope' on the current
     ///     <see cref="IComponentContext" />.
     /// </summary>
     public RegistrationAssertions InstancePerLifetimeScope()
-    {
-        return Lifetime<CurrentScopeLifetime>()
-            .Shared(InstanceSharing.Shared);
-    }
+        => Lifetime<CurrentScopeLifetime>().Shared(InstanceSharing.Shared);
 
     /// <summary>
     ///     Asserts that the current service type has been registered as 'instance per matching lifetime scope' on the current
     ///     <see cref="IComponentContext" />.
     /// </summary>
     public RegistrationAssertions InstancePerMatchingLifetimeScope()
-    {
-        return Lifetime<MatchingScopeLifetime>()
-            .Shared(InstanceSharing.Shared);
-    }
+        => Lifetime<MatchingScopeLifetime>().Shared(InstanceSharing.Shared);
 
     /// <summary>
     ///     Asserts that the current service type has been registered as 'instance per request' on the current
     ///     <see cref="IComponentContext" />.
     /// </summary>
     public RegistrationAssertions InstancePerRequest()
-    {
-        return Lifetime<MatchingScopeLifetime>()
-            .Shared(InstanceSharing.Shared);
-    }
+        => Lifetime<MatchingScopeLifetime>().Shared(InstanceSharing.Shared);
 
     /// <summary>
     ///     Asserts that the current service type has been registered as 'instance per owned' of the specified
     ///     <see typeparamref="TService" /> on the current <see cref="IComponentContext" />.
     /// </summary>
-    public RegistrationAssertions InstancePerOwned<TService>()
-    {
-        return InstancePerOwned(typeof(TService));
-    }
+    public RegistrationAssertions InstancePerOwned<TService>() => InstancePerOwned(typeof(TService));
 
     /// <summary>
     ///     Asserts that the current service type has been registered as 'instance per owned' of the specified
@@ -181,19 +162,13 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     ///     Asserts that the current service type has been registered as 'externally owned' on the current
     ///     <see cref="IComponentContext" />.
     /// </summary>
-    public RegistrationAssertions ExternallyOwned()
-    {
-        return Owned(InstanceOwnership.ExternallyOwned);
-    }
+    public RegistrationAssertions ExternallyOwned() => Owned(InstanceOwnership.ExternallyOwned);
 
     /// <summary>
     ///     Asserts that the current service type has been registered as 'owned by lifetime scope' on the current
     ///     <see cref="IComponentContext" />.
     /// </summary>
-    public RegistrationAssertions OwnedByLifetimeScope()
-    {
-        return Owned(InstanceOwnership.OwnedByLifetimeScope);
-    }
+    public RegistrationAssertions OwnedByLifetimeScope() => Owned(InstanceOwnership.OwnedByLifetimeScope);
 
     /// <summary>
     ///     Asserts the current service type has been registered using the specified <see typeparamref="TLifetime" /> on the
@@ -248,9 +223,7 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     /// <param name="name">The parameter name</param>
     /// <param name="value">The parameter value</param>
     public RegistrationAssertions WithParameter(string name, object value)
-    {
-        return WithParameter(new NamedParameter(name, value));
-    }
+        => WithParameter(new NamedParameter(name, value));
 
     /// <summary>
     ///     Asserts the current service type has been registered with the specified constructor parameter.
@@ -264,9 +237,7 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     ///     <paramref name="predicate" />.
     /// </param>
     /// <returns></returns>
-    public RegistrationAssertions WithParameter(
-        Func<Parameter, bool> predicate,
-        int? matchCount = null)
+    public RegistrationAssertions WithParameter(Func<Parameter, bool> predicate, int? matchCount = null)
     {
         var matchingParams = _parameters.Where(predicate);
 
@@ -275,8 +246,7 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
             matchingParams
                 .Count()
                 .Should()
-                .Be(
-                    matchCount.Value,
+                .Be(matchCount.Value,
                     $"exactly {matchCount.Value} parameter(s) matching a predicate should have been registered");
         }
         else
@@ -328,24 +298,18 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     {
         var parameters = new List<Parameter>();
 
-        if (!(registration.Activator is ReflectionActivator activator))
-        {
+        if (registration.Activator is not ReflectionActivator activator)
             return parameters;
-        }
 
         const string fieldName = "_defaultParameters";
         const BindingFlags bindFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic |
                                        BindingFlags.Static;
         var field = activator.GetType().GetField(fieldName, bindFlags);
         if (field == null)
-        {
             return parameters;
-        }
 
         if (field.GetValue(activator) is Parameter[] p)
-        {
             parameters.AddRange(p);
-        }
 
         return parameters;
     }

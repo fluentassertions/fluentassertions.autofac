@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Autofac;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac;
@@ -39,12 +40,13 @@ public class TypeScanningAssertions : ReferenceTypeAssertions<IComponentContext,
     /// </summary>
     /// <param name="subject"></param>
     /// <param name="types">The types to assert</param>
-    /// <exception cref="ArgumentNullException"></exception>
-    public TypeScanningAssertions(IComponentContext subject, IEnumerable<Type> types) : base(subject)
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
+    public TypeScanningAssertions(IComponentContext subject, IEnumerable<Type> types, AssertionChain assertionChain)
+        : base(subject, assertionChain)
     {
         Types = FilterTypes(types);
         _registerAssertions = new Lazy<List<RegisterAssertions>>(
-            () => Types.Select(t => Subject.Should().Have().Registered(t)).ToList());
+            () => Types.Select(t => new ContainerRegistrationAssertions(Subject, CurrentAssertionChain).Registered(t)).ToList());
     }
 
     /// <summary>
@@ -52,26 +54,18 @@ public class TypeScanningAssertions : ReferenceTypeAssertions<IComponentContext,
     ///     the specified <paramref name="predicate" />.
     /// </summary>
     public TypeScanningAssertions Where(Func<Type, bool> predicate)
-    {
-        return new TypeScanningAssertions(Subject, Types.Where(predicate));
-    }
+        => new(Subject, Types.Where(predicate), CurrentAssertionChain);
 
     /// <summary>
     ///     Specifies a subset of types to register from a scanned assembly.
     /// </summary>
-    public TypeScanningAssertions Except<T>()
-    {
-        return Where(t => t != typeof(T));
-    }
+    public TypeScanningAssertions Except<T>() => Where(t => t != typeof(T));
 
     /// <summary>
     ///     Asserts that the scanned types can be resolved from the current <see cref="IComponentContext" />
     ///     as the specified <typeparamref name="T" />.
     /// </summary>
-    public TypeScanningAssertions As<T>()
-    {
-        return As(typeof(T));
-    }
+    public TypeScanningAssertions As<T>() => As(typeof(T));
 
     /// <summary>
     ///     Asserts that the scanned types can be resolved from the current <see cref="IComponentContext" />
@@ -122,13 +116,8 @@ public class TypeScanningAssertions : ReferenceTypeAssertions<IComponentContext,
             !IsCompilerGenerated(t));
     }
 
-    private static bool IsDelegate(Type type)
-    {
-        return type.GetTypeInfo().IsSubclassOf(typeof(Delegate));
-    }
+    private static bool IsDelegate(Type type) => type.GetTypeInfo().IsSubclassOf(typeof(Delegate));
 
     private static bool IsCompilerGenerated(Type type)
-    {
-        return type.GetTypeInfo().GetCustomAttributes<CompilerGeneratedAttribute>().Any();
-    }
+        => type.GetTypeInfo().GetCustomAttributes<CompilerGeneratedAttribute>().Any();
 }
