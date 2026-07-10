@@ -12,11 +12,8 @@ using Nuke.Common.Tools.GitVersion;
 using Nuke.Common.Tools.ReportGenerator;
 using Nuke.Common.Tools.SonarScanner;
 using Nuke.Common.Utilities.Collections;
-using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-[CheckBuildProjectConfigurations]
-[UnsetVisualStudioEnvironmentVariables]
 // NUKE CI Integration: http://www.nuke.build/docs/authoring-builds/ci-integration.html
 [GitHubActions("build", GitHubActionsImage.WindowsLatest,
     AutoGenerate = false,
@@ -41,7 +38,7 @@ class Build : NukeBuild
         {
             TestsDirectory
                 .GlobDirectories("**/bin", "**/obj", "**/TestResults")
-                .ForEach(DeleteDirectory);
+                .ForEach(d => d.DeleteDirectory());
         });
 
     Target Restore => _ => _
