@@ -11,7 +11,7 @@
 
     <ItemGroup>
         <PackageReference Include="Nuke.Common" Version="8.1.4"/>
-        <PackageDownload Include="GitVersion.Tool" Version="[6.0.2]"/>
+        <PackageDownload Include="GitVersion.Tool" Version="[6.8.2]"/>
         <PackageDownload Include="NuGet.CommandLine" Version="[6.0.0]"/>
         <PackageDownload Include="dotnet-sonarscanner" Version="[5.5.1]"/>
         <PackageDownload Include="ReportGenerator" Version="[5.0.3]"/>
