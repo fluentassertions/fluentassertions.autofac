@@ -7,6 +7,7 @@ using Autofac;
 using Autofac.Core;
 using Autofac.Core.Activators.Reflection;
 using Autofac.Core.Lifetime;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac;
@@ -40,7 +41,9 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     /// </summary>
     /// <param name="subject">The container</param>
     /// <param name="type">The type that should be registered on the container</param>
-    public RegistrationAssertions(IComponentContext subject, Type type) : base(subject)
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
+    public RegistrationAssertions(IComponentContext subject, Type type, AssertionChain assertionChain)
+        : base(subject, assertionChain)
     {
         Type = type ?? throw new ArgumentNullException(nameof(type));
         _registration = Subject.ComponentRegistry.GetRegistration(Type);
@@ -52,7 +55,9 @@ public class RegistrationAssertions : ReferenceTypeAssertions<IComponentContext,
     /// </summary>
     /// <param name="subject">The container</param>
     /// <param name="registration"></param>
-    public RegistrationAssertions(IComponentContext subject, IComponentRegistration registration) : base(subject)
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
+    public RegistrationAssertions(IComponentContext subject, IComponentRegistration registration, AssertionChain assertionChain)
+        : base(subject, assertionChain)
     {
         _registration = registration ?? throw new ArgumentNullException(nameof(registration));
         Type = registration.Activator.LimitType;

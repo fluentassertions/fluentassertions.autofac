@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Autofac;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac;
@@ -27,7 +28,9 @@ public class
     ///     Initializes a new instance of the <see cref="ContainerRegistrationAssertions" /> class.
     /// </summary>
     /// <param name="subject">The subject</param>
-    public ContainerRegistrationAssertions(IComponentContext subject) : base(subject)
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
+    public ContainerRegistrationAssertions(IComponentContext subject, AssertionChain assertionChain)
+        : base(subject, assertionChain)
     {
     }
 
@@ -37,7 +40,7 @@ public class
     /// </summary>
     public RegisterAssertions Registered<TService>()
     {
-        return new RegisterAssertions(Subject, typeof(TService));
+        return new RegisterAssertions(Subject, typeof(TService), CurrentAssertionChain);
     }
 
     /// <summary>
@@ -46,7 +49,7 @@ public class
     /// </summary>
     public RegisterAssertions Registered(Type type)
     {
-        return new RegisterAssertions(Subject, type);
+        return new RegisterAssertions(Subject, type, CurrentAssertionChain);
     }
 
     /// <summary>
@@ -58,7 +61,7 @@ public class
         if (instance == null)
             throw new ArgumentNullException(nameof(instance));
 
-        return new RegisterAssertions(Subject, instance.GetType());
+        return new RegisterAssertions(Subject, instance.GetType(), CurrentAssertionChain);
     }
 
     /// <summary>
@@ -135,6 +138,6 @@ public class
     /// </summary>
     public RegisterGenericSourceAssertions RegisteredGeneric(Type genericComponentTypeDefinition)
     {
-        return new RegisterGenericSourceAssertions(Subject, genericComponentTypeDefinition);
+        return new RegisterGenericSourceAssertions(Subject, genericComponentTypeDefinition, CurrentAssertionChain);
     }
 }

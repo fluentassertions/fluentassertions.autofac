@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Autofac;
+using FluentAssertions.Execution;
 
 namespace FluentAssertions.Autofac;
 
@@ -19,7 +20,9 @@ public class RegisterAssertions : RegistrationAssertions
     /// </summary>
     /// <param name="subject">The container</param>
     /// <param name="type">The type that should be registered on the container</param>
-    public RegisterAssertions(IComponentContext subject, Type type) : base(subject, type)
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
+    public RegisterAssertions(IComponentContext subject, Type type, AssertionChain assertionChain)
+        : base(subject, type, assertionChain)
     {
     }
 
@@ -67,7 +70,7 @@ public class RegisterAssertions : RegistrationAssertions
 
     private void AssertResolveAs(Type serviceType)
     {
-        new ResolveAssertions(Subject, serviceType).As(Type);
+        new ResolveAssertions(Subject, serviceType, CurrentAssertionChain).As(Type);
     }
 
     private static List<Type> GetImplementedInterfaces(Type type)
