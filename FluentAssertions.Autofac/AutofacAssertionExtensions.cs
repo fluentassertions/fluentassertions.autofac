@@ -1,4 +1,5 @@
 using Autofac;
+using FluentAssertions.Execution;
 
 namespace FluentAssertions.Autofac;
 
@@ -16,7 +17,7 @@ public static class AutofacAssertionExtensions
     /// </summary>
     public static ContainerAssertions Should(this IComponentContext container)
     {
-        return new ContainerAssertions(container);
+        return new ContainerAssertions(container, AssertionChain.GetOrCreate());
     }
 
     /// <summary>
@@ -25,6 +26,6 @@ public static class AutofacAssertionExtensions
     /// </summary>
     public static BuilderAssertions Should(this ContainerBuilder builder)
     {
-        return new BuilderAssertions(builder);
+        return new BuilderAssertions(builder, AssertionChain.GetOrCreate());
     }
 }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using Autofac;
 using Autofac.Util;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac;
@@ -29,7 +30,9 @@ public class ContainerAssertions : ReferenceTypeAssertions<IComponentContext, Co
     ///     Initializes a new instance of the <see cref="ContainerAssertions" /> class.
     /// </summary>
     /// <param name="container">The subject</param>
-    public ContainerAssertions(IComponentContext container) : base(container)
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
+    public ContainerAssertions(IComponentContext container, AssertionChain assertionChain)
+        : base(container, assertionChain)
     {
     }
 
@@ -39,7 +42,7 @@ public class ContainerAssertions : ReferenceTypeAssertions<IComponentContext, Co
     /// </summary>
     public ContainerRegistrationAssertions Have()
     {
-        return new ContainerRegistrationAssertions(Subject);
+        return new ContainerRegistrationAssertions(Subject, CurrentAssertionChain);
     }
 
     /// <summary>
@@ -48,7 +51,7 @@ public class ContainerAssertions : ReferenceTypeAssertions<IComponentContext, Co
     /// </summary>
     public ResolveAssertions Resolve(Type serviceType)
     {
-        return new ResolveAssertions(Subject, serviceType);
+        return new ResolveAssertions(Subject, serviceType, CurrentAssertionChain);
     }
 
     /// <summary>
@@ -86,7 +89,7 @@ public class ContainerAssertions : ReferenceTypeAssertions<IComponentContext, Co
     public TypeScanningAssertions RegisterAssemblyTypes(params Assembly[] assemblies)
     {
         var types = assemblies.SelectMany(assembly => assembly.GetLoadableTypes());
-        return new TypeScanningAssertions(Subject, types);
+        return new TypeScanningAssertions(Subject, types, CurrentAssertionChain);
     }
 
     /// <summary>
@@ -96,6 +99,6 @@ public class ContainerAssertions : ReferenceTypeAssertions<IComponentContext, Co
     /// <param name="types"></param>
     public TypeScanningAssertions RegisterTypes(IEnumerable<Type> types)
     {
-        return new TypeScanningAssertions(Subject, types);
+        return new TypeScanningAssertions(Subject, types, CurrentAssertionChain);
     }
 }

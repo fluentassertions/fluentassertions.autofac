@@ -34,8 +34,10 @@ public class BuilderAssertions : ReferenceTypeAssertions<ContainerBuilder, Build
     ///     Initializes a new instance of the <see cref="BuilderAssertions" /> class.
     /// </summary>
     /// <param name="subject"></param>
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public BuilderAssertions(ContainerBuilder subject) : base(subject)
+    public BuilderAssertions(ContainerBuilder subject, AssertionChain assertionChain)
+        : base(subject, assertionChain)
     {
     }
 
@@ -56,7 +58,7 @@ public class BuilderAssertions : ReferenceTypeAssertions<ContainerBuilder, Build
     {
         EnsureVisited();
         var module = _modules.FirstOrDefault(m => m.GetType() == moduleType);
-        Execute.Assertion
+        CurrentAssertionChain
             .ForCondition(module != null)
             .FailWith($"Module '{moduleType}' should be registered but it was not.");
     }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using Autofac;
+using FluentAssertions.Execution;
 using FluentAssertions.Primitives;
 
 namespace FluentAssertions.Autofac;
@@ -39,12 +40,14 @@ public class TypeScanningAssertions : ReferenceTypeAssertions<IComponentContext,
     /// </summary>
     /// <param name="subject"></param>
     /// <param name="types">The types to assert</param>
+    /// <param name="assertionChain">The current <see cref="AssertionChain"/></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public TypeScanningAssertions(IComponentContext subject, IEnumerable<Type> types) : base(subject)
+    public TypeScanningAssertions(IComponentContext subject, IEnumerable<Type> types, AssertionChain assertionChain)
+        : base(subject, assertionChain)
     {
         Types = FilterTypes(types);
         _registerAssertions = new Lazy<List<RegisterAssertions>>(
-            () => Types.Select(t => Subject.Should().Have().Registered(t)).ToList());
+            () => Types.Select(t => new ContainerRegistrationAssertions(Subject, CurrentAssertionChain).Registered(t)).ToList());
     }
 
     /// <summary>
@@ -53,7 +56,7 @@ public class TypeScanningAssertions : ReferenceTypeAssertions<IComponentContext,
     /// </summary>
     public TypeScanningAssertions Where(Func<Type, bool> predicate)
     {
-        return new TypeScanningAssertions(Subject, Types.Where(predicate));
+        return new TypeScanningAssertions(Subject, Types.Where(predicate), CurrentAssertionChain);
     }
 
     /// <summary>
