@@ -5,8 +5,8 @@
     <Import Project="$(SolutionDir)\solution.targets"/>
 
     <PropertyGroup>
-        <!-- Match FluentAssertions 8.x supported target frameworks -->
-        <TargetFrameworks>net47;net6.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+        <!-- Match FluentAssertions 8.x supported target frameworks; Autofac 7.x no longer supports net47 -->
+        <TargetFrameworks>net6.0;netstandard2.0;netstandard2.1</TargetFrameworks>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <!-- Mark the project as being a test project -->
         <SonarQubeTestProject>false</SonarQubeTestProject>
