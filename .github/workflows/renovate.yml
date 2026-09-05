@@ -32,6 +32,8 @@ jobs:
           configurationFile: renovate.json
           # Prefer a fine-grained PAT (secrets.RENOVATE_TOKEN) for full functionality
           # (e.g. dependency dashboard checkboxes); falls back to GITHUB_TOKEN otherwise.
+          # NOTE: with GITHUB_TOKEN, PRs opened by this workflow won't auto-trigger other
+          # workflows (e.g. build.yml checks) - add RENOVATE_TOKEN later if that's needed.
           token: '${{ secrets.RENOVATE_TOKEN || secrets.GITHUB_TOKEN }}'
         env:
           LOG_LEVEL: "${{ inputs.logLevel || 'info' }}"
