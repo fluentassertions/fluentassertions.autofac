@@ -27,7 +27,7 @@ jobs:
 
       # cf.: https://github.com/renovatebot/github-action
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v46
+        uses: renovatebot/github-action@v46.2.5
         with:
           configurationFile: renovate.json
           # Prefer a fine-grained PAT (secrets.RENOVATE_TOKEN) for full functionality
