@@ -43,7 +43,12 @@ Find more examples in the [documentation](_docs/index.md) or the [tests](./Fluen
 
 ### How to build
 
-Clone and build using Rider, Code, Visual Studio, ... or the command line using [nuke.build](https://nuke.build/).
+Clone and build using Rider, Code, Visual Studio, ... or the command line using the `dotnet` CLI:
+
+```shell
+dotnet build
+dotnet test
+```
 
 ### Links
 
