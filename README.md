@@ -5,9 +5,7 @@
 [![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 [![NuGet](https://img.shields.io/nuget/dt/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=fluentassertions.FluentAssertions.Autofac&metric=alert_status)](https://sonarcloud.io/dashboard?id=fluentassertions.FluentAssertions.Autofac)
-[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=fluentassertions.FluentAssertions.Autofac&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=fluentassertions.FluentAssertions.Autofac)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=fluentassertions.FluentAssertions.Autofac&metric=coverage)](https://sonarcloud.io/summary/new_code?id=fluentassertions.FluentAssertions.Autofac)
+[![Coverage Status](https://coveralls.io/repos/github/fluentassertions/fluentassertions.autofac/badge.svg)](https://coveralls.io/github/fluentassertions/fluentassertions.autofac)
 
 This repository contains the [Fluent Assertions](http://fluentassertions.com/) extensions
 for [Autofac](https://autofac.org/). It is maintained by [@mkoertgen](https://github.com/mkoertgen).
