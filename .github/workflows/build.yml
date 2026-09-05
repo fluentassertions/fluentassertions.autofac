@@ -16,6 +16,10 @@ permissions:
 jobs:
   build:
     runs-on: windows-2022 # net47 target requires the .NET Framework dev pack, only available on Windows runners
+    permissions:
+      contents: read
+      checks: write # required by dorny/test-reporter
+      pull-requests: write # required by dorny/test-reporter to annotate failures on PRs
 
     steps:
       - uses: actions/checkout@v7
@@ -55,8 +59,17 @@ jobs:
           --collect:"XPlat Code Coverage"
           --results-directory ./TestResults
 
-      - name: Upload test results & coverage
+      # Nobody downloads & reads a trx zip; publish a proper Checks-tab report instead
+      - name: Publish test report
+        uses: dorny/test-reporter@v2
         if: always()
+        with:
+          name: Test Results
+          path: TestResults/*.trx
+          reporter: dotnet-trx
+
+      - name: Upload test results (on failure only)
+        if: failure()
         uses: actions/upload-artifact@v4
         with:
           name: test-results
