@@ -19,6 +19,7 @@
         <!-- See GitHub project tags -->
         <PackageTags>autofac;fluent-assertions;ioc;tdd;dotnet-core</PackageTags>
         <RepositoryUrl>https://github.com/fluentassertions/fluentassertions.autofac</RepositoryUrl>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <!-- Workaround GitVersionTask failing to load Newtonsoft.Json=12, cf. https://gitter.im/GitTools/GitVersion# -->
         <WriteVersionInfoToBuildLog>false</WriteVersionInfoToBuildLog>
 
