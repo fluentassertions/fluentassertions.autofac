@@ -15,7 +15,7 @@ permissions:
 
 jobs:
   build:
-    runs-on: windows-2022 # net47 target requires the .NET Framework dev pack, only available on Windows runners
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       checks: write # required by dorny/test-reporter
@@ -49,9 +49,8 @@ jobs:
           --logger "trx;LogFileName=test-results.trx"
           --results-directory ./TestResults
 
-      # Coverlet instruments (rewrites) the test assemblies, which invalidates their strong-name
-      # signature; net47 enforces strong-name verification at load time and fails, so only collect
-      # coverage on a modern TFM.
+      # Coverlet instruments (rewrites) the test assemblies, which can invalidate strong-name
+      # signatures on some runtimes, so only collect coverage on a modern TFM.
       - name: Test (coverage)
         run: >
           dotnet test --configuration Release --no-build --framework net8.0
@@ -85,7 +84,7 @@ jobs:
   publish:
     needs: build
     if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')
-    runs-on: windows-2022 # net47 target requires the .NET Framework dev pack, only available on Windows runners
+    runs-on: ubuntu-latest
     environment: release
     permissions:
       id-token: write # required for NuGet.org trusted publishing (OIDC)
