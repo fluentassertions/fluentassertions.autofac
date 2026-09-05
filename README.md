@@ -1,10 +1,8 @@
 # FluentAssertions.Autofac
 
 [![Build status](https://github.com/fluentassertions/fluentassertions.autofac/actions/workflows/build.yml/badge.svg)](https://github.com/fluentassertions/fluentassertions.autofac/actions/workflows/build.yml)
-
 [![NuGet](https://img.shields.io/nuget/v/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
 [![NuGet](https://img.shields.io/nuget/dt/FluentAssertions.Autofac.svg?style=flat-square)](https://www.nuget.org/packages/FluentAssertions.Autofac/)
-
 [![Coverage Status](https://coveralls.io/repos/github/fluentassertions/fluentassertions.autofac/badge.svg)](https://coveralls.io/github/fluentassertions/fluentassertions.autofac)
 
 This repository contains the [Fluent Assertions](http://fluentassertions.com/) extensions
