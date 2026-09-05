@@ -1,0 +1,15 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "dependencyDashboard": true,
+  "packageRules": [
+    {
+      "matchManagers": ["nuget"],
+      "groupName": "nuget dependencies"
+    },
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "github actions dependencies"
+    }
+  ]
+}
